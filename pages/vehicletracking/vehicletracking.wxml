@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="wrapper">
+ <!--
   <view class="page-body">
     <view class="page-body-wrapper">
 
@@ -8,10 +9,25 @@
         </view>
 
         <view class="page-body-buttons">
-          <button class="page-body-button" type="primary" formType="submit">查看位置</button>       
+          <button class="page-body-button" type="primary" formType="submit">查看位置</button>
         </view>
 
       </form>
+    </view>
+
+  </view>
+  -->
+
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+      <map
+        style="width: 100%; height: 300px;"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        markers="{{markers}}"
+        covers="{{covers}}"
+        >
+      </map>
     </view>
   </view>
 </view>
