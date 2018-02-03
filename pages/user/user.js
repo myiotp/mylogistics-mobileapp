@@ -4,7 +4,8 @@ Page({
         userInfo:{},
         total:{
             view:56,
-            favorite:5
+            vehiclefavorite:'个货主收藏',
+            cargofavorite:'个车主收藏'
         }
     },
     onLoad:function(){
@@ -21,19 +22,21 @@ Page({
             },
             fail:function(err){}
         });
-        /*wx.request({
-            url: 'http://localhost:8080/onemap/api/0/',
-            data: {
-                c:'wxadoc',
-                m:'getUserCount',
-                uid:app.uid
-            },
-            success:function(res){
-                console.log(res);
-                that.setData({
-                    total:res.data['data'].total
-                });
-            }
-        })*/
+
+    		wx.request({
+          url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/mycount',
+    			data:{
+
+    			},
+    			success:function(res){
+            console.log(res.data.data)
+    				that.setData({
+              total:{
+                  vehiclefavorite: res.data.data['1'],
+                  cargofavorite:res.data.data['2'],
+              }
+    				})
+    			}
+    		})
     }
 })

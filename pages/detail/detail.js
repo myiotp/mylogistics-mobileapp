@@ -13,29 +13,33 @@ Page({
         mileage:'',
         receipt:'',
         address:[
-            
+
         ],
         source:[
-            
+
         ],
         other:'',
-        phone:''
+        phone:'',
+        favorite:false
     },
     onLoad:function(options){
         var that = this;
+        that.setData({
+          id: options['id']
+        })
+
         wx.request({
-            //url:app.ajaxurl,
-            url: 'http://localhost:8080/onemap/api/cargoes/' + options['id'],
+            url: app.serviceurl+'/api/cargoes/' + options['id'],
             data:{
                 id:options['id'],
-                uid:app['uid']
+                username: app.uid
             },
             success:function(res){
               console.debug(res.data.data);
               var rawdata = res.data.data;
-              that.setData({ 
-                start: { 
-                  city: rawdata.fromCityName, 
+              that.setData({
+                start: {
+                  city: rawdata.fromCityName,
                   province: rawdata.fromProvinceName
                 },
                 end: {
@@ -43,7 +47,7 @@ Page({
                   province: rawdata.toProvinceName
                 },
                 receipt: rawdata.price + '元/' + rawdata.cargoWeight + '吨  '  + rawdata.payment,
-                mileage: rawdata.mileage,                
+                mileage: rawdata.mileage,
                 address: [
                   {
                     title: '装货地址',
@@ -69,7 +73,8 @@ Page({
                   }
                 ],
                 other: rawdata.memo,
-                phone: rawdata.ownerCellphone
+                phone: rawdata.ownerCellphone,
+                favorite:rawdata.favoited
               });
             }
         })
@@ -79,6 +84,60 @@ Page({
         wx.makePhoneCall({
             phoneNumber:that.data['phone']
         })
+    },
+    removeFavorite:function(){
+      let that = this;
+      console.log(that.data)
+      wx.request({
+        url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/cargo/'+that.data['id'],
+        method: 'DELETE',
+        data: {},
+        success: function (res) {
+          console.log(res)
+          res = res.data;
+          if (res.status == 1 || res.status == 2) {
+            wx.showToast({
+              title: '取消收藏成功',
+              icon: 'success',
+              duration: 1e3
+            });
+            setTimeout(function () {
+              app.submited = true;
+              wx.hideToast();
+              wx.switchTab({
+                url: '../list/list'
+              })
+            }, 1e3);
+          }
+        }
+      })
+    },
+    addFavorite:function(){
+      let that = this;
+      console.log(that.data)
+      wx.request({
+        url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/cargo/'+that.data['id'],
+        method: 'POST',
+        data: {},
+        success: function (res) {
+          console.log(res)
+          res = res.data;
+          if (res.status == 1 || res.status == 2) {
+            wx.showToast({
+              title: '收藏成功',
+              icon: 'success',
+              duration: 1e3
+            });
+            setTimeout(function () {
+              app.submited = true;
+              wx.hideToast();
+              wx.switchTab({
+                url: '../list/list'
+              })
+            }, 1e3);
+          }
+        }
+      })
     },
     showMap:function(e){
         var index = e.target['dataset'].index;
@@ -95,5 +154,59 @@ Page({
           }
         })
 
+    },
+    onShow:function(options){
+        var that = this;
+        console.info(app.serviceurl+'/api/cargoes/' + that.data['id']);
+        wx.request({
+            url: app.serviceurl+'/api/cargoes/' + that.data['id'],
+            data:{
+              username: app.uid
+            },
+            success:function(res){
+              console.info(res.data.data);
+              var rawdata = res.data.data;
+              that.setData({
+                id: that.data['id'],
+                start: {
+                  city: rawdata.fromCityName,
+                  province: rawdata.fromProvinceName
+                },
+                end: {
+                  city: rawdata.toCityName,
+                  province: rawdata.toProvinceName
+                },
+                receipt: rawdata.price + '元/' + rawdata.cargoWeight + '吨  '  + rawdata.payment,
+                mileage: rawdata.mileage,
+                address: [
+                  {
+                    title: '装货地址',
+                    content: rawdata.fromProvinceName + rawdata.fromCityName + rawdata.fromAreaName + rawdata.fromAddress
+                  },
+                  {
+                    title: '卸货地址',
+                    content: rawdata.toProvinceName + rawdata.toCityName + rawdata.toAreaName + rawdata.toAddress
+                  }
+                ],
+                source: [
+                  {
+                    caption: '装货时间',
+                    content: rawdata.shipTimestamp
+                  },
+                  {
+                    caption: '货物情况',
+                    content: rawdata.cargoName + rawdata.cargoWeight +'吨'
+                  },
+                  {
+                    caption: '车辆需求',
+                    content: rawdata.carLength + '米' + rawdata.carType
+                  }
+                ],
+                other: rawdata.memo,
+                phone: rawdata.ownerCellphone,
+                favorite:rawdata.favoited
+              });
+            }
+        })
     }
 })

@@ -1,20 +1,34 @@
 var app = getApp();
 Page({
-    data:{
-        trucks:''
-    },
-    onLoad:function(options){
-        var that = this;
-        wx.request({
-            url: app.serviceurl + '/api/truck/username/'+app.uid,
-            data:{
+	data: {
+	  	list:''
+	},
+	onLoad:function(options){
+		var that = this;
+		wx.request({
+      url: app.serviceurl + '/api/truck/username/'+app.uid,
+			data:{
 
-            },
-            success:function(res){
-                that.setData({
-                    trucks:res.data.data
-                })
-            }
-        })
-    }
+			},
+			success:function(res){
+				that.setData({
+					list:res.data.data
+				})
+			}
+		})
+	},
+	onShow:function(options){
+		var that = this;
+		wx.request({
+      url: app.serviceurl + '/api/truck/username/'+app.uid,
+			data:{
+
+			},
+			success:function(res){
+				that.setData({
+					list:res.data.data
+				})
+			}
+		})
+	}
 })

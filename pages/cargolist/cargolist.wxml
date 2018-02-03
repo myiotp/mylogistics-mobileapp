@@ -21,7 +21,7 @@
         <text class="truck">{{item.carLength}}米{{item.carType}}</text>
         <text class="article">{{item.cargoName}}{{item.cargoWeight}}吨</text>
         <text class="price">{{item.price}}元</text>
-      
+
 			</view>
 		</navigator>
 	</view>

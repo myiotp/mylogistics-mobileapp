@@ -10,6 +10,14 @@
       <navigator class="nameauthentication" url="../nameauthentication2/nameauthentication">
           <text>身份证反面照片</text>
       </navigator>
+      <view wx:if="{{usertype == 2}}">
+        <navigator class="nameauthentication" url="../nameauthentication3/nameauthentication">
+            <text>营业执照</text>
+        </navigator>
+        <navigator class="nameauthentication" url="../nameauthentication4/nameauthentication">
+            <text>法人证</text>
+        </navigator>
+      </view>
       <button type="primary" size="default" class="submit" form-type="submit">提交申请认证</button>
     </view>
   </form>

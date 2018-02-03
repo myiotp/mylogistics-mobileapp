@@ -1,5 +1,3 @@
-
-
 <page>
 	<view class="goods">
 		<navigator class="monad" wx:for="{{list}}" url="../detail/detail?id={{item.id}}" wx:key="{{item.id}}">
@@ -14,15 +12,23 @@
 				</view>
 				<view class="end">
 					<text class="city">{{item.toCityName}}</text>
-	                <text class="province">{{item.toProvinceName}}</text>
+	        <text class="province">{{item.toProvinceName}}</text>
+					<view wx:if="{{item.favoited == true}}">
+					<view class="image"><image src="../../images/shoucang1.png"></image></view>
+					</view>
 				</view>
+
 			</view>
 			<view class="condition">
         <text class="truck">{{item.carLength}}米{{item.carType}}</text>
         <text class="article">{{item.cargoName}}{{item.cargoWeight}}吨</text>
         <text class="price">{{item.price}}元</text>
-      
+
 			</view>
 		</navigator>
+	</view>
+
+	<view class="add" bindtap="search">
+		<image src="../../images/search.png"></image>
 	</view>
 </page>

@@ -4,6 +4,7 @@ Page({
         userInfo:{},
         authresult:false,
         comment:'',
+        usertype:1,
         total:{
             view:56,
             favorite:5
@@ -26,7 +27,8 @@ Page({
                   // }
                   that.setData({
                       authresult:res.data.data['authresult'],
-                      comment:res.data.data['comment']
+                      comment:res.data.data['comment'],
+                      usertype:res.data.data['usertype']
                   });
                 }
 

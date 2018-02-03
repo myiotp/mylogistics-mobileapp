@@ -14,8 +14,19 @@
 		</view>
     <view class="import">
 			<view class="information">公司名称</view>
-			<input name="corporatename" placeholder-style="color:#B2B2B2" placeholder="请填写公司名称"  value='{{corporatename}}'/>
+			<input name="corporatename" placeholder-style="color:#B2B2B2" placeholder="请填写所在公司名称"  value='{{corporatename}}'/>
 		</view>
+    <view class="import">
+                    <view class="information">类型
+                    </view>
+                    <view class="weui-cell__bd">
+                        <radio-group class="radio-group weui-cell weui-check__label" name="usertype" bindchange="selectType">
+                            <label class="radio" wx:for="{{types}}" wx:key="value">
+                                <radio value="{{item.name}}" checked="{{item.checked}}"/><text>{{item.value}}</text>
+                            </label>
+                        </radio-group>
+                    </view>
+     </view>
     
     
 <!--

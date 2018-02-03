@@ -9,6 +9,8 @@ Page({
     inputHidden: true,
     className: ['header'],
     start: "请选择城市",
+    usertype: 1,
+    types: [{ name: '1', value: '个人', checked: true }, { name: '2', value: '企业' }],
     options: '',
     screenBtn: '',
     infoId: '',
@@ -17,6 +19,9 @@ Page({
   },
   init: function () {
     this.regionSelectCallback('fromid', 'start', 'startOptions');
+  },
+  selectType: function (e) {
+    this.setData({ usertype: e.detail.value })
   },
   selectRegion: function (e) {//点击选择城市
     let name = e.target.dataset['name'];
@@ -76,9 +81,20 @@ Page({
             //start: dd.city,
             detailedaddress: dd.address,
             emergencycontact: dd.emergency,
-            emergencyphone: dd.emergencyphone
+            emergencyphone: dd.emergencyphone,
+            usertype: dd.usertype
 
           })
+
+          if(dd.usertype == 2) {
+            that.setData({
+                types:[{ name: '1', value: '个人' }, { name: '2', value: '企业',checked: true }]
+            })
+          }else{
+            that.setData({
+                types:[{ name: '1', value: '个人', checked: true }, { name: '2', value: '企业' }]
+            })
+          }
         }
 
       }
@@ -301,7 +317,8 @@ Page({
       "city": this.data['startOptions'],
       "address": formData['detailedaddress'],
       "emergency": formData['emergencycontact'],
-      "emergencyphone": formData['emergencyphone']
+      "emergencyphone": formData['emergencyphone'],
+      "usertype":this.data['usertype']
     };
     console.log(submitData);
     this._submit(submitData, '提交成功')
