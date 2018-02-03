@@ -1,0 +1,9 @@
+<form class="info" bindsubmit="formSubmit" bindreset="formReset">
+
+<button style="margin:10rpx;" bindtap="chooseimage2">身份证反面照片</button>
+<image src="{{tempFilePaths2 }}" mode="aspecFill" style="width: 100%; height: 450rpx"/>
+
+<view class="hint">你的隐私信息将受到法律保护，请您放心上传</view>
+
+<button type="primary" size="default" class="submit" form-type="submit">提交信息</button>
+</form>

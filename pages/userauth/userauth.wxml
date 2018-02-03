@@ -1,0 +1,16 @@
+<page>
+  <form class="info" bindsubmit="formSubmit" bindreset="formReset">
+    <view wx:if="{{authresult == '1'}}">
+      <button size="default" class="disablebutton" form-type="button">已通过认证</button>
+    </view>
+    <view wx:else>
+      <navigator class="nameauthentication" url="../nameauthentication/nameauthentication">
+          <text>手持身份证正面照片</text>
+      </navigator>
+      <navigator class="nameauthentication" url="../nameauthentication2/nameauthentication">
+          <text>身份证反面照片</text>
+      </navigator>
+      <button type="primary" size="default" class="submit" form-type="submit">提交申请认证</button>
+    </view>
+  </form>
+</page>

@@ -1,0 +1,31 @@
+
+
+<page>
+	<view class="goods">
+		<navigator class="monad" wx:for="{{list}}" url="/pages/vehicleinformation/vehicleinformation?id={{item.id}}" wx:key="{{item.id}}">
+			<view class="place">
+				<view class="start">
+					<text class="city">年检截止</text>
+					<text class="province">{{item.checkdeadline}}</text>
+				</view>
+				<view class="distance">
+					<view class="image"><image src="../../images/truck_on_the_road.png"></image></view>
+					<text>{{item.licenseplate}}</text>
+				</view>
+				<view class="end">
+					<text class="city">保险截止</text>
+	        <text class="province">{{item.insurancedeadline}}</text>
+				</view>
+			</view>
+			<view class="condition">
+        <text class="price">{{item.vehiclebrand}}</text>
+        <text class="article">载重{{item.vehicleweight}}吨</text>
+        <text class="truck">{{item.cargolength}}米{{item.vehicletype}}</text>
+			</view>
+		</navigator>
+	</view>
+
+	<view class="add" bindtap="add">
+		<image src="../../images/adddy.png"></image>
+	</view>
+</page>

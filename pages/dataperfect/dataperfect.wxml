@@ -1,0 +1,97 @@
+<form class="info" bindsubmit="formSubmit" bindreset="formReset">
+	<view class="input-list">
+    <view class="import">
+			<view class="information">姓名</view>
+			<input name="ownname" placeholder-style="color:#B2B2B2" placeholder="请填写您的真实名字" value='{{ownname}}'/>
+		</view>
+    <view class="import">
+			<view class="information">身份证号</view>
+			<input name="idnumber" type="digit"  placeholder-style="color:#B2B2B2" maxlength="18" placeholder="请填写您真实的身份证号"  value='{{idnumber}}'/>
+		</view>
+    <view class="import">
+			<view class="information">联系方式</view>
+			<input name="ownerCellphone" type="digit"  placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写您的手机号码" value='{{ownerCellphone}}'/>
+		</view>
+    <view class="import">
+			<view class="information">公司名称</view>
+			<input name="corporatename" placeholder-style="color:#B2B2B2" placeholder="请填写公司名称"  value='{{corporatename}}'/>
+		</view>
+    
+    
+<!--
+	<block wx:for="{{infoList}}">
+			<view class="popup">
+				<view class="information">{{item.information}}</view>
+				<view class="select" id="{{index}}" bindtap="{{item.bindBtn}}">{{item.select}}</view>
+				<input hidden="{{inputHidden}}" name="{{item.name}}" value="{{item.val}}"/>
+			</view>
+		</block> 
+    -->
+    <view class="import">
+				<view class="information">所在地区</view>
+				<view class="select"><view class="startText" data-option="{{startOptions}}" data-name="fromid" bindtap="selectRegion">{{start}}</view></view>
+			</view>
+    <view class="section section-second">
+			
+    <!-- 选择地区 -->
+			<view class="backSelectCity" bindtap="backToAdd" wx:if="{{isShow}}"></view>
+			<view class="selectTheCity" wx:if="{{isShow}}">
+				<view class="selectNow">当前地区:<text class="theSelectedText"> {{theSelect}}</text></view>
+				<view wx:if="{{showData == 1}}">
+					<view class="content">
+						<view class="selectCity" wx:for="{{proData}}" id="{{item.provinceid}}" data-index="{{index}}" bindtap="getCity">{{item.province_name}}</view>
+					</view>
+				</view>
+				<view wx:elif="{{showData == 2}}">
+					<view class="backFront" bindtap="backToFront">返回上一级</view>
+					<view class="content">
+						<view class="selectCity" wx:for="{{cityData}}"  data-index="{{index}}" id="{{item.id}}" bindtap="getDistrict" >{{item.name}}</view>
+					</view>
+				</view>
+				<view wx:else>
+					<view class="backFront" bindtap="backToSecond">返回上一级</view>
+					<view class="content">
+						<view class="selectCity all" bindtap="chooseAll" id="">全{{theSelect}}</view>
+						<view class="selectCity" wx:for="{{distData}}" id="{{item.id}}" data-index="{{index}}" bindtap="selectAll">{{item}}</view>
+					</view>
+				</view>
+			</view>
+    </view>  
+
+    
+    <view class="import">
+			<view class="information">详细地址</view>
+			<input name="detailedaddress" placeholder-style="color:#B2B2B2" placeholder="请填写您的详细地址（到门牌号）"  value='{{detailedaddress}}'/>
+		</view>
+
+    <view class="import">
+			<view class="information">应急联系人</view>
+			<input name="emergencycontact" placeholder-style="color:#B2B2B2" placeholder="请填写应急联系人姓名"  value='{{emergencycontact}}'/>
+		</view>
+
+    <view class="import">
+			<view class="information">应急联系电话</view>
+			<input name="emergencyphone" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写应急联系电话"  value='{{emergencyphone}}'/>
+		</view>
+  </view>
+	<view class="hint">{{textHint}}</view>
+  <!--
+	<navigator url="../success/success" redirect><button class="submit">提交信息</button></navigator>
+  -->
+  <!-- 提交 -->
+  <button name="id" type="hidden" value='{{id}}'/>
+	<button type="primary" size="default" class="submit" form-type="submit">提交信息</button>
+	<button formType="reset" class="resume">重新输入</button>
+</form>
+
+<view class="shade" hidden="{{hiddenBoolean}}">
+	<view class="layer" bindtap="hiddenBtn"></view>
+	<view class="selected">
+		<block wx:for="{{options}}">
+			<view bindtap="{{screenBtn}}" id="{{item.id}}" class="{{className[index]}}" >
+				<text>{{item.name}}</text>
+			</view>
+		</block>
+	</view>
+</view>
+

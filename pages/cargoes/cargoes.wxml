@@ -1,0 +1,124 @@
+<form class="info" bindsubmit="formSubmit" bindreset="formReset">
+	<view class="input-list">
+    <view class="import">
+			<view class="information">货主姓名</view>
+			<input name="cargoOwner" placeholder-style="color:#B2B2B2" placeholder="请填写真实有效的名字"/>
+		</view>
+    <view class="import">
+			<view class="information">联系方式</view>
+			<input name="ownerCellphone" type="digit"  placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写您的手机号码"/>
+		</view>
+
+    <view class="import">
+			<view class="information">货物名称</view>
+			<input name="cargoName" placeholder-style="color:#B2B2B2" placeholder="请填写您的货物名称"/>
+		</view>
+    <view class="import">
+			<view class="information">货物重量(吨)</view>
+			<input name="cargoWeight" placeholder-style="color:#B2B2B2" placeholder="请输入吨数"/>
+		</view>
+    <view class="import">
+			<view class="information">装货时间</view>
+			<picker mode="date" value="{{shipTimestamp}}" start="{{today}}" end="{{validenddate}}" bindchange="bindShipDateChange">
+		    <view class="picker">
+		      {{shipTimestamp}}
+		    </view>
+		  </picker>
+		</view>
+
+		<view class="import">
+				<view class="information">装货地址</view>
+				<view class="select"><view class="startText" data-option="{{startOptions}}" data-name="fromid2" bindtap="selectRegion">{{start}}</view></view>
+		</view>
+		<view class="import">
+				<view class="information">卸货地址</view>
+				<view class="select"><view class="endText" data-option="{{endOptions}}" data-name="toid2" bindtap="selectRegion">{{end}}</view></view>
+		</view>
+
+    <view class="section section-second">
+			<!-- 选择地区 -->
+			<view class="backSelectCity" bindtap="backToAdd" wx:if="{{isShow}}"></view>
+			<view class="selectTheCity" wx:if="{{isShow}}">
+				<view class="selectNow">当前地区:<text class="theSelectedText"> {{theSelect}}</text></view>
+				<view wx:if="{{showData == 1}}">
+					<view class="content">
+						<view class="selectCity" wx:for="{{proData}}" id="{{item.provinceid}}" data-index="{{index}}" bindtap="getCity">{{item.province_name}}</view>
+					</view>
+				</view>
+				<view wx:elif="{{showData == 2}}">
+					<view class="backFront" bindtap="backToFront">返回上一级</view>
+					<view class="content">
+						<view class="selectCity" wx:for="{{cityData}}"  data-index="{{index}}" id="{{item.id}}" bindtap="getDistrict" >{{item.name}}</view>
+					</view>
+				</view>
+				<view wx:else>
+					<view class="backFront" bindtap="backToSecond">返回上一级</view>
+					<view class="content">
+						<view class="selectCity all" bindtap="chooseAll" id="">全{{theSelect}}</view>
+						<view class="selectCity" wx:for="{{distData}}" id="{{item.id}}" data-index="{{index}}" bindtap="selectAll">{{item}}</view>
+					</view>
+				</view>
+			</view>
+    </view>
+
+    <view class="import">
+			<view class="information">装货地址(详细)</view>
+			<input name="shipaddress" placeholder-style="color:#B2B2B2" placeholder="请填写详细的装货地址"/>
+		</view>
+    <view class="import">
+			<view class="information">卸货地址(详细)</view>
+			<input name="destinationaddress" placeholder-style="color:#B2B2B2" placeholder="请填写详细的卸货地址"/>
+		</view>
+		<block wx:for="{{infoList}}">
+			<view class="popup">
+				<view class="information">{{item.information}}</view>
+				<view class="select" id="{{index}}" bindtap="{{item.bindBtn}}">{{item.select}}</view>
+				<input hidden="{{inputHidden}}" name="{{item.name}}" value="{{item.val}}"/>
+			</view>
+		</block>
+    <view class="import">
+			<view class="information">运价</view>
+			<input name="price" placeholder-style="color:#B2B2B2" placeholder="请输入金额"/>
+		</view>
+    <view class="import">
+			<view class="information">付款方式</view>
+			<input name="payment" placeholder-style="color:#B2B2B2" placeholder="请输入付款方式"/>
+		</view>
+    <view class="import">
+			<view class="information">运输时效</view>
+			<input name="validtime" placeholder-style="color:#B2B2B2" placeholder="请输入运输时效"/>
+		</view>
+	    <view class="import">
+				<view class="information">微信</view>
+				<input name="wechat" placeholder-style="color:#B2B2B2" placeholder="微信号"/>
+		</view>
+		<view class="import">
+				<view class="information">紧急联系人</view>
+				<input name="emergencyContact" placeholder-style="color:#B2B2B2" placeholder="紧急联系人"/>
+		</view>
+		<view class="import">
+				<view class="information">紧急联系人电话</view>
+				<input name="emergencyCellphone" placeholder-style="color:#B2B2B2" placeholder="紧急联系人电话"/>
+		</view>
+		<view class="import">
+				<view class="information">备注</view>
+				<input name="memo" placeholder-style="color:#B2B2B2" placeholder="特殊情况请填写备注，如是否拼车配货，货物长宽高等"/>
+		</view>
+
+	</view>
+	<view class="hint">{{textHint}}</view>
+	<button name="id" type="hidden" value='{{id}}'/>
+	<button type="primary" size="default" class="submit" form-type="submit">提交信息</button>
+	<button formType="reset" class="resume">重新输入</button>
+</form>
+
+<view class="shade" hidden="{{hiddenBoolean}}">
+	<view class="layer" bindtap="hiddenBtn"></view>
+	<view class="selected">
+		<block wx:for="{{options}}">
+			<view bindtap="{{screenBtn}}" id="{{item.id}}" class="{{className[index]}}" >
+				<text>{{item.name}}</text>
+			</view>
+		</block>
+	</view>
+</view>

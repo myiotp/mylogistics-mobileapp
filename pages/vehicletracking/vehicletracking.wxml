@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="wrapper">
+  <view class="page-body">
+    <view class="page-body-wrapper">
+
+      <form bindsubmit="openLocation">
+        <view class="page-body-form">
+        </view>
+
+        <view class="page-body-buttons">
+          <button class="page-body-button" type="primary" formType="submit">查看位置</button>       
+        </view>
+
+      </form>
+    </view>
+  </view>
+</view>

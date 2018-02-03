@@ -1,0 +1,76 @@
+<form class="info" bindsubmit="formSubmit" bindreset="formReset">
+	<view class="input-list">
+    <view class="import">
+			<view class="information">车牌号</view>
+			<input name="licenseplate" placeholder-style="color:#B2B2B2" placeholder="请填写车牌号" value="{{licenseplate}}"/>
+		</view>
+    <view class="import">
+			<view class="information">发动机号</view>
+			<input name="enginenumber" placeholder-style="color:#B2B2B2" placeholder="请填写发动机号" value="{{enginenumber}}"/>
+		</view>
+    <view class="import">
+			<view class="information">车辆登记地点</view>
+			<input name="registrationaddress"  placeholder-style="color:#B2B2B2" placeholder="请填写车辆登记地点" value="{{registrationaddress}}"/>
+		</view>
+    <view class="import">
+			<view class="information">车辆品牌</view>
+			<input name="vehiclebrand"  placeholder-style="color:#B2B2B2" placeholder="请填写车辆品牌" value="{{vehiclebrand}}"/>
+		</view>
+		<view class="import">
+			<view class="information">车辆类型</view>
+			<input name="vehicletype"  placeholder-style="color:#B2B2B2" placeholder="请填写车辆类型" value="{{vehicletype}}"/>
+		</view>
+		<view class="import">
+			<view class="information">车辆载重(吨)</view>
+			<input name="vehicleweight" type="digit"  placeholder-style="color:#B2B2B2" placeholder="请填写车辆载重(吨)" value="{{vehicleweight}}"/>
+		</view>
+    <view class="import">
+			<view class="information">货箱长度(米)</view>
+			<input name="cargolength"  type="digit" placeholder-style="color:#B2B2B2" placeholder="请填写货箱长度(米)" value="{{cargolength}}"/>
+		</view>
+    <view class="import">
+			<view class="information">年检截止日期</view>
+			<input name="checkdeadline"  type="date" placeholder-style="color:#B2B2B2"  placeholder="请填写年检截止日期" value="{{checkdeadline}}"/>
+		</view>
+    <view class="import">
+			<view class="information">保险截止日期</view>
+			<input name="insurancedeadline" type="date" placeholder-style="color:#B2B2B2" placeholder="请填写保险截止日期" value="{{insurancedeadline}}"/>
+		</view>
+  </view>
+	<view class="hint">{{textHint}}</view>
+	<view style="display:none">
+		<input class="hidden" name="id" type="hidden" value='{{id}}'/>
+	</view>
+	<view wx:if="{{authresult == '1'}}">
+		<button size="default" class="disablebutton" form-type="button">已通过认证</button>
+		<navigator class="vehicletracking" url="../vehicletracking/vehicletracking?x={{gpsx}}&y={{gpsy}}">
+				<button size="default" type="primary" form-type="button">车辆跟踪</button>
+		</navigator>
+	</view>
+	<view wx:else>
+		<view wx:if="{{id}}">
+			<navigator class="drivingcertification" url="../drivingcertification/drivingcertification?id={{id}}">
+				 <button type="primary" size="default" class="submit">行驶证认证</button>
+			</navigator>
+			<button type="warn" formType="reset" class="resume">一旦删除将不可恢复</button>
+		</view>
+		<view wx:else>
+			<button type="primary" size="default" class="submit" form-type="submit">提交信息</button>
+		</view>
+	</view>
+
+
+
+
+</form>
+
+<view class="shade" hidden="{{hiddenBoolean}}">
+	<view class="layer" bindtap="hiddenBtn"></view>
+	<view class="selected">
+		<block wx:for="{{options}}">
+			<view bindtap="{{screenBtn}}" id="{{item.id}}" class="{{className[index]}}" >
+				<text>{{item.name}}</text>
+			</view>
+		</block>
+	</view>
+</view>
