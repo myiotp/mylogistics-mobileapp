@@ -7,7 +7,9 @@
         </view>
         <view class="links">
             <button type="primary" bindtap="goHome">回主页面</button>
+            <!--
             <button type="default" bindtap="viewMyList">查看我发布的货源</button>
+            -->
         </view>
     </view>
 </page>

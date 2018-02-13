@@ -236,6 +236,11 @@ Page({
             })
           }, 1e3);
 
+        } else {
+          wx.showModal({  
+            title: '提示',  
+            content:res.info  
+          })  
         }
       }
     })
@@ -255,43 +260,69 @@ Page({
         car_size=this.data.infoList[i].select;
       }
     }
-    //need to handle formData['shiptime']
-    let submitData = {
-      "id": formData['id'],
-      "username": app.uid,
-      "fromAreaName": '',
-      "fromCityName": '',
-      "fromProvinceName": '',
-      "fromid": this.data['startOptions'],
-      "fromname": this.data['start'],
-      "fromAddress": formData['shipaddress'],
-      "toAreaName": '',
-      "toCityName": '',
-      "toProvinceName": '',
-      "toid": this.data['endOptions'],
-      "toname": this.data['end'],
-      "toAddress": formData['destinationaddress'],
-      "carType": car_type,
-      "carLength": car_size,
-      "status": 0,
-      "cargoOwner": formData['cargoOwner'],
-      "ownerCellphone": formData['ownerCellphone'],
-      "cargoName": formData['cargoName'],
-      "cargoWeight": formData['cargoWeight'],
-      "shipTimestamp": '2018-01-02',
-      "price": formData['price'],
-      "payment": formData['payment'],
-      "validDays": formData['validtime'],
-      "memo": formData['memo'],
-      "wechat": formData['wechat'],
-      "emergencyContact": formData['emergencyContact'],
-      "emergencyCellphone": formData['emergencyCellphone'],
-      "category": formData['category'],
-      "mileage": 0
-    };
+    var flag = true;//判断信息输入是否完整  
+    var warn = "";//弹框时提示的内容  
+    if(formData['cargoOwner']==""){
+      warn="请填写真实有效的名字";
+    } else if(formData['ownerCellphone']=="") {
+      warn="请填写您的手机号码";
+    } else if(this.data['startOptions']=="" || this.data['startOptions']==",,") {
+      warn="请选择装货地址";
+    } else if(this.data['endOptions']=="" || this.data['endOptions']==",,") {
+      warn="请选择卸货地址";
+    } else if(car_type=="" || car_type == '请选择车辆类型') {
+      warn="请选择车辆类型";
+    } else if(car_size=="" || car_size == '请选择货箱长度') {
+      warn="请选择货箱长度";  
+    } else if(formData['cargoWeight']=="") {
+      warn="请填写载重(吨)";
+    } else {
+      flag=false;
+      //need to handle formData['shiptime']
+      let submitData = {
+        "id": formData['id'],
+        "username": app.uid,
+        "fromAreaName": '',
+        "fromCityName": '',
+        "fromProvinceName": '',
+        "fromid": this.data['startOptions'],
+        "fromname": this.data['start'],
+        "fromAddress": formData['shipaddress'],
+        "toAreaName": '',
+        "toCityName": '',
+        "toProvinceName": '',
+        "toid": this.data['endOptions'],
+        "toname": this.data['end'],
+        "toAddress": formData['destinationaddress'],
+        "carType": car_type,
+        "carLength": car_size,
+        "status": 0,
+        "cargoOwner": formData['cargoOwner'],
+        "ownerCellphone": formData['ownerCellphone'],
+        "cargoName": formData['cargoName'],
+        "cargoWeight": formData['cargoWeight'],
+        "shipTimestamp": '2018-01-02',
+        "price": formData['price'],
+        "payment": formData['payment'],
+        "validDays": formData['validtime'],
+        "memo": formData['memo'],
+        "wechat": formData['wechat'],
+        "emergencyContact": formData['emergencyContact'],
+        "emergencyCellphone": formData['emergencyCellphone'],
+        "category": formData['category'],
+        "mileage": 0
+      };
 
-    console.log(submitData);
-    this._submit(submitData, '提交成功')
+      console.log(submitData);
+      this._submit(submitData, '提交成功')
+    }
+    
+    if(flag==true){  
+      wx.showModal({  
+        title: '提示',  
+        content:warn  
+      })  
+    }  
   },
   bindShipDateChange: function(e) {
     this.setData({

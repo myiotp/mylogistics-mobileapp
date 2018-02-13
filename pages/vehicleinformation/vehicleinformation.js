@@ -502,7 +502,7 @@ Page({
       warn="请填写车牌号";
     } else if(formData['enginenumber']=="") {
       warn="请填写发动机号";
-    } else if(this.data['startOptions']=="") {
+    } else if(this.data['startOptions']=="" || this.data['startOptions']==",,") {
       warn="请选择车辆登记地(市区)";
     } else if(formData['registrationaddressdetail']=="") {
       warn="请填写详细的车辆登记地";

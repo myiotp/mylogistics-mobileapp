@@ -20,7 +20,7 @@ input .hidden{display:#none;}
 .selected .header{padding:0;text-align: center;}
 .selected .header text{font-size: 36rpx;text-align: center;}
 
-
+.disablebutton{background:#888;color:#fff;}
 
 .picker{
   padding: 19rpx 26rpx;
