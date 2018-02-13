@@ -43,6 +43,32 @@ Page({
       })
     }
   },
+  onShow: function () {
+    setTimeout(function () {
+      wx.switchTab({
+        url: '../list/list'
+      })
+    }, 3e3);
+  },
+  //事件处理函数
+  goto1: function () {
+    wx.setStorage({
+      key: 'myrole',
+      data: '1'
+    })
+    wx.switchTab({
+      url: '../list/list'
+    })
+  },
+  goto2: function () {
+    wx.setStorage({
+      key: 'myrole',
+      data: '2'
+    })
+    wx.switchTab({
+      url: '../list/list'
+    })
+  },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo

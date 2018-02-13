@@ -28,6 +28,6 @@
 		</navigator>
 	</view>
 	<view class="add" bindtap="search">
-		<image src="../../images/search.png"></image>
+		<image src="../../images/search1.png"></image>
 	</view>
 </page>

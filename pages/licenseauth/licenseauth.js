@@ -18,7 +18,7 @@ Page({
             },
             success:function(res){
                 console.log(res.data);
-                if(res.data) {
+                if(res.data && res.data.data) {
                   // let _authresult = res.data['authresult'];
                   // let _ok = false;
                   // if(_authresult == '1') {

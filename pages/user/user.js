@@ -2,6 +2,7 @@ var app = getApp();
 Page({
     data:{
         userInfo:{},
+        myrole:'',
         total:{
             view:56,
             vehiclefavorite:'个货主收藏',
@@ -22,6 +23,7 @@ Page({
             },
             fail:function(err){}
         });
+        
 
     		wx.request({
           url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/mycount',
@@ -38,5 +40,23 @@ Page({
     				})
     			}
     		})
+    },
+    onShow:function() {
+      var that = this;
+      wx.getStorage({
+        key: 'myrole',
+        success: function (res) {
+          console.log(res.data);
+          if (res.data == '1') {
+            that.setData({
+              myrole: '车主'
+            })
+          } else {
+            that.setData({
+              myrole: '货主'
+            })
+          }
+        }
+      });
     }
 })

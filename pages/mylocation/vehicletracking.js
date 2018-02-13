@@ -60,22 +60,20 @@ Page({
         })
       }
     }
-  },
 
+  },
   onLoad: function (options) {
     var that = this;
     if (this.loaded) return;
 
     console.log('x:' + options['x'] + ',y:' + options['y'])
-  
-    if(options['x'] >0 && options['y'] > 0) {
-      that.setData({
-        hasLocation: true,
-        longitude: options['y'],
-        latitude: options['x']
-      })
-    }
-    //console.log(this.data);
+    // if(options['x'] >0 && options['y'] > 0) {
+    //   that.setData({
+    //     hasLocation: true,
+    //     longitude: 23.099994,//options['x'],
+    //     latitude: 113.324520//options['y']
+    //   })
+    // }
   }
 
 })

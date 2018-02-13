@@ -16,6 +16,35 @@
   color: #aaa;
 }
 
+
 .usermotto {
-  margin-top: 200px;
+  margin-top: 180px;
+  /* border: 1px solid #405f80;
+  width: 200rpx;
+  height: 80rpx;
+  text-align: center;
+  border-radius: 5px; */
 }
+.usermotto2 {
+  margin-top: 10px;
+}
+.container-footer text.apply-btn{
+	background: #f7982a;
+	color: #fff;
+	flex: 1.5;
+}
+page{
+  height: 500px;
+  background-color: #FAFAFA;
+  background-image: url('http://47.104.158.49/images/background4.png');
+  background-repeat: round;
+  background-position-y: top;
+}
+.container {
+  height:100%;
+}
+
+.backgroundimg{
+
+}
+

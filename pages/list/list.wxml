@@ -29,6 +29,6 @@
 	</view>
 
 	<view class="add" bindtap="search">
-		<image src="../../images/search.png"></image>
+		<image src="../../images/search2.png"></image>
 	</view>
 </page>

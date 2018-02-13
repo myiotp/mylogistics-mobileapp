@@ -62,7 +62,7 @@ Page({
        setTimeout(function () {
          app.submited = true;
          wx.hideToast();
-         wx.redirectTo({
+         wx.switchTab({
            url: '../user/user'
          })
          //wx.navigateBack();
@@ -79,7 +79,7 @@ Page({
     var tempFilePaths = this.data.tempFilePaths;
     var tempFilePaths2 = this.data.tempFilePaths2;
     console.log(tempFilePaths);
-    console.log(tempFilePaths2);
+    //console.log(tempFilePaths2);
     if (tempFilePaths == '') {
       wx.showToast({
         title: '请提交驾驶证照片',

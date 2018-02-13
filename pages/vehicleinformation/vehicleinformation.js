@@ -1,11 +1,27 @@
 let app = getApp();
 
 var optionList = [];
+var type = [];
+var size = [];
+var list = [
+  {
+    information: '车辆类型',
+    select: '请选择车辆类型',
+    bindBtn: 'carType',
+    name: 'car_type',
+    val: ''
+  }, {
+    information: '货箱长度',
+    select: '请选择货箱长度',
+    bindBtn: 'carExtent',
+    name: 'car_size',
+    val: ''
+  }
+];
 
 Page({
   data: {
     textHint: "您的隐私会受到法律保护，请您放心填写  。",
-    licenseplate: '',
     licenseplate: '',
     enginenumber: '',
     registrationaddress: '',
@@ -20,18 +36,22 @@ Page({
     comment: '',
     gpsx:0,
     gpsy:0,
+    options: '',
     hiddenBoolean: true,
     inputHidden: true,
     className: ['header'],
     start: "请选择城市",
+    infoList: list,
     options: '',
     screenBtn: '',
     infoId: '',
     checkHtml: "",
+    mycartyelist:[],
+    mycarlengthlist:[],
     provinceList: []
   },
   init: function () {
-    //this.regionSelectCallback('fromid', 'start', 'startOptions');
+    this.regionSelectCallback('registrationaddress', 'start', 'startOptions');
   },
   selectRegion: function (e) {//点击选择城市
     let name = e.target.dataset['name'];
@@ -42,7 +62,7 @@ Page({
       isShowTextArea: true,
       showData: 1
     })
-    if (name == 'fromid') {
+    if (name == 'registrationaddress') {
       app.selectPro = true
     } else {
       app.selectPro = false
@@ -62,8 +82,90 @@ Page({
           })
         }
 
+      },
+      fail: function(res) {
+        console.log(res)
+        that.setData({
+          [name]: ',,',
+          [options]: ',,'
+        })
       }
     })
+  },
+  address: function (e) {
+    var addId = e.currentTarget.id;
+    if (addId <= 2) {
+      this.setData({
+        infoId: addId,
+        options: this.data.provinceList,
+        hiddenBoolean: !this.data.hiddenBoolean,
+        screenBtn: 'cityBtn'
+      });
+
+    }
+  },
+  carType: function (e) {
+    var addId = e.currentTarget.id;
+    if (addId == 0) {
+      this.setData({
+        infoId: addId,
+        options: this.data.mycartyelist,
+        hiddenBoolean: !this.data.hiddenBoolean,
+        screenBtn: 'carBtn'
+      });
+    }
+  },
+  carExtent: function (e) {
+    if (e.currentTarget.id == 1) {
+      this.setData({
+        infoId: e.currentTarget.id,
+        options: this.data.mycarlengthlist,
+        hiddenBoolean: !this.data.hiddenBoolean,
+        screenBtn: 'carBtn'
+      });
+    }
+  },
+  hiddenBtn: function (e) {
+    this.setData({
+      hiddenBoolean: !this.data.hiddenBoolean
+    })
+  },
+
+  overBtn: function (e) {
+    var zone,
+      dataId = e.currentTarget.id,
+      num = this.data.infoId;
+    for (var i = 0; i < optionList.length; i++) {
+      if (optionList[i].id == dataId) {
+        zone = optionList[i].name;
+      }
+    }
+    if (dataId != '') {
+      this.data.infoList[this.data.infoId].val = dataId;
+      this.data.infoList[this.data.infoId].select = zone;
+
+      var newInfo = this.data.infoList;
+      this.setData({
+        hiddenBoolean: !this.data.hiddenBoolean,
+        screenBtn: '',
+        infoList: newInfo
+      });
+
+      console.log(newInfo);
+    }
+  },
+
+  bindcheckdeadlineDateChange: function(e) {
+    this.setData({
+      checkdeadline: e.detail.value
+    });
+    console.log(this.data);
+  },
+  bindinsurancedeadlineDateChange: function(e) {
+    this.setData({
+      insurancedeadline: e.detail.value
+    });
+    console.log(this.data);
   },
 
   onLoad: function (options) {
@@ -71,6 +173,9 @@ Page({
     if (this.loaded) return;
     this.init();
     this.getProvince();
+    this.initcartype();
+    this.initcarlength();
+
     console.log(app.serviceurl + '/api/uservehicle/getJson?id=' + options['id'])
     if(options['id']) {
       wx.request({
@@ -88,7 +193,24 @@ Page({
               licenseplate: dd.licenseplate,
               licenseplate: dd.licenseplate,
               enginenumber: dd.enginenumber,
-              registrationaddress: dd.registrationaddress,
+              start:dd.fromname,
+              infoList:[
+                {
+                  information: '车辆类型',
+                  select: dd.vehicletype,
+                  bindBtn: 'carType',
+                  name: 'car_type',
+                  val: dd.vehicletype
+                }, {
+                  information: '货箱长度',
+                  select: dd.cargolength,
+                  bindBtn: 'carExtent',
+                  name: 'car_size',
+                  val: dd.cargolength
+                }
+              ],
+              registrationaddress: dd.fromAddress,
+              registrationaddressdetail:dd.fromAddress,
               vehicletype: dd.vehicletype,
               vehiclebrand:dd.vehiclebrand,
               vehicleweight:dd.vehicleweight,
@@ -98,8 +220,8 @@ Page({
               certimage: dd.certimage,
               authresult: dd.authresult,
               comment: dd.comment,
-              gpsx: dd.gpsx,
-              gpsy: dd.gpsy
+              gpsx: dd.fromlng,
+              gpsy: dd.fromlat
             })
           }
 
@@ -202,7 +324,7 @@ Page({
         startOptions: that.data.selectProId + ',' + that.data.selectCityId + ',' + selectDistId
       })
       wx.setStorage({
-        key: 'fromid',
+        key: 'registrationaddress',
         data: {
           province: this.data['selectedProvince'],
           city: this.data['selectCities'],
@@ -246,7 +368,7 @@ Page({
         startOptions: that.data.selectProId + ',' + that.data.selectCityId
       })
       wx.setStorage({
-        key: 'fromid',
+        key: 'registrationaddress',
         data: {
           province: this.data['selectedProvince'],
           city: this.data['selectCities'],
@@ -275,6 +397,57 @@ Page({
     }
   },
 
+  showMap:function(e){
+   
+    var that = this;
+
+    console.log(that.data.gpsx + "," + that.data.gpsy + ',' + that.data.licenseplate)
+    wx.openLocation({
+      latitude: that.data.gpsy,
+      longitude: that.data.gpsx,
+      scale: 16,
+      name: that.data.licenseplate
+    })
+
+},
+
+  carBtn: function (e) {
+    var me, zone;
+    var dataId = e.currentTarget.id,
+      arr = this.data.infoList[this.data.infoId];
+    if (this.data.infoId == 0) {
+      me = this.data.mycartyelist;
+    } else if (this.data.infoId == 1) {
+      me = this.data.mycarlengthlist;
+    }
+    for (var i = 0; i < me.length; i++) {
+      if (me[i].id == dataId) {
+        zone = me[i].name;
+      }
+    }
+    this.data.infoList[this.data.infoId].val = dataId;
+    this.data.infoList[this.data.infoId].select = zone;
+
+    var newInfo = this.data.infoList;
+    this.setData({
+      hiddenBoolean: !this.data.hiddenBoolean,
+      screenBtn: '',
+      infoList: newInfo
+    })
+  },
+  initcartype : function () {
+    this.type = wx.getStorageSync('chooseCartype');
+    this.setData({
+        mycartyelist:this.type
+    })
+    //console.log(this.type);
+  },
+  initcarlength: function () {
+    this.setData({
+        mycarlengthlist:wx.getStorageSync('chooseCarLength')
+    })
+    //console.log(this.type);
+  },
   formReset: function () {
     this.setData({
 
@@ -312,26 +485,103 @@ Page({
     let formData = e.detail.value;
     console.log('form发生了submit事件，携带数据为：', formData);
     console.log(this.data);
-    let submitData = {
-      "id": formData['id'],
-      "username": app.uid,
-      "licenseplate": formData['licenseplate'],
-      "enginenumber": formData['enginenumber'],
-      "registrationaddress": formData['registrationaddress'],
-      "vehicletype": formData['vehicletype'],
-      "vehiclebrand":formData['vehiclebrand'],
-      "vehicleweight":formData['vehicleweight'],
-      "cargolength": formData['cargolength'],
-      "checkdeadline": formData['checkdeadline'],
-      "insurancedeadline": formData['insurancedeadline'],
-      "certimage": '',
-      "authresult": 0,
-      "comment": ''
-    };
-    console.log(submitData);
-    this._submit(submitData, '提交成功')
+    var length = this.data.infoList.length;
+    var car_type = '';
+    var car_size = '';
+    for(var i=0;i<length;i++){
+      if(this.data.infoList[i].name=='car_type'){
+        car_type=this.data.infoList[i].select;
+      }
+      if(this.data.infoList[i].name=='car_size'){
+        car_size=this.data.infoList[i].select;
+      }
+    }
+    var flag = true;//判断信息输入是否完整  
+    var warn = "";//弹框时提示的内容  
+    if(formData['licenseplate']==""){
+      warn="请填写车牌号";
+    } else if(formData['enginenumber']=="") {
+      warn="请填写发动机号";
+    } else if(this.data['startOptions']=="") {
+      warn="请选择车辆登记地(市区)";
+    } else if(formData['registrationaddressdetail']=="") {
+      warn="请填写详细的车辆登记地";
+    } else if(formData['vehiclebrand']=="") {
+      warn="请填写车辆品牌";
+    } else if(car_type=="" || car_type == '请选择车辆类型') {
+      warn="请选择车辆类型";
+    } else if(car_size=="" || car_size == '请选择货箱长度') {
+      warn="请选择货箱长度";  
+    } else if(formData['vehicleweight']=="") {
+      warn="请填写车辆载重(吨)";
+    } else if(formData['vehiclebrand']=="") {
+      warn="请填写车辆品牌";
+    } else if(this.data['checkdeadline']=="") {
+      warn="请填写年检截止日期";
+    } else if(this.data['insurancedeadline']=="") {
+      warn="请填写保险截止日期";
+    } else {
+      flag=false;
+      let submitData = {
+        "id": formData['id'],
+        "username": app.uid,
+        "fromAreaName": '',
+        "fromCityName": '',
+        "fromProvinceName": '',
+        "fromid": this.data['startOptions'],
+        "fromname": this.data['start'],
+        "fromAddress": formData['registrationaddressdetail'],
+        "licenseplate": formData['licenseplate'],
+        "enginenumber": formData['enginenumber'],
+        "registrationaddress": formData['registrationaddress'],
+        "vehicletype": car_type,
+        "vehiclebrand":formData['vehiclebrand'],
+        "vehicleweight":formData['vehicleweight'],
+        "cargolength": car_size,
+        "checkdeadline": this.data['checkdeadline'],
+        "insurancedeadline": this.data['insurancedeadline'],
+        "certimage": '',
+        "authresult": 0,
+        "comment": ''
+      };
+      console.log(submitData);
+      this._submit(submitData, '提交成功')
+    }
+    
+    if(flag==true){  
+      wx.showModal({  
+        title: '提示',  
+        content:warn  
+      })  
+    }  
   },
-
+  removeFavorite:function(){
+    let that = this;
+    console.log(that.data)
+    wx.request({
+      url: app.serviceurl + '/api/uservehicle/username/'+app.uid+'/id/'+that.data['id'],
+      method: 'DELETE',
+      data: {},
+      success: function (res) {
+        console.log(res)
+        res = res.data;
+        if (res.status == 1 || res.status == 2) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1e3
+          });
+          setTimeout(function () {
+            app.submited = true;
+            wx.hideToast();
+            wx.switchTab({
+              url: '../user/user'
+            })
+          }, 1e3);
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

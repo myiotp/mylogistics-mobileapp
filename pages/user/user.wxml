@@ -6,6 +6,11 @@
             <text>共{{total.vehiclefavorite}}个车源/{{total.cargofavorite}}个货源收藏</text>
         </view>
     </view>
+    <!--
+    <navigator class="publish" url="../index/index">
+        <text>切换角色(当前为:{{myrole}})</text>
+    </navigator>
+    -->
     <navigator class="publish" url="../trucks/trucks">
         <text>我发布的车源</text>
     </navigator>

@@ -10,6 +10,14 @@ Page({
             city:'',
             province:''
         },
+        fromlnglat: {
+          lng:0,
+          lat:0
+        },
+        tolnglat: {
+          lng: 0,
+          lat: 0
+        },
         licenseplate:'',
         receipt:'',
         address:[
@@ -45,6 +53,14 @@ Page({
                 end: {
                   city: rawdata.toCityName,
                   province: rawdata.toProvinceName
+                },
+                fromlnglat:{
+                  lng: rawdata.fromlng,
+                  lat: rawdata.fromlat
+                },
+                tolnglat: {
+                  lng: rawdata.tolng,
+                  lat: rawdata.tolat
                 },
                 receipt: rawdata.price + '元/' + rawdata.cargoWeight + '吨  '  + rawdata.payment,
                 licenseplate: rawdata.licenseplate,
@@ -167,18 +183,25 @@ Page({
     },
     showMap:function(e){
         var index = e.target['dataset'].index;
-        wx.getLocation({
-          type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-          success: function(res) {
-            var latitude = res.latitude
-            var longitude = res.longitude
-            wx.openLocation({
-              latitude: latitude,
-              longitude: longitude,
-              scale: 28
-            })
-          }
-        })
+        var that = this;
+        console.log(index)
+        console.log(that.data.fromlnglat.lat + "," + that.data.tolnglat.lat + ',' + that.data.address[0].content)
+        console.log(that.data.fromlnglat.lng + "," + that.data.tolnglat.lng + ',' + that.data.address[1].content)
+        if(index == '0') {
+          wx.openLocation({
+            latitude: that.data.fromlnglat.lat,
+            longitude: that.data.fromlnglat.lng,
+            scale: 16,
+            name: that.data.address[0].content
+          })
+        } else if (index == '1') {
+          wx.openLocation({
+            latitude: that.data.tolnglat.lat,
+            longitude: that.data.tolnglat.lng,
+            scale: 16,
+            name: that.data.address[1].content
+          })
+        } 
 
     },
     onShow:function(options){

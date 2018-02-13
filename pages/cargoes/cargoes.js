@@ -5,7 +5,7 @@ var type = [];
 var size = [];
 var list = [
   {
-    information: '车辆需求',
+    information: '车辆类型',
     select: '请选择车辆类型',
     bindBtn: 'carType',
     name: 'car_type',

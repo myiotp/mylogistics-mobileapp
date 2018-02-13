@@ -15,7 +15,14 @@
 				<view class="end">
 					<text class="city">保险截止</text>
 	        <text class="province">{{item.insurancedeadline}}</text>
+					<view wx:if="{{item.authresult == 1}}">
+						<view class="image"><image src="../../images/yes.png"></image></view>
+					</view>
+					<view wx:if="{{item.authresult == -1}}">
+						<view class="image"><image src="../../images/no.png"></image></view>
+					</view>
 				</view>
+				
 			</view>
 			<view class="condition">
         <text class="price">{{item.vehiclebrand}}</text>

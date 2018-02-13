@@ -1,6 +1,8 @@
 {
   "pages":[
+    
     "pages/list/list",
+    "pages/index/index",
     "pages/searchcargolist/list",
     "pages/searchcarlist/carlist",
     "pages/message/message",
@@ -53,8 +55,8 @@
       {
         "pagePath": "pages/list/list",
         "text": "货源列表",
-        "iconPath": "images/list.png",
-        "selectedIconPath": "images/list-selected.png"
+        "iconPath": "images/addgoods.png",
+        "selectedIconPath": "images/addgoods-selected.png"
       },
       {
         "pagePath": "pages/carlist/carlist",
@@ -65,14 +67,14 @@
       {
         "pagePath": "pages/addcar/addcar",
         "text": "我要找货",
-        "iconPath": "images/add.png",
-        "selectedIconPath": "images/add-selected.png"
+        "iconPath": "images/truck-yellow.png",
+        "selectedIconPath": "images/truck-yellow-selected.png"
       },
       {
         "pagePath": "pages/cargoes/cargoes",
         "text": "我要发货",
-        "iconPath": "images/add.png",
-        "selectedIconPath": "images/add-selected.png"
+        "iconPath": "images/cargo1.png",
+        "selectedIconPath": "images/cargo1-selected.png"
       },
       {
         "pagePath": "pages/user/user",
