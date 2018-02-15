@@ -5,8 +5,10 @@ Page({
         myrole:'',
         total:{
             view:56,
-            vehiclefavorite:'个货主收藏',
-            cargofavorite:'个车主收藏'
+            vehiclefavorite:'0',
+            cargofavorite:'0',
+            myvehicle:'0',
+            mycargo:'0'
         }
     },
     onLoad:function(){
@@ -36,6 +38,8 @@ Page({
               total:{
                   vehiclefavorite: res.data.data['1'],
                   cargofavorite:res.data.data['2'],
+                  myvehicle:res.data.data['3'],
+                  mycargo:res.data.data['4']
               }
     				})
     			}
@@ -58,5 +62,23 @@ Page({
           }
         }
       });
+
+      wx.request({
+        url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/mycount',
+        data:{
+
+        },
+        success:function(res){
+          console.log(res.data.data)
+          that.setData({
+            total:{
+                vehiclefavorite: res.data.data['1'],
+                cargofavorite:res.data.data['2'],
+                myvehicle:res.data.data['3'],
+                mycargo:res.data.data['4']
+            }
+          })
+        }
+      })
     }
 })

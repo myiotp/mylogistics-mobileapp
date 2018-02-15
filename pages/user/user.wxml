@@ -3,7 +3,10 @@
         <image src="{{userInfo.avatar}}" class="avatar" />
         <text class="nickname">{{userInfo.nickname}}</text>
         <view class="total">
-            <text>共{{total.vehiclefavorite}}个车源/{{total.cargofavorite}}个货源收藏</text>
+            <text>共发布{{total.myvehicle}}个车源/{{total.mycargo}}个货源</text>
+        </view>
+        <view class="total">
+            <text>共收藏{{total.vehiclefavorite}}个车源/{{total.cargofavorite}}个货源</text>
         </view>
     </view>
     <!--
