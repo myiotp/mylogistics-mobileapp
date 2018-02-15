@@ -1,6 +1,6 @@
 .header{
     height:224rpx;
-    background:url("https://s.kcimg.cn/app/images/matching/truck-1.jpg") no-repeat 0 0;
+    background:url("http://47.104.158.49/images/truck-1.jpg") no-repeat 0 0;
     background-size: contain;
     color:#fff;
     overflow: hidden;
@@ -95,7 +95,7 @@
     height:28rpx;
     content:"";
     display: block;
-    background: url("https://s.kcimg.cn/app/images/matching/locate.png") no-repeat;
+    background: url("http://47.104.158.49/images/locate.png") no-repeat;
     background-size: 100% 100%;
 }
 
@@ -151,7 +151,7 @@
 .tel:before{
     width:24rpx;
     height:28rpx;
-    background-image: url("https://s.kcimg.cn/app/images/matching/phone.png");
+    background-image: url("http://47.104.158.49/images/phone.png");
 }
 .favorite{
     margin-top: 30rpx;
@@ -162,6 +162,6 @@
 .favorite:before{
     width:28rpx;
     height:28rpx;
-    background-image: url("https://s.kcimg.cn/app/images/matching/collect.png");
+    background-image: url("http://47.104.158.49/images/collect.png");
 
 }

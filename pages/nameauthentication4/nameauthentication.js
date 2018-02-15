@@ -3,9 +3,29 @@ var util = require('../../utils/util.js');
 Page({
   data: {
     tempFilePaths: '',
+    uploaded: false,
     tempFilePaths2:''
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    var that = this;
+    that.setData({
+      id: options['id']
+    })
+
+    wx.request({
+        url: app.serviceurl+'/api/uploadimage/' + app.uid + '/type/104',
+        data:{
+            id:options['id'],
+            username: app.uid
+        },
+        success:function(res){
+          console.debug(res.data.data);
+          var rawdata = res.data.data;
+          that.setData({
+            tempFilePaths: app.imagesurl + '/' + rawdata.image
+          });
+        }
+    })
   },
   chooseimage: function () {
     var that = this;
@@ -48,6 +68,7 @@ Page({
         console.log(res);
         that.setData({
           tempFilePaths: res.tempFilePaths[0],
+          uploaded: true
         })
       }
     })
@@ -61,13 +82,15 @@ Page({
         console.log(res);
         that.setData({
           tempFilePaths2: res.tempFilePaths[0],
+          uploaded: true
         })
       }
     })
   },
   formReset: function () {
     this.setData({
-
+      tempFilePaths: '',
+      uploaded: false
     })
   },
   upload_file: function (url, filePath, name, type) {

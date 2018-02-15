@@ -2,6 +2,7 @@
 App({
   onLaunch: function () {
     this.serviceurl ='http://localhost:8080/onemap';
+    this.imagesurl = 'http://localhost/uploadimages';
     this.uid = 'wangxn';
 
     this.setCity();
