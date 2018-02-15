@@ -93,9 +93,8 @@
 	<view wx:else>
 		<view wx:if="{{id}}">
 			<button type="primary" class="submit" form-type="submit">保存信息</button>
-			<navigator class="drivingcertification" url="../drivingcertification/drivingcertification?id={{id}}">
-				 <button type="primary" size="default" class="submit">行驶证认证</button>
-			</navigator>
+			<button type="primary" size="default" class="submit" bindtap="gotoauth">行驶证认证</button>
+
 			<button type="warn" bindtap="removeFavorite" class="resume">一旦删除将不可恢复</button>
 		</view>
 		<view wx:else>

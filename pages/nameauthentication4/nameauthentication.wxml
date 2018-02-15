@@ -1,5 +1,5 @@
 <form class="info" bindsubmit="formSubmit" bindreset="formReset">
-<button style="margin:10rpx;" bindtap="chooseimage">法人证</button>
+<button style="margin:10rpx;" bindtap="chooseimage">点击选择法人证</button>
 <image src="{{tempFilePaths }}" mode="aspecFill" style="width: 100%; height: 450rpx"/>
 
 <view class="hint">你的隐私信息将受到法律保护，请您放心上传</view>

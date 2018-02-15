@@ -3,11 +3,15 @@ var util = require('../../utils/util.js');
 Page({
   data: {
     tempFilePaths: '',
+    uploaded: false,
     vehicleid:''
   },
   onLoad: function (options) {
+    var that = this;
+    console.log(options)
     this.setData({
-      vehicleid:options["id"]
+      vehicleid:options["id"],
+      tempFilePaths:options["img"]
     })
   },
   chooseimage: function () {
@@ -35,13 +39,15 @@ Page({
         console.log(res);
         that.setData({
           tempFilePaths: res.tempFilePaths[0],
+          uploaded: true
         })
       }
     })
   },
   formReset: function () {
     this.setData({
-
+      tempFilePaths: '',
+      uploaded: false
     })
   },
   upload_file: function (url, filePath, name, type) {
