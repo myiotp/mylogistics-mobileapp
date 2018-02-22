@@ -29,7 +29,8 @@ Page({
         ],
         other:'',
         phone:'',
-        favorite:false
+        favorite:false,
+        booked:false
     },
     onLoad:function(options){
         var that = this;
@@ -91,7 +92,8 @@ Page({
                 ],
                 other: rawdata.memo,
                 phone: rawdata.ownerCellphone,
-                favorite:rawdata.favoited
+                favorite:rawdata.favoited,
+                booked: rawdata.canCreate
               });
             }
         })
@@ -130,6 +132,33 @@ Page({
       })
     },
     addFavorite:function(){
+      let that = this;
+      console.log(that.data)
+      wx.request({
+        url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/cargo/'+that.data['id'],
+        method: 'POST',
+        data: {},
+        success: function (res) {
+          console.log(res)
+          res = res.data;
+          if (res.status == 1 || res.status == 2) {
+            wx.showToast({
+              title: '收藏成功',
+              icon: 'success',
+              duration: 1e3
+            });
+            setTimeout(function () {
+              app.submited = true;
+              wx.hideToast();
+              wx.switchTab({
+                url: '../list/list'
+              })
+            }, 1e3);
+          }
+        }
+      })
+    },
+    addBook:function(){
       let that = this;
       console.log(that.data)
       wx.request({
@@ -228,7 +257,8 @@ Page({
                 ],
                 other: rawdata.memo,
                 phone: rawdata.ownerCellphone,
-                favorite:rawdata.favoited
+                favorite:rawdata.favoited,
+                booked: rawdata.canCreate
               });
             }
         })

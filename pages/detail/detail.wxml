@@ -45,7 +45,13 @@
           <button class="unfavorite" type="warn" data-index="{{index}}" bindtap="removeFavorite">取消收藏</button>
         </view>
         <view wx:else>
-          <button class="favorite" type="default" data-index="{{index}}" bindtap="addFavorite">收藏这条货源</button>
+          <button class="favorite" type="primary" data-index="{{index}}" bindtap="addFavorite">收藏这条货源</button>
+        </view>
+        <view wx:if="{{booked == true}}">
+          <button size="default" class="disablebutton" form-type="button">等待货主确认</button>
+        </view>
+        <view wx:else>
+          <button class="favorite" type="primary" data-index="{{index}}" bindtap="addBook">我要接这条货源</button>
         </view>
     </view>
 
