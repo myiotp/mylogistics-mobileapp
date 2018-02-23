@@ -28,7 +28,11 @@ Page({
         ],
         other:'',
         phone:'',
-        favoited:false
+        favoited:false,
+        booked:false,
+        canUpdate:false,
+        canDelete:false,
+        owner:''
     },
     onLoad:function(options){
         var that = this;
@@ -116,7 +120,11 @@ Page({
                 ],
                 other: rawdata.memo,
                 phone: rawdata.ownerCellphone,
-                favoited:rawdata.favoited
+                favoited:rawdata.favoited,
+                booked: rawdata.canCreate,
+                canUpdate:rawdata.canUpdate,
+                canDelete:rawdata.canDelete,
+                owner: rawdata.username
               });
             }
         })
@@ -177,6 +185,40 @@ Page({
                 url: '../carlist/carlist'
               })
             }, 1e3);
+          }
+        }
+      })
+    },
+    addBook:function(){
+      let that = this;
+      console.log(that.data)
+      wx.request({
+        url: app.serviceurl + '/api/cargoes/username/'+app.uid+'/count',
+        method: 'GET',
+        data: {},
+        success: function (res) {
+          console.log(res.data)
+          res = res.data;
+          if (res.data > 0) {
+            wx.showToast({
+              title: '选择货源',
+              icon: 'success',
+              duration: 1e3
+            });
+            setTimeout(function () {
+              app.submited = true;
+              wx.hideToast();
+              wx.navigateTo({
+                url: '../trucks4tx/trucks?cid='+that.data['id']+'&o='+that.data['owner']
+              })
+            }, 1e3);
+          } else {
+            wx.showModal({  
+              title: '提示',  
+              showCancel: false,
+              content:'您没有发布任何货源信息,暂时无法接该车源!'  
+            });
+            
           }
         }
       })
@@ -279,7 +321,11 @@ Page({
                 ],
                 other: rawdata.memo,
                 phone: rawdata.ownerCellphone,
-                favoited:rawdata.favoited
+                favoited:rawdata.favoited,
+                booked: rawdata.canCreate,
+                canUpdate:rawdata.canUpdate,
+                canDelete:rawdata.canDelete,
+                owner: rawdata.username
               });
             }
         })
