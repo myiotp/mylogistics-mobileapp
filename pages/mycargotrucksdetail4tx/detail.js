@@ -187,8 +187,8 @@ Page({
             setTimeout(function () {
               app.submited = true;
               wx.hideToast();
-              wx.navigateTo({
-                url: '../cargolist/cargolist'
+              wx.switchTab({
+                url: '../user/user'
               })
             }, 1e3);
           }
