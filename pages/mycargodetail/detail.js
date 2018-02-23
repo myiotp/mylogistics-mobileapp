@@ -31,6 +31,8 @@ Page({
         phone:'',
         favorite:false,
         booked:false,
+        canUpdate:false,
+        canDelete:false,
         owner:''
     },
     onLoad:function(options){
@@ -95,6 +97,8 @@ Page({
                 phone: rawdata.ownerCellphone,
                 favorite:rawdata.favoited,
                 booked: rawdata.canCreate,
+                canUpdate:rawdata.canUpdate,
+                canDelete:rawdata.canDelete,
                 owner: rawdata.username
               });
             }
@@ -241,6 +245,8 @@ Page({
                 phone: rawdata.ownerCellphone,
                 favorite:rawdata.favoited,
                 booked: rawdata.canCreate,
+                canUpdate:rawdata.canUpdate,
+                canDelete:rawdata.canDelete,
                 owner: rawdata.username
               });
             }

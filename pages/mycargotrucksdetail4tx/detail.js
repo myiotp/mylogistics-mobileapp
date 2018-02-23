@@ -45,7 +45,7 @@ Page({
         console.log(that.data);
 
         wx.request({
-            url: app.serviceurl+'/api/truck/' + options['id'],
+            url: app.serviceurl+'/api/truck/' + options['id'] +'/txId/'+options['txId'],
             data:{
                 id:options['id'],
                 username: app.uid
@@ -252,9 +252,9 @@ Page({
     },
     onShow:function(options){
         var that = this;
-        console.info(app.serviceurl+'/api/truck/' + that.data['id']);
+        console.info(app.serviceurl+'/api/truck/' + that.data['id']+'/txId/'+that.data['txId']);
         wx.request({
-            url: app.serviceurl+'/api/truck/' + that.data['id'],
+            url: app.serviceurl+'/api/truck/' + that.data['id']+'/txId/'+that.data['txId'],
             data:{
               username: app.uid
             },

@@ -15,13 +15,19 @@
 				<view class="end">
 					<text class="city">{{item.toCityName}}</text>
 	        <text class="province">{{item.toProvinceName}}</text>
-
+					<view wx:if="{{item.status == -1}}">
+					<view class="image"><image src="../../images/no.png"></image></view>
+					</view>
+					<view wx:if="{{item.status == 1}}">
+					<view class="image"><image src="../../images/yes.png"></image></view>
+					</view>
 				</view>
 			</view>
 			<view class="condition">
         <text class="price">{{item.truckBarnd}}</text>
         <text class="article">载重{{item.truckWeight}}吨</text>
         <text class="truck">{{item.carLength}}米{{item.carType}}</text>
+		
 			</view>
 		</navigator>
 	</view>
