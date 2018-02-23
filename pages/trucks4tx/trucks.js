@@ -1,24 +1,25 @@
 var app = getApp();
 Page({
 	data: {
-	  	list:''
+		  list:'',
+		  cid:0,
+		  cargoowner:''
 	},
-	search: function () {
-    wx.navigateTo({
-      url: '/pages/searchcargoes/cargoes'
-    })
-  },
 	onLoad:function(options){
 		var that = this;
-		//console.log(options);
+		that.data.cid = options['cid'];
+		that.data['cargoowner'] = options['o'];
+		console.log(that.data)
 		wx.request({
-      url: app.serviceurl + '/api/cargoes',
+      		url: app.serviceurl + '/api/truck/username/'+app.uid,
 			data:{
-      	username:app.uid
+
 			},
 			success:function(res){
 				that.setData({
-					list:res.data.data
+					list:res.data.data,
+					cid:options['cid'],
+					cargoowner:options['o']
 				})
 			}
 		})
@@ -26,9 +27,9 @@ Page({
 	onShow:function(options){
 		var that = this;
 		wx.request({
-      url: app.serviceurl + '/api/cargoes',
+      		url: app.serviceurl + '/api/truck/username/'+app.uid,
 			data:{
-      	username:app.uid
+
 			},
 			success:function(res){
 				that.setData({

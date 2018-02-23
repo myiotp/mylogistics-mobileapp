@@ -16,6 +16,8 @@
     "pages/licenseauth/licenseauth",
     "pages/usercarlist/usercarlist",
     "pages/trucks/trucks",
+    "pages/trucks4tx/trucks",
+    "pages/trucksdetail4tx/detail",
     "pages/carlist/carlist",
     "pages/cardetail/detail",
     "pages/mycardetail/detail",
