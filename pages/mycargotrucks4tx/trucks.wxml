@@ -2,7 +2,7 @@
 
 <page>
 	<view class="goods">
-		<navigator class="monad" wx:for="{{list}}" url="../mycargodetail/detail?id={{item.id}}" wx:key="{{item.id}}">
+		<navigator class="monad" wx:for="{{list}}" url="../mycargotrucksdetail4tx/detail?id={{item.id}}&cid={{cid}}&o={{cargoowner}}&txId={{item.txId}}" wx:key="{{item.id}}">
 			<view class="place">
 				<view class="start">
 					<text class="city">{{item.fromCityName}}</text>
@@ -10,18 +10,18 @@
 				</view>
 				<view class="distance">
 					<view class="image"><image src="../../images/truck_on_the_road.png"></image></view>
-					<text>大概{{item.mileage}}公里</text>
+					<text>{{item.truckName}}</text>
 				</view>
 				<view class="end">
 					<text class="city">{{item.toCityName}}</text>
-	                <text class="province">{{item.toProvinceName}}</text>
+	        <text class="province">{{item.toProvinceName}}</text>
+
 				</view>
 			</view>
 			<view class="condition">
+        <text class="price">{{item.truckBarnd}}</text>
+        <text class="article">载重{{item.truckWeight}}吨</text>
         <text class="truck">{{item.carLength}}米{{item.carType}}</text>
-        <text class="article">{{item.cargoName}}{{item.cargoWeight}}吨</text>
-        <text class="price">{{item.price}}元</text>
-
 			</view>
 		</navigator>
 	</view>
