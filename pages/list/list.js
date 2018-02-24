@@ -1,7 +1,8 @@
 var app = getApp();
 Page({
 	data: {
-	  	list:''
+			list:'',
+			size:0,
 	},
 	search: function () {
     wx.navigateTo({
@@ -18,7 +19,8 @@ Page({
 			},
 			success:function(res){
 				that.setData({
-					list:res.data.data
+					list:res.data.data,
+					size:res.data.size
 				})
 			}
 		})
@@ -32,7 +34,8 @@ Page({
 			},
 			success:function(res){
 				that.setData({
-					list:res.data.data
+					list:res.data.data,
+					size:res.data.size
 				})
 			}
 		})

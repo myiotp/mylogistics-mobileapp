@@ -32,6 +32,7 @@ Page({
         booked:false,
         canUpdate:false,
         canDelete:false,
+        status: 0,
         owner:''
     },
     onLoad:function(options){
@@ -124,6 +125,7 @@ Page({
                 booked: rawdata.canCreate,
                 canUpdate:rawdata.canUpdate,
                 canDelete:rawdata.canDelete,
+                status:rawdata.status,
                 owner: rawdata.username
               });
             }
@@ -193,13 +195,13 @@ Page({
       let that = this;
       console.log(that.data)
       wx.request({
-        url: app.serviceurl + '/api/cargoes/username/'+app.uid+'/count',
+        url: app.serviceurl + '/api/cargoes/username/'+app.uid+'/status/todo',
         method: 'GET',
         data: {},
         success: function (res) {
           console.log(res.data)
           res = res.data;
-          if (res.data > 0) {
+          if (res.size > 0) {
             wx.showToast({
               title: '选择货源',
               icon: 'success',
@@ -209,14 +211,14 @@ Page({
               app.submited = true;
               wx.hideToast();
               wx.navigateTo({
-                url: '../trucks4tx/trucks?cid='+that.data['id']+'&o='+that.data['owner']
+                url: '../cargolist4tx/cargolist?cid='+that.data['id']+'&o='+that.data['owner']
               })
             }, 1e3);
           } else {
             wx.showModal({  
               title: '提示',  
               showCancel: false,
-              content:'您没有发布任何货源信息,暂时无法接该车源!'  
+              content:'您没有可用的任何货源信息,暂时无法接该车源!'  
             });
             
           }
@@ -325,6 +327,7 @@ Page({
                 booked: rawdata.canCreate,
                 canUpdate:rawdata.canUpdate,
                 canDelete:rawdata.canDelete,
+                status:rawdata.status,
                 owner: rawdata.username
               });
             }

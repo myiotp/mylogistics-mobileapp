@@ -32,6 +32,7 @@
 .condition .price{color:#FFB578;border-color:#FFB578;}
 .condition .favorite{color:#E64340;border-color:#FFB578;}
 .place .end  image{width:30rpx;height:30rpx;margin-bottom:12rpx;overflow:hidden;top:0;right:0;}
+.place .start  image{width:30rpx;height:30rpx;margin-bottom:12rpx;overflow:hidden;top:0;left:0;}
 
 .add{position: fixed;bottom: 30px;right:30px;}
 .add image{width: 80rpx;height: 80rpx;}

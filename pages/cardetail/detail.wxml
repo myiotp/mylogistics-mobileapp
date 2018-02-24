@@ -71,25 +71,30 @@
           <button class="favorite" type="primary" data-index="{{index}}" bindtap="addFavorite">收藏这条车源</button>
         </view>
 
-         <view wx:if="{{booked == true}}">
-            
-            <view wx:if="{{canUpdate == true && canDelete == true}}">
-            <view wx:if="{{booked == true}}">
-                <button size="default" class="disablebutton" form-type="button">等待车主确认</button>
-            </view>
-            </view>    
-            <view wx:else>
-            <view wx:if="{{canDelete == true}}">
-                <button class="favorite" type="primary" data-index="{{index}}" bindtap="confirm">车主已拒绝</button>
-            </view>
-            <view wx:else>
-                <button class="favorite" type="primary" data-index="{{index}}" bindtap="confirm">车主已确认</button>
-                </view>    
-            </view>
-
+        <view wx:if="{{status == 11}}">
+            <button size="default" class="disablebutton" form-type="button">该车源已在交易中</button>
         </view>
         <view wx:else>
-          <button class="favorite" type="primary" data-index="{{index}}" bindtap="addBook">我要接这条车源</button>
+            <view wx:if="{{booked == true}}">
+                
+                <view wx:if="{{canUpdate == true && canDelete == true}}">
+                <view wx:if="{{booked == true}}">
+                    <button size="default" class="disablebutton" form-type="button">等待车主确认</button>
+                </view>
+                </view>    
+                <view wx:else>
+                <view wx:if="{{canDelete == true}}">
+                    <button class="confirm1" type="primary" data-index="{{index}}" bindtap="confirm">车主已拒绝</button>
+                </view>
+                <view wx:else>
+                    <button class="confirm1" type="primary" data-index="{{index}}" bindtap="confirm">车主已确认</button>
+                    </view>    
+                </view>
+
+            </view>
+            <view wx:else>
+            <button class="confirm1" type="primary" data-index="{{index}}" bindtap="addBook">我要接这条车源</button>
+            </view>
         </view>
     </view>
 

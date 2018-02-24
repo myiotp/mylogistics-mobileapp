@@ -1,8 +1,8 @@
 var app = getApp();
 Page({
 	data: {
-		  list:'',
-		  size:0,
+		list:'',
+		size:0,
 		  cid:0,
 		  cargoowner:''
 	},
@@ -12,9 +12,9 @@ Page({
 		that.data['cargoowner'] = options['o'];
 		console.log(that.data)
 		wx.request({
-      		url: app.serviceurl + '/api/truck/username/'+app.uid + '/status/todo',
+      		url:app.serviceurl + '/api/usertransaction/username/'+app.uid + '/truck/' + options['cid'],
 			data:{
-
+        		username:app.uid
 			},
 			success:function(res){
 				that.setData({
@@ -29,16 +29,16 @@ Page({
 	onShow:function(options){
 		var that = this;
 		wx.request({
-      		url: app.serviceurl + '/api/truck/username/'+app.uid+ '/status/todo',
-			data:{
-
-			},
-			success:function(res){
-				that.setData({
-					list:res.data.data,
-					size:res.data.size
-				})
-			}
-		})
+		url: app.serviceurl + '/api/usertransaction/username/'+app.uid + '/truck/' + that.data.cid,
+				data:{
+			username:app.uid
+				},
+				success:function(res){
+					that.setData({
+						list:res.data.data,
+						size:res.data.size
+					})
+				}
+			})
 	}
 })

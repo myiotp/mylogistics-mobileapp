@@ -11,14 +11,15 @@ Page({
             province:''
         },
         fromlnglat: {
-          lng:0,
-          lat:0
+            lng:0,
+            lat:0
         },
         tolnglat: {
           lng: 0,
           lat: 0
         },
-        licenseplate:'',
+        
+        mileage:'',
         receipt:'',
         address:[
 
@@ -28,7 +29,7 @@ Page({
         ],
         other:'',
         phone:'',
-        favoited:false,
+        favorite:false,
         booked:false,
         canUpdate:false,
         canDelete:false,
@@ -41,7 +42,7 @@ Page({
         })
 
         wx.request({
-            url: app.serviceurl+'/api/truck/' + options['id'],
+            url: app.serviceurl+'/api/cargoes/' + options['id'],
             data:{
                 id:options['id'],
                 username: app.uid
@@ -67,15 +68,15 @@ Page({
                   lat: rawdata.tolat
                 },
                 receipt: rawdata.price + '元/' + rawdata.cargoWeight + '吨  '  + rawdata.payment,
-                licenseplate: rawdata.licenseplate,
+                mileage: rawdata.mileage,
                 address: [
                   {
                     title: '装货地址',
-                    content: rawdata.fromProvinceName + rawdata.fromCityName + rawdata.fromAreaName
+                    content: rawdata.fromProvinceName + rawdata.fromCityName + rawdata.fromAreaName + rawdata.fromAddress
                   },
                   {
                     title: '卸货地址',
-                    content: rawdata.toProvinceName + rawdata.toCityName + rawdata.toAreaName
+                    content: rawdata.toProvinceName + rawdata.toCityName + rawdata.toAreaName + rawdata.toAddress
                   }
                 ],
                 source: [
@@ -84,43 +85,17 @@ Page({
                     content: rawdata.shipTimestamp
                   },
                   {
-                    caption: '运输时效',
-                    content: rawdata.validDays +'天'
-                  }
-                ],
-                source2: [
-                  {
-                    caption: '载重情况',
-                    content: rawdata.truckWeight +'吨'
+                    caption: '货物情况',
+                    content: rawdata.cargoName + rawdata.cargoWeight +'吨'
                   },
                   {
-                    caption: '车辆情况',
+                    caption: '车辆需求',
                     content: rawdata.carLength + '米' + rawdata.carType
-                  }
-                ],
-                source3: [
-                  {
-                    caption: '车主姓名',
-                    content: rawdata.owner
-                  },
-                  {
-                    caption: '微信',
-                    content: rawdata.wechat
-                  }
-                ],
-                source4: [
-                  {
-                    caption: '紧急联系人',
-                    content: rawdata.emergencyContact
-                  },
-                  {
-                    caption: '紧急联系人电话',
-                    content: rawdata.emergencyCellphone
                   }
                 ],
                 other: rawdata.memo,
                 phone: rawdata.ownerCellphone,
-                favoited:rawdata.favoited,
+                favorite:rawdata.favoited,
                 booked: rawdata.canCreate,
                 canUpdate:rawdata.canUpdate,
                 canDelete:rawdata.canDelete,
@@ -128,13 +103,6 @@ Page({
               });
             }
         })
-    },
-    confirm:function(){
-      let that = this;
-      console.log(that.data)
-      wx.navigateTo({
-        url: '../mytruckcargolist4tx/cargolist?cid='+that.data['id']+'&o='+that.data['owner']
-      })
     },
     makePhoneCall:function(){
         var that = this;
@@ -146,7 +114,7 @@ Page({
       let that = this;
       console.log(that.data)
       wx.request({
-        url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/vehicle/'+that.data['id'],
+        url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/cargo/'+that.data['id'],
         method: 'DELETE',
         data: {},
         success: function (res) {
@@ -161,8 +129,8 @@ Page({
             setTimeout(function () {
               app.submited = true;
               wx.hideToast();
-              wx.redirectTo({
-                url: '../favorites/favorites'
+              wx.switchTab({
+                url: '../list/list'
               })
             }, 1e3);
           }
@@ -173,7 +141,7 @@ Page({
       let that = this;
       console.log(that.data)
       wx.request({
-        url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/vehicle/'+that.data['id'],
+        url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/cargo/'+that.data['id'],
         method: 'POST',
         data: {},
         success: function (res) {
@@ -189,11 +157,18 @@ Page({
               app.submited = true;
               wx.hideToast();
               wx.switchTab({
-                url: '../carlist/carlist'
+                url: '../list/list'
               })
             }, 1e3);
           }
         }
+      })
+    },
+    confirm:function(){
+      let that = this;
+      console.log(that.data)
+      wx.navigateTo({
+        url: '../mycargotrucks4tx/trucks?cid='+that.data['id']+'&o='+that.data['owner']
       })
     },
     showMap:function(e){
@@ -221,9 +196,9 @@ Page({
     },
     onShow:function(options){
         var that = this;
-        console.info(app.serviceurl+'/api/truck/' + that.data['id']);
+        console.info(app.serviceurl+'/api/cargoes/' + that.data['id']);
         wx.request({
-            url: app.serviceurl+'/api/truck/' + that.data['id'],
+            url: app.serviceurl+'/api/cargoes/' + that.data['id'],
             data:{
               username: app.uid
             },
@@ -241,15 +216,15 @@ Page({
                   province: rawdata.toProvinceName
                 },
                 receipt: rawdata.price + '元/' + rawdata.cargoWeight + '吨  '  + rawdata.payment,
-                licenseplate: rawdata.licenseplate,
+                mileage: rawdata.mileage,
                 address: [
                   {
                     title: '装货地址',
-                    content: rawdata.fromProvinceName + rawdata.fromCityName + rawdata.fromAreaName
+                    content: rawdata.fromProvinceName + rawdata.fromCityName + rawdata.fromAreaName + rawdata.fromAddress
                   },
                   {
                     title: '卸货地址',
-                    content: rawdata.toProvinceName + rawdata.toCityName + rawdata.toAreaName
+                    content: rawdata.toProvinceName + rawdata.toCityName + rawdata.toAreaName + rawdata.toAddress
                   }
                 ],
                 source: [
@@ -258,43 +233,17 @@ Page({
                     content: rawdata.shipTimestamp
                   },
                   {
-                    caption: '运输时效',
-                    content: rawdata.validDays +'天'
-                  }
-                ],
-                source2: [
-                  {
-                    caption: '载重情况',
-                    content: rawdata.truckWeight +'吨'
+                    caption: '货物情况',
+                    content: rawdata.cargoName + rawdata.cargoWeight +'吨'
                   },
                   {
-                    caption: '车辆情况',
+                    caption: '车辆需求',
                     content: rawdata.carLength + '米' + rawdata.carType
-                  }
-                ],
-                source3: [
-                  {
-                    caption: '车主姓名',
-                    content: rawdata.owner
-                  },
-                  {
-                    caption: '微信',
-                    content: rawdata.wechat
-                  }
-                ],
-                source4: [
-                  {
-                    caption: '紧急联系人',
-                    content: rawdata.emergencyContact
-                  },
-                  {
-                    caption: '紧急联系人电话',
-                    content: rawdata.emergencyCellphone
                   }
                 ],
                 other: rawdata.memo,
                 phone: rawdata.ownerCellphone,
-                favoited:rawdata.favoited,
+                favorite:rawdata.favoited,
                 booked: rawdata.canCreate,
                 canUpdate:rawdata.canUpdate,
                 canDelete:rawdata.canDelete,
