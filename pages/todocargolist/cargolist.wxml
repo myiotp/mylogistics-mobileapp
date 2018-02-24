@@ -1,0 +1,29 @@
+
+
+<page>
+	<view class="goods">
+		<navigator class="monad" wx:for="{{list}}" url="../todocargodetail/detail?id={{item.id}}" wx:key="{{item.id}}">
+			<view class="place">
+				<view class="start">
+					<text class="city">{{item.fromCityName}}</text>
+					<text class="province">{{item.fromProvinceName}}</text>
+				</view>
+				<view class="distance">
+					<view class="image"><image src="../../images/truck_on_the_road.png"></image></view>
+					<text>大概{{item.mileage}}公里</text>
+				</view>
+				<view class="end">
+					<text class="city">{{item.toCityName}}</text>
+	                <text class="province">{{item.toProvinceName}}</text>
+					
+				</view>
+			</view>
+			<view class="condition">
+        <text class="truck">{{item.carLength}}米{{item.carType}}</text>
+        <text class="article">{{item.cargoName}}{{item.cargoWeight}}吨</text>
+        <text class="price">{{item.price}}元</text>
+
+			</view>
+		</navigator>
+	</view>
+</page>

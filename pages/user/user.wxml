@@ -21,10 +21,10 @@
         <text>我发布的货源</text>
     </navigator>
     <navigator class="favorite" url="../favorites/favorites">
-        <text>我的车源收藏</text>
+        <text>我收藏的车源</text>
     </navigator>
     <navigator class="favorite" url="../favorites2/favorites2">
-        <text>我的货源收藏</text>
+        <text>我收藏的货源</text>
     </navigator>
 
     <navigator class="dataperfect" url="../dataperfect/dataperfect">

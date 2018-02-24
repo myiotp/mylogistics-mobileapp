@@ -1,0 +1,21 @@
+<page>
+     <navigator class="cargoes" url="../cargoes/cargoes">
+        <text>我要发货</text>
+    </navigator>
+    <navigator class="truck-yellow-selected" url="../addcar/addcar">
+        <text>我要发车</text>
+    </navigator>
+    <navigator class="confirmed" url="../confirmedtrucks/trucks">
+        <text>已确认交易的车源</text>
+    </navigator>
+    <navigator class="todo" url="../todotrucks/trucks">
+        <text>待确认交易的车源</text>
+    </navigator>
+   <navigator class="confirmed" url="../confirmedcargolist/cargolist">
+        <text>已确认交易的货源</text>
+    </navigator>
+    <navigator class="todo" url="../todocargolist/cargolist">
+        <text>待确认交易的货源</text>
+    </navigator>
+
+</page>

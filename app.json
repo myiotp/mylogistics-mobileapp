@@ -11,11 +11,18 @@
     "pages/addcar/addcar",
     "pages/searchcar/addcar",
     "pages/cargolist/cargolist",
+    "pages/confirmedcargolist/cargolist",
+    "pages/confirmedcargodetail/detail",
+    "pages/todocargolist/cargolist",
+    "pages/todocargodetail/detail",
+    "pages/txcenter/txcenter",
     "pages/user/user",
     "pages/userauth/userauth",
     "pages/licenseauth/licenseauth",
     "pages/usercarlist/usercarlist",
     "pages/trucks/trucks",
+    "pages/confirmedtrucks/trucks",
+    "pages/todotrucks/trucks",
     "pages/trucks4tx/trucks",
     "pages/trucksdetail4tx/detail",
     "pages/carlist/carlist",
@@ -70,16 +77,10 @@
         "selectedIconPath": "images/carlist-selected.png"
       },
       {
-        "pagePath": "pages/addcar/addcar",
-        "text": "我要找货",
-        "iconPath": "images/truck-yellow.png",
-        "selectedIconPath": "images/truck-yellow-selected.png"
-      },
-      {
-        "pagePath": "pages/cargoes/cargoes",
-        "text": "我要发货",
-        "iconPath": "images/cargo1.png",
-        "selectedIconPath": "images/cargo1-selected.png"
+        "pagePath": "pages/txcenter/txcenter",
+        "text": "交易中心",
+        "iconPath": "images/list.png",
+        "selectedIconPath": "images/list-selected.png"
       },
       {
         "pagePath": "pages/user/user",
