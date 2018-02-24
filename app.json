@@ -22,6 +22,7 @@
     "pages/usercarlist/usercarlist",
     "pages/trucks/trucks",
     "pages/confirmedtrucks/trucks",
+    "pages/confirmedtruckdetail/detail",
     "pages/todotrucks/trucks",
     "pages/todotruckdetail/detail",
     "pages/trucks4tx/trucks",

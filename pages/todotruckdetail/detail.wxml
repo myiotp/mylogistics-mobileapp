@@ -18,7 +18,7 @@
 
     <!-- 地址信息 -->
     <view class="module address-info">
-        <view wx:for="{{address}}" class="grid">
+        <view wx:for="{{address}}" class="grid" wx:key="{{item.title}}">
             <caption>{{item.title}}</caption>
             <text class="content">{{item.content}}</text>
             <text class="region" bindtap="showMap" data-index="{{index}}">定位</text>
@@ -28,28 +28,28 @@
 
 
     <view class="module source-info">
-        <view class="cell" wx:for="{{source}}">
+        <view class="cell" wx:for="{{source}}" wx:key="{{item.caption}}">
             <caption>{{item.caption}}</caption>
             <text>{{item.content}}</text>
         </view>
     </view>
 
     <view class="module source-info">
-        <view class="cell" wx:for="{{source2}}">
+        <view class="cell" wx:for="{{source2}}" wx:key="{{item.caption}}">
             <caption>{{item.caption}}</caption>
             <text>{{item.content}}</text>
         </view>
     </view>
 
     <view class="module source-info">
-        <view class="cell" wx:for="{{source3}}">
+        <view class="cell" wx:for="{{source3}}" wx:key="{{item.caption}}">
             <caption>{{item.caption}}</caption>
             <text>{{item.content}}</text>
         </view>
     </view>
 
     <view class="module source-info">
-        <view class="cell" wx:for="{{source4}}">
+        <view class="cell" wx:for="{{source4}}" wx:key="{{item.caption}}">
             <caption>{{item.caption}}</caption>
             <text>{{item.content}}</text>
         </view>
@@ -64,9 +64,11 @@
 
     <view class="footer">
         <button class="tel" type="primary" class="tel" data-index="{{index}}" bindtap="makePhoneCall">车源电话：{{phone}}</button>
+        <button class="favorite" type="primary" data-index="{{index}}" bindtap="confirm">车主请确认</button>
+
+        <!--
         <view wx:if="{{canUpdate == true && canDelete == true}}">
             <view wx:if="{{booked == true}}">
-            <button class="favorite" type="primary" data-index="{{index}}" bindtap="confirm">车主请确认</button>
             </view>
         </view>    
         <view wx:else>
@@ -77,6 +79,7 @@
             <button class="favorite" type="primary" data-index="{{index}}" bindtap="confirm">车主已确认</button>
             </view>    
         </view>
+        -->
     </view>
 
 </page>

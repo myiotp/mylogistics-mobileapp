@@ -162,6 +162,6 @@
 .favorite:before{
     width:28rpx;
     height:28rpx;
-    background-image: url("http://47.104.158.49/images/confirm1.png");
-}
+    background-image: url("http://47.104.158.49/images/collect.png");
 
+}

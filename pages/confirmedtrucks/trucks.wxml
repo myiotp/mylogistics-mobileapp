@@ -3,7 +3,7 @@
 <page>
 	<view class="goods">
 	<view wx:if="{{size > 0}}">
-		<navigator class="monad" wx:for="{{list}}" url="../mycardetail/detail?id={{item.id}}" wx:key="{{item.id}}">
+		<navigator class="monad" wx:for="{{list}}" url="../confirmedtruckdetail/detail?id={{item.id}}" wx:key="{{item.id}}">
 			<view class="place">
 				<view class="start">
 					<text class="city">{{item.fromCityName}}</text>
@@ -15,8 +15,8 @@
 				</view>
 				<view class="end">
 					<text class="city">{{item.toCityName}}</text>
-	        <text class="province">{{item.toProvinceName}}</text>
-
+					<text class="province">{{item.toProvinceName}}</text>
+					<view class="image"><image src="../../images/yes.png"></image></view>
 				</view>
 			</view>
 			<view class="condition">
