@@ -12,7 +12,7 @@
     "pages/searchcar/addcar",
     "pages/cargolist/cargolist",
     "pages/cargolist4tx/cargolist",
-    "pages/mycargodetail4tx/detail",
+    "pages/cargodetail4tx/detail",
     "pages/confirmedcargolist/cargolist",
     "pages/confirmedcargodetail/detail",
     "pages/todocargolist/cargolist",

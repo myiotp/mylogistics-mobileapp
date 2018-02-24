@@ -33,12 +33,17 @@ Page({
         booked:false,
         canUpdate:false,
         canDelete:false,
+        cid:0,
+        truckowner:'',
         owner:''
     },
     onLoad:function(options){
         var that = this;
+       
         that.setData({
-          id: options['id']
+          id: options['id'],
+          cid:options['cid'],
+          truckowner:options['o']
         })
 
         wx.request({
@@ -169,6 +174,39 @@ Page({
       console.log(that.data)
       wx.navigateTo({
         url: '../mycargotrucks4tx/trucks?cid='+that.data['id']+'&o='+that.data['owner']
+      })
+    },
+    addBook:function(){
+      let that = this;
+      console.log(that.data)
+      wx.request({
+        url: app.serviceurl + '/api/usertransaction',
+        method: 'POST',
+        data: {
+          cargoId: parseInt(that.data.id),
+          truckId:parseInt(that.data.cid),
+          operator:app.uid,
+          type:2,
+          var1: that.data['truckowner']
+        },
+        success: function (res) {
+          console.log(res)
+          res = res.data;
+          if (res.status == 1 || res.status == 2) {
+            wx.showToast({
+              title: '等待货主确认',
+              icon: 'success',
+              duration: 1e3
+            });
+            setTimeout(function () {
+              app.submited = true;
+              wx.hideToast();
+              wx.switchTab({
+                url: '../list/list'
+              })
+            }, 1e3);
+          }
+        }
       })
     },
     showMap:function(e){
