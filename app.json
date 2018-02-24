@@ -13,6 +13,7 @@
     "pages/cargolist/cargolist",
     "pages/cargolist4tx/cargolist",
     "pages/cargodetail4tx/detail",
+    "pages/mytruckcargodetail4tx/detail",
     "pages/confirmedcargolist/cargolist",
     "pages/confirmedcargodetail/detail",
     "pages/todocargolist/cargolist",
