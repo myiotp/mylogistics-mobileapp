@@ -1,7 +1,8 @@
 var app = getApp();
 Page({
 	data: {
-		  list:'',
+		list:'',
+		size:0,
 		  cid:0,
 		  cargoowner:''
 	},
@@ -18,6 +19,7 @@ Page({
 			success:function(res){
 				that.setData({
 					list:res.data.data,
+					size:res.data.size,
 					cid:options['cid'],
 					cargoowner:options['o']
 				})
@@ -33,7 +35,8 @@ Page({
 			},
 			success:function(res){
 				that.setData({
-					list:res.data.data
+					list:res.data.data,
+					size:res.data.size
 				})
 			}
 		})

@@ -41,7 +41,9 @@
 
     <view class="footer">
         <button class="tel" type="primary" class="tel" data-index="{{index}}" bindtap="makePhoneCall">货源电话：{{phone}}</button>
-        
+        <button class="favorite" type="primary" data-index="{{index}}" bindtap="confirm">货主请确认</button>
+
+        <!--
         <view wx:if="{{canUpdate == true && canDelete == true}}">
             <view wx:if="{{booked == true}}">
             <button class="favorite" type="primary" data-index="{{index}}" bindtap="confirm">货主请确认</button>
@@ -55,6 +57,7 @@
             <button class="favorite" type="primary" data-index="{{index}}" bindtap="confirm">货主已确认</button>
             </view>    
         </view>
+        -->
     </view>
 
 </page>

@@ -169,6 +169,7 @@ Page({
           truckId: parseInt(that.data.id),
           cargoId:parseInt(that.data.cid),
           operator:app.uid,
+          type:1,
           var1: that.data['cargoowner']
         },
         success: function (res) {

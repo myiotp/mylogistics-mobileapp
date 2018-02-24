@@ -2,6 +2,7 @@
 
 <page>
 	<view class="goods">
+	<view wx:if="{{size > 0}}">
 		<navigator class="monad" wx:for="{{list}}" url="../todocargodetail/detail?id={{item.id}}" wx:key="{{item.id}}">
 			<view class="place">
 				<view class="start">
@@ -25,5 +26,9 @@
 
 			</view>
 		</navigator>
+		</view>
+	   <view wx:else>
+			不存在记录
+		</view> 
 	</view>
 </page>
