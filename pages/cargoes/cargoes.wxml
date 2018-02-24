@@ -69,7 +69,7 @@
 			<view class="information">卸货地址(详细)</view>
 			<input name="destinationaddress" placeholder-style="color:#B2B2B2" placeholder="请填写详细的卸货地址"/>
 		</view>
-		<block wx:for="{{infoList}}">
+		<block wx:for="{{infoList}}" wx:key="{{item.information}}">
 			<view class="popup">
 				<view class="information">{{item.information}}</view>
 				<view class="select" id="{{index}}" bindtap="{{item.bindBtn}}">{{item.select}}</view>
@@ -115,7 +115,7 @@
 <view class="shade" hidden="{{hiddenBoolean}}">
 	<view class="layer" bindtap="hiddenBtn"></view>
 	<view class="selected">
-		<block wx:for="{{options}}">
+		<block wx:for="{{options}}" wx:key="{{item.id}}">
 			<view bindtap="{{screenBtn}}" id="{{item.id}}" class="{{className[index]}}" >
 				<text>{{item.name}}</text>
 			</view>
