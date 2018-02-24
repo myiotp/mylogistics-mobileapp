@@ -2,7 +2,7 @@
 
 <page>
 	<view class="goods">
-		<navigator class="monad" wx:for="{{list}}" url="../mycardetail/detail?id={{item.id}}" wx:key="{{item.id}}">
+		<navigator class="monad" wx:for="{{list}}" url="../todotruckdetail/detail?id={{item.id}}" wx:key="{{item.id}}">
 			<view class="place">
 				<view class="start">
 					<text class="city">{{item.fromCityName}}</text>
