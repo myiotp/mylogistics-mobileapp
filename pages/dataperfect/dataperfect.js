@@ -61,6 +61,8 @@ Page({
     if (this.loaded) return;
     this.init();
     this.getProvince();
+    app.uid=wx.getStorageSync('appuid');
+    console.log(app.uid)
     console.log(app.serviceurl + '/api/user/' + app.uid)
     wx.request({
       url: app.serviceurl + '/api/user/' + app.uid,
@@ -73,7 +75,7 @@ Page({
         if(dd != null) {
           that.setData({
             id: dd.id,
-            username: app.uid,
+            username: dd.username,
             ownname: dd.realname,
             corporatename: dd.company,
             ownerCellphone: dd.mobilephone,
@@ -281,32 +283,43 @@ Page({
       success: function (res) {
         console.log(res)
         res = res.data;
-        if (res.info == 'OK') {
-          wx.showToast({
-            title: title,
-            icon: 'success',
-            duration: 1e3
-          });
-
-          setTimeout(function () {
-            app.submited = true;
-            wx.hideToast();
-            wx.switchTab({
-              url: '../user/user'
-            })
-          }, 1e3);
-
+        if(res.status == 10) {
+          wx.showModal({  
+            title: '提示',  
+            content: '填写的唯一号已经存在'  
+          })  
+        } else {
+          if (res.info == 'OK') {
+            wx.setStorageSync('appuid', o.username)
+            wx.showToast({
+              title: title,
+              icon: 'success',
+              duration: 1e3
+            });
+  
+            setTimeout(function () {
+              app.submited = true;
+              wx.hideToast();
+              wx.switchTab({
+                url: '../user/user'
+              })
+            }, 1e3);
+  
+          }
         }
+        
       }
     })
   },
   formSubmit: function (e) {
     let formData = e.detail.value;
     console.log('form发生了submit事件，携带数据为：', formData);
+    var openId = (wx.getStorageSync('openId'));
     console.log(this.data);
     let submitData = {
       "id": formData['id'],
-      "username": app.uid,
+      "openid":openId,
+      "username": formData['username'],
       "password": "1234",
       "email": "12@12.com",
       "realname": formData['ownname'],

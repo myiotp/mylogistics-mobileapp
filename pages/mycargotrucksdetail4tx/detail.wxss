@@ -1,6 +1,6 @@
 .header{
     height:224rpx;
-    background:url("http://47.104.158.49/images/truck-1.jpg") no-repeat 0 0;
+    background:url("https://tongdagufenwuliu.com/images/truck-1.jpg") no-repeat 0 0;
     background-size: contain;
     color:#fff;
     overflow: hidden;
@@ -95,7 +95,7 @@
     height:28rpx;
     content:"";
     display: block;
-    background: url("http://47.104.158.49/images/locate.png") no-repeat;
+    background: url("https://tongdagufenwuliu.com/images/locate.png") no-repeat;
     background-size: 100% 100%;
 }
 
@@ -151,7 +151,7 @@
 .tel:before{
     width:24rpx;
     height:28rpx;
-    background-image: url("http://47.104.158.49/images/phone.png");
+    background-image: url("https://tongdagufenwuliu.com/images/phone.png");
 }
 .favorite{
     margin-top: 30rpx;
@@ -165,7 +165,7 @@
 .favorite:before{
     width:28rpx;
     height:28rpx;
-    background-image: url("http://47.104.158.49/images/collect.png");
+    background-image: url("https://tongdagufenwuliu.com/images/collect.png");
 
 }
 .disablebutton{background:#888;color:#fff;margin-top: 30rpx;}

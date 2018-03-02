@@ -14,6 +14,7 @@ Page({
     onLoad:function(){
         var that = this;
         wx.getUserInfo({
+            withCredentials: true,
             success: function(res) {
                 var userInfo = res.userInfo;
                 that.setData({
@@ -25,8 +26,18 @@ Page({
             },
             fail:function(err){}
         });
-        
-
+        app.uid=wx.getStorageSync('appuid');
+        if(app.uid == '') {
+          wx.showModal({  
+            title: '提示',  
+            content: '请完善资料',
+            success: function (res) {
+              wx.navigateTo({
+                url: '../dataperfect/dataperfect'
+              })
+            }
+          })  
+        }
     		wx.request({
           url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/mycount',
     			data:{
@@ -46,6 +57,19 @@ Page({
     		})
     },
     onShow:function() {
+      app.uid=wx.getStorageSync('appuid');
+        if(app.uid == '') {
+          wx.showModal({  
+            title: '提示',  
+            content: '请完善资料',
+            success: function (res) {
+              wx.navigateTo({
+                url: '../dataperfect/dataperfect'
+              })
+            }
+          })  
+        }
+        
       var that = this;
       wx.getStorage({
         key: 'myrole',
@@ -62,7 +86,7 @@ Page({
           }
         }
       });
-
+      console.log(app.serviceurl + '/api/userfavorite/username/'+app.uid+'/mycount');
       wx.request({
         url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/mycount',
         data:{

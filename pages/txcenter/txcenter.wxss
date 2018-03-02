@@ -62,10 +62,10 @@ navigator:before{
     background-repeat: no-repeat;
 }
 .publish:before{
-    background-image: url("http://47.104.158.49/images/posted.png")
+    background-image: url("https://tongdagufenwuliu.com/images/posted.png")
 }
 .favorite:before{
-    background-image: url("http://47.104.158.49/images/collected.png")
+    background-image: url("https://tongdagufenwuliu.com/images/collected.png")
 }
 .dataperfect:before{
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.856 13.285c.073.15 1.644 2.815 2.606 3.905 1.636 1.854 4.92 3.635 4.92 3.635l1.905-1.908a1.841 1.841 0 0 1 1.725-.491l7.376 1.738c.416.114.907.352 1.386.79.784.718 1.244 1.751 1.225 3.013 0 0-.314 3.118-1.656 4.773-.943 1.162-4.1 2.9-4.168 2.92C15.895 34.654-2.015 17.215.185 5.849c.022-.113.91-2.018 1.734-3.007C3.556.878 5.709-.254 8.33.05c0 0 1.073-.028 1.831.53.616.453 1.065 1.131 1.342 1.999l2.1 6.58a1.84 1.84 0 0 1-.451 1.86s-2.408 2.038-2.296 2.267z' fill='#09bb07' /%3E%3C/svg%3E");
@@ -74,10 +74,10 @@ navigator:before{
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 21 21' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M.294 20.337a.997.997 0 0 0 1.41.005l8.614-8.615c.78-.78.78-2.042 0-2.822L1.703.291a.994.994 0 0 0-1.41.004.998.998 0 0 0 .001 1.415l7.899 7.898a.999.999 0 0 1 0 1.416L.294 18.922a.998.998 0 0 0 0 1.415zm10 0a.997.997 0 0 0 1.41.005l8.614-8.615c.78-.78.78-2.042 0-2.822L11.703.291a.994.994 0 0 0-1.41.004.998.998 0 0 0 .001 1.415l7.899 7.898a.999.999 0 0 1 0 1.416l-7.899 7.898a.998.998 0 0 0 0 1.415z' fill='#10AEFF' /%3E%3C/svg%3E");
 }
 .drivinglicence:before{
-    background-image: url("http://47.104.158.49/images/cert100.png")
+    background-image: url("https://tongdagufenwuliu.com/images/cert100.png")
 }
 .vehicleinformation:before{
-    background-image: url("http://47.104.158.49/images/che100.png")
+    background-image: url("https://tongdagufenwuliu.com/images/che100.png")
 }
 .drivingcertification:before{
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 21 21' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M.294 20.337a.997.997 0 0 0 1.41.005l8.614-8.615c.78-.78.78-2.042 0-2.822L1.703.291a.994.994 0 0 0-1.41.004.998.998 0 0 0 .001 1.415l7.899 7.898a.999.999 0 0 1 0 1.416L.294 18.922a.998.998 0 0 0 0 1.415zm10 0a.997.997 0 0 0 1.41.005l8.614-8.615c.78-.78.78-2.042 0-2.822L11.703.291a.994.994 0 0 0-1.41.004.998.998 0 0 0 .001 1.415l7.899 7.898a.999.999 0 0 1 0 1.416l-7.899 7.898a.998.998 0 0 0 0 1.415z' fill='#10AEFF' /%3E%3C/svg%3E");
@@ -86,14 +86,14 @@ navigator:before{
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 21 21' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M.294 20.337a.997.997 0 0 0 1.41.005l8.614-8.615c.78-.78.78-2.042 0-2.822L1.703.291a.994.994 0 0 0-1.41.004.998.998 0 0 0 .001 1.415l7.899 7.898a.999.999 0 0 1 0 1.416L.294 18.922a.998.998 0 0 0 0 1.415zm10 0a.997.997 0 0 0 1.41.005l8.614-8.615c.78-.78.78-2.042 0-2.822L11.703.291a.994.994 0 0 0-1.41.004.998.998 0 0 0 .001 1.415l7.899 7.898a.999.999 0 0 1 0 1.416l-7.899 7.898a.998.998 0 0 0 0 1.415z' fill='#10AEFF' /%3E%3C/svg%3E");
 }
 .truck-yellow-selected:before{
-    background-image: url("http://47.104.158.49/images/truck-yellow-selected.png")
+    background-image: url("https://tongdagufenwuliu.com/images/truck-yellow-selected.png")
 }
 .cargoes:before{
-    background-image: url("http://47.104.158.49/images/cargo1-selected.png")
+    background-image: url("https://tongdagufenwuliu.com/images/cargo1-selected.png")
 }
 .confirmed:before{
-    background-image: url("http://47.104.158.49/images/yes.png")
+    background-image: url("https://tongdagufenwuliu.com/images/yes.png")
 }
 .todo:before{
-    background-image: url("http://47.104.158.49/images/todo.png")
+    background-image: url("https://tongdagufenwuliu.com/images/todo.png")
 }

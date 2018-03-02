@@ -14,6 +14,9 @@
         <text>切换角色(当前为:{{myrole}})</text>
     </navigator>
     -->
+    <navigator class="dataperfect" url="../dataperfect/dataperfect">
+        <text>资料完善</text>
+    </navigator>
     <navigator class="publish" url="../trucks/trucks">
         <text>我发布的车源</text>
     </navigator>
@@ -27,9 +30,7 @@
         <text>我收藏的货源</text>
     </navigator>
 
-    <navigator class="dataperfect" url="../dataperfect/dataperfect">
-        <text>资料完善</text>
-    </navigator>
+    
     <navigator class="nameauthentication" url="../userauth/userauth">
         <text>实名认证</text>
     </navigator>

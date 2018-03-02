@@ -5,8 +5,9 @@ Page({
 	},
 	onLoad:function(options){
 		var that = this;
+		console.log(app.serviceurl + '/api/truck/username/'+app.uid+app.globalData.uid+'/');
 		wx.request({
-      url: app.serviceurl + '/api/truck/username/'+app.uid,
+      url: app.serviceurl + '/api/truck/username/'+app.uid+app.globalData.uid+'/',
 			data:{
 
 			},
@@ -20,7 +21,7 @@ Page({
 	onShow:function(options){
 		var that = this;
 		wx.request({
-      url: app.serviceurl + '/api/truck/username/'+app.uid,
+      url: app.serviceurl + '/api/truck/username/'+app.uid+app.globalData.uid+'/',
 			data:{
 
 			},

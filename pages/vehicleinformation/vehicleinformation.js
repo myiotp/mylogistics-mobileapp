@@ -21,6 +21,8 @@ var list = [
 
 Page({
   data: {
+    validstartdate:'',
+    validenddate:'',
     textHint: "您的隐私会受到法律保护，请您放心填写  。",
     licenseplate: '',
     enginenumber: '',
@@ -171,6 +173,24 @@ Page({
   onLoad: function (options) {
     var that = this;
     if (this.loaded) return;
+    var date = new Date();
+    var seperator1 = "-";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+
+    this.setData({
+      checkdeadline: date.getFullYear() + seperator1 + month + seperator1 + strDate,
+      insurancedeadline: date.getFullYear() + seperator1 + month + seperator1 + strDate,
+      validstartdate: (date.getFullYear()-10) + seperator1 + month + seperator1 + strDate,
+      validenddate: (date.getFullYear()+10) + seperator1 + month + seperator1 + strDate
+    })
+
     this.init();
     this.getProvince();
     this.initcartype();

@@ -62,7 +62,7 @@
 		</view>
     <view class="import">
 			<view class="information">年检截止日期</view>
-			<picker mode="date" value="{{checkdeadline}}" bindchange="bindcheckdeadlineDateChange"  placeholder="请填写年检截止日期">
+			<picker mode="date" value="{{checkdeadline}}" start="{{validstartdate}}" end="{{validenddate}}" bindchange="bindcheckdeadlineDateChange"  placeholder="请填写年检截止日期">
 				<view class="picker">
 				{{checkdeadline}}
 				</view>
@@ -70,7 +70,7 @@
 		</view>
     <view class="import">
 			<view class="information">保险截止日期</view>
-			<picker mode="date" value="{{insurancedeadline}}" bindchange="bindinsurancedeadlineDateChange"  placeholder="请填写保险截止日期">
+			<picker mode="date" value="{{insurancedeadline}}" start="{{validstartdate}}" end="{{validenddate}}" bindchange="bindinsurancedeadlineDateChange"  placeholder="请填写保险截止日期">
 				<view class="picker">
 				{{insurancedeadline}}
 				</view>
