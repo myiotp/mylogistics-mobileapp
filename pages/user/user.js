@@ -26,17 +26,36 @@ Page({
             },
             fail:function(err){}
         });
-        app.uid=wx.getStorageSync('appuid');
-        if(app.uid == '') {
-          wx.showModal({  
-            title: '提示',  
-            content: '请完善资料',
-            success: function (res) {
-              wx.navigateTo({
-                url: '../dataperfect/dataperfect'
-              })
+        var openId=wx.getStorageSync('openId');
+        
+        wx.request({
+          url: app.serviceurl + '/api/wx/username/'+openId+'',
+    			data:{
+
+    			},
+    			success:function(res){
+            console.log(res.data)
+            if(res.data.data == null || res.data.data == '') {
+              wx.showModal({  
+                title: '提示',  
+                content: '请完善资料',
+                success: function (res) {
+                  wx.navigateTo({
+                    url: '../dataperfect/dataperfect'
+                  })
+                }
+              })  
+            } else {
+              app.uid = res.data.data;
+              wx.setStorageSync('appuid', res.data.data);
             }
-          })  
+    				
+    			}
+        })
+        
+        
+        if(app.uid == '') {
+          
         }
     		wx.request({
           url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/mycount',
