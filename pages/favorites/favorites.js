@@ -1,11 +1,12 @@
 var app = getApp();
 var page =1;
 var pageSize = app.pageSize;
-var url=app.serviceurl + '/api/userfavorite/username/'+app.uid+'/vehicle';
 var GetList = function (that) { 
 	that.setData({  
     hidden: false  
 	});  
+	var url=app.serviceurl + '/api/userfavorite/username/'+app.uid+'/vehicle';
+
 	wx.request({
 		url: url,
 		data:{

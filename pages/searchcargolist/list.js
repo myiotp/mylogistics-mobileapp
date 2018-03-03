@@ -1,11 +1,12 @@
 var app = getApp();
 var page =1;
 var pageSize = app.pageSize;
-var url=app.serviceurl + '/api/cargoes/q';
 var GetList = function (that) { 
 	that.setData({  
     hidden: false  
 	});  
+	var url=app.serviceurl + '/api/cargoes/q';
+
 	wx.request({
 		url: url,
 		method: 'GET',
