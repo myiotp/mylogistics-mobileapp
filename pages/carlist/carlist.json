@@ -1,3 +1,4 @@
 {
-	"navigationBarTitleText":"车源列表"
+	"navigationBarTitleText":"车源列表",
+	"enablePullDownRefresh": true
 }
