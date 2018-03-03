@@ -36,7 +36,7 @@
 page{
   height: 500px;
   background-color: #FAFAFA;
-  background-image: url('https://tongdagufenwuliu.com/images/background4.png');
+  background-image: url('https://tongdagufen.cn/images/background4.png');
   background-repeat: round;
   background-position-y: top;
 }
