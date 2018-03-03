@@ -276,12 +276,17 @@ Page({
       warn="请选择货箱长度";  
     } else if(formData['cargoWeight']=="") {
       warn="请填写载重(吨)";
+    } else if(formData['vehicledimension']=="") {
+      warn="请填写货物体积";
     } else {
       flag=false;
       //need to handle formData['shiptime']
       let submitData = {
         "id": formData['id'],
         "username": app.uid,
+        "ownercompany": formData['ownercompany'],
+        "operator": formData['operator'],
+        "cargotype": formData['cargotype'],
         "fromAreaName": '',
         "fromCityName": '',
         "fromProvinceName": '',
@@ -301,6 +306,7 @@ Page({
         "ownerCellphone": formData['ownerCellphone'],
         "cargoName": formData['cargoName'],
         "cargoWeight": formData['cargoWeight'],
+        "vehicledimension":formData['vehicledimension'],
         "shipTimestamp": '2018-01-02',
         "price": formData['price'],
         "payment": formData['payment'],

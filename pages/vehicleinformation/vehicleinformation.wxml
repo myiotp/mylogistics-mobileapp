@@ -60,6 +60,10 @@
 			<view class="information">车辆载重(吨)</view>
 			<input name="vehicleweight" type="digit"  placeholder-style="color:#B2B2B2" placeholder="请填写车辆载重(吨)" value="{{vehicleweight}}"/>
 		</view>
+		<view class="import">
+			<view class="information">车辆容积(立方米)</view>
+			<input name="vehicledimension" type="digit"  placeholder-style="color:#B2B2B2" placeholder="请填写车辆容积(立方米)" value="{{vehicledimension}}"/>
+		</view>
     <view class="import">
 			<view class="information">年检截止日期</view>
 			<picker mode="date" value="{{checkdeadline}}" start="{{validstartdate}}" end="{{validenddate}}" bindchange="bindcheckdeadlineDateChange"  placeholder="请填写年检截止日期">

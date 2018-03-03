@@ -270,6 +270,9 @@ Page({
     let submitData = {
       "id": formData['id'],
       "username": app.uid,
+      "ownercompany": formData['ownercompany'],
+      "operator": formData['operator'],
+      "cargotype": formData['cargotype'],
       "fromAreaName": '',
       "fromCityName": '',
       "fromProvinceName": '',

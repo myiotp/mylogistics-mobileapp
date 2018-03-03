@@ -30,6 +30,7 @@ Page({
     vehicletype: '',
     vehiclebrand:'',
     vehicleweight:'',
+    vehicledimension:'',
     cargolength: '',
     checkdeadline: '',
     insurancedeadline: '',
@@ -234,6 +235,7 @@ Page({
               vehicletype: dd.vehicletype,
               vehiclebrand:dd.vehiclebrand,
               vehicleweight:dd.vehicleweight,
+              vehicledimension:dd.vehicledimension,
               cargolength: dd.cargolength,
               checkdeadline: dd.checkdeadline,
               insurancedeadline: dd.insurancedeadline,
@@ -539,6 +541,8 @@ Page({
       warn="请选择货箱长度";  
     } else if(formData['vehicleweight']=="") {
       warn="请填写车辆载重(吨)";
+    } else if(formData['vehicledimension']=="") {
+      warn="请填写车辆容积(立方米)";
     } else if(formData['vehiclebrand']=="") {
       warn="请填写车辆品牌";
     } else if(this.data['checkdeadline']=="") {
@@ -562,6 +566,7 @@ Page({
         "vehicletype": car_type,
         "vehiclebrand":formData['vehiclebrand'],
         "vehicleweight":formData['vehicleweight'],
+        "vehicledimension":formData['vehicledimension'],
         "cargolength": car_size,
         "checkdeadline": this.data['checkdeadline'],
         "insurancedeadline": this.data['insurancedeadline'],

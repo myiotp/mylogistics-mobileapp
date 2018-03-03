@@ -86,7 +86,7 @@
 
     <view class="import">
 			<view class="information">应急联系电话</view>
-			<input name="emergencyphone" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写应急联系电话"  value='{{emergencyphone}}'/>
+			<input name="emergencyphone" type="digit" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写应急联系电话"  value='{{emergencyphone}}'/>
 		</view>
   </view>
 	<view class="hint">{{textHint}}</view>

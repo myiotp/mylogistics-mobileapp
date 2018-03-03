@@ -8,14 +8,29 @@
 			<view class="information">联系方式</view>
 			<input name="ownerCellphone" type="digit"  placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写您的手机号码"/>
 		</view>
-
+	<view class="import">
+		<view class="information">所在公司</view>
+		<input name="ownercompany" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写所在的公司"/>
+	</view>
+	<view class="import">
+		<view class="information">经办人</view>
+		<input name="operator" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写经办人"/>
+	</view>
     <view class="import">
 			<view class="information">货物名称</view>
 			<input name="cargoName" placeholder-style="color:#B2B2B2" placeholder="请填写您的货物名称"/>
 		</view>
     <view class="import">
 			<view class="information">货物重量(吨)</view>
-			<input name="cargoWeight" placeholder-style="color:#B2B2B2" placeholder="请输入吨数"/>
+			<input name="cargoWeight" type="digit" placeholder-style="color:#B2B2B2" placeholder="请输入吨数"/>
+		</view>
+		<view class="import">
+			<view class="information">货物体积(立方米)</view>
+			<input name="vehicledimension" type="digit" placeholder-style="color:#B2B2B2" placeholder="请输入货物体积(立方米)"/>
+		</view>
+		<view class="import">
+				<view class="information">货物种类</view>
+				<input name="cargotype" placeholder-style="color:#B2B2B2" placeholder="请输入货物种类"/>
 		</view>
     <view class="import">
 			<view class="information">装货时间</view>
@@ -77,16 +92,16 @@
 			</view>
 		</block>
     <view class="import">
-			<view class="information">运价</view>
-			<input name="price" placeholder-style="color:#B2B2B2" placeholder="请输入金额"/>
+			<view class="information">运价(元)</view>
+			<input name="price" type="digit" placeholder-style="color:#B2B2B2" placeholder="请输入金额"/>
 		</view>
     <view class="import">
 			<view class="information">付款方式</view>
 			<input name="payment" placeholder-style="color:#B2B2B2" placeholder="请输入付款方式"/>
 		</view>
     <view class="import">
-			<view class="information">运输时效</view>
-			<input name="validtime" placeholder-style="color:#B2B2B2" placeholder="请输入运输时效"/>
+			<view class="information">运输时效(天)</view>
+			<input name="validtime" type="digit" placeholder-style="color:#B2B2B2" placeholder="请输入运输时效"/>
 		</view>
 	    <view class="import">
 				<view class="information">微信</view>
@@ -98,7 +113,7 @@
 		</view>
 		<view class="import">
 				<view class="information">紧急联系人电话</view>
-				<input name="emergencyCellphone" placeholder-style="color:#B2B2B2" placeholder="紧急联系人电话"/>
+				<input name="emergencyCellphone" type="digit" placeholder-style="color:#B2B2B2" placeholder="紧急联系人电话"/>
 		</view>
 		<view class="import">
 				<view class="information">备注</view>
