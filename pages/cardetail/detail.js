@@ -81,42 +81,62 @@ Page({
                 ],
                 source: [
                   {
+                    caption: '车主姓名',
+                    content: rawdata.owner  || ''
+                  },
+                  {
+                    caption: '微信',
+                    content: rawdata.wechat  || ''
+                  }
+                ],
+                source1: [
+                  {
+                    caption: '所在公司',
+                    content: rawdata.ownercompany || ''
+                  },
+                  {
+                    caption: '经办人',
+                    content: rawdata.operator || ''
+                  }
+                ],
+                source2: [
+                  {
                     caption: '装货时间',
-                    content: rawdata.shipTimestamp
+                    content: rawdata.shipTimestamp  || ''
                   },
                   {
                     caption: '运输时效',
                     content: rawdata.validDays +'天'
                   }
                 ],
-                source2: [
+                source3: [
                   {
-                    caption: '载重情况',
-                    content: rawdata.truckWeight +'吨'
+                    caption: '车辆品牌',
+                    content: rawdata.truckBarnd || ''
                   },
                   {
                     caption: '车辆情况',
-                    content: rawdata.carLength + '米' + rawdata.carType
-                  }
-                ],
-                source3: [
-                  {
-                    caption: '车主姓名',
-                    content: rawdata.owner
-                  },
-                  {
-                    caption: '微信',
-                    content: rawdata.wechat
+                    content: rawdata.carLength + '米' + (rawdata.carType  || '')
                   }
                 ],
                 source4: [
                   {
+                    caption: '车辆载重',
+                    content: rawdata.truckWeight +'吨'
+                  },
+                  {
+                    caption: '可载货物种类',
+                    content: rawdata.cargotype || ''
+                  }
+                ],
+                source5: [
+                  {
                     caption: '紧急联系人',
-                    content: rawdata.emergencyContact
+                    content: rawdata.emergencyContact || ''
                   },
                   {
                     caption: '紧急联系人电话',
-                    content: rawdata.emergencyCellphone
+                    content: rawdata.emergencyCellphone || ''
                   }
                 ],
                 other: rawdata.memo,
@@ -283,42 +303,62 @@ Page({
                 ],
                 source: [
                   {
+                    caption: '车主姓名',
+                    content: rawdata.owner  || ''
+                  },
+                  {
+                    caption: '微信',
+                    content: rawdata.wechat  || ''
+                  }
+                ],
+                source1: [
+                  {
+                    caption: '所在公司',
+                    content: rawdata.ownercompany || ''
+                  },
+                  {
+                    caption: '经办人',
+                    content: rawdata.operator || ''
+                  }
+                ],
+                source2: [
+                  {
                     caption: '装货时间',
-                    content: rawdata.shipTimestamp
+                    content: rawdata.shipTimestamp  || ''
                   },
                   {
                     caption: '运输时效',
                     content: rawdata.validDays +'天'
                   }
                 ],
-                source2: [
+                source3: [
                   {
-                    caption: '载重情况',
-                    content: rawdata.truckWeight +'吨'
+                    caption: '车辆品牌',
+                    content: rawdata.truckBarnd || ''
                   },
                   {
                     caption: '车辆情况',
-                    content: rawdata.carLength + '米' + rawdata.carType
-                  }
-                ],
-                source3: [
-                  {
-                    caption: '车主姓名',
-                    content: rawdata.owner
-                  },
-                  {
-                    caption: '微信',
-                    content: rawdata.wechat
+                    content: rawdata.carLength + '米' + (rawdata.carType  || '')
                   }
                 ],
                 source4: [
                   {
+                    caption: '车辆载重',
+                    content: rawdata.truckWeight +'吨'
+                  },
+                  {
+                    caption: '可载货物种类',
+                    content: rawdata.cargotype || ''
+                  }
+                ],
+                source5: [
+                  {
                     caption: '紧急联系人',
-                    content: rawdata.emergencyContact
+                    content: rawdata.emergencyContact || ''
                   },
                   {
                     caption: '紧急联系人电话',
-                    content: rawdata.emergencyCellphone
+                    content: rawdata.emergencyCellphone || ''
                   }
                 ],
                 other: rawdata.memo,

@@ -76,16 +76,66 @@ Page({
                 ],
                 source: [
                   {
+                    caption: '货主姓名',
+                    content: rawdata.cargoOwner || ''
+                  },
+                  {
+                    caption: '微信',
+                    content: rawdata.wechat || ''
+                  }
+                ],
+                source1: [
+                  {
+                    caption: '所在公司',
+                    content: rawdata.ownercompany || ''
+                  },
+                  {
+                    caption: '经办人',
+                    content: rawdata.operator || ''
+                  }
+                ],
+                source2: [
+                  {
                     caption: '装货时间',
                     content: rawdata.shipTimestamp
                   },
                   {
+                    caption: '运输时效(天)',
+                    content: rawdata.validDays
+                  },
+                  {
+                    caption: '付款方式',
+                    content: rawdata.payment
+                  }
+                ],
+                source3: [
+                  {
+                    caption: '货物名称',
+                    content: rawdata.cargoName
+                  },
+                  {
+                    caption: '货物种类',
+                    content: rawdata.cargotype || ''
+                  }
+                ],
+                source4: [
+                  {
                     caption: '货物情况',
-                    content: rawdata.cargoName + rawdata.cargoWeight +'吨'
+                    content: rawdata.cargoWeight +'吨' + rawdata.vehicledimension + '立方米'
                   },
                   {
                     caption: '车辆需求',
                     content: rawdata.carLength + '米' + rawdata.carType
+                  }
+                ],
+                source5: [
+                  {
+                    caption: '紧急联系人',
+                    content: rawdata.emergencyContact
+                  },
+                  {
+                    caption: '紧急联系人电话',
+                    content: rawdata.emergencyCellphone
                   }
                 ],
                 other: rawdata.memo,
@@ -216,16 +266,66 @@ Page({
                 ],
                 source: [
                   {
+                    caption: '货主姓名',
+                    content: rawdata.cargoOwner || ''
+                  },
+                  {
+                    caption: '微信',
+                    content: rawdata.wechat || ''
+                  }
+                ],
+                source1: [
+                  {
+                    caption: '所在公司',
+                    content: rawdata.ownercompany || ''
+                  },
+                  {
+                    caption: '经办人',
+                    content: rawdata.operator || ''
+                  }
+                ],
+                source2: [
+                  {
                     caption: '装货时间',
                     content: rawdata.shipTimestamp
                   },
                   {
+                    caption: '运输时效(天)',
+                    content: rawdata.validDays
+                  },
+                  {
+                    caption: '付款方式',
+                    content: rawdata.payment
+                  }
+                ],
+                source3: [
+                  {
+                    caption: '货物名称',
+                    content: rawdata.cargoName
+                  },
+                  {
+                    caption: '货物种类',
+                    content: rawdata.cargotype || ''
+                  }
+                ],
+                source4: [
+                  {
                     caption: '货物情况',
-                    content: rawdata.cargoName + rawdata.cargoWeight +'吨'
+                    content: rawdata.cargoWeight +'吨' + rawdata.vehicledimension + '立方米'
                   },
                   {
                     caption: '车辆需求',
                     content: rawdata.carLength + '米' + rawdata.carType
+                  }
+                ],
+                source5: [
+                  {
+                    caption: '紧急联系人',
+                    content: rawdata.emergencyContact
+                  },
+                  {
+                    caption: '紧急联系人电话',
+                    content: rawdata.emergencyCellphone
                   }
                 ],
                 other: rawdata.memo,

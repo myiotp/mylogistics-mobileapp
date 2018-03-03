@@ -11,7 +11,7 @@ Page({
   },
 	onLoad:function(options){
 		var that = this;
-		//console.log(options);
+		console.log(app.serviceurl + '/api/cargoes');
 		wx.request({
       url: app.serviceurl + '/api/cargoes',
 			data:{

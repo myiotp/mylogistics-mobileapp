@@ -20,6 +20,10 @@
 			<view class="information">货物名称</view>
 			<input name="cargoName" placeholder-style="color:#B2B2B2" placeholder="请填写您的货物名称"/>
 		</view>
+	<view class="import">
+				<view class="information">货物种类</view>
+				<input name="cargotype" placeholder-style="color:#B2B2B2" placeholder="请输入货物种类"/>
+		</view>	
     <view class="import">
 			<view class="information">货物重量(吨)</view>
 			<input name="cargoWeight" type="digit" placeholder-style="color:#B2B2B2" placeholder="请输入吨数"/>
@@ -28,10 +32,7 @@
 			<view class="information">货物体积(立方米)</view>
 			<input name="vehicledimension" type="digit" placeholder-style="color:#B2B2B2" placeholder="请输入货物体积(立方米)"/>
 		</view>
-		<view class="import">
-				<view class="information">货物种类</view>
-				<input name="cargotype" placeholder-style="color:#B2B2B2" placeholder="请输入货物种类"/>
-		</view>
+		
     <view class="import">
 			<view class="information">装货时间</view>
 			<picker mode="date" value="{{shipTimestamp}}" start="{{today}}" end="{{validenddate}}" bindchange="bindShipDateChange">
