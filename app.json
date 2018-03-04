@@ -1,6 +1,5 @@
 {
   "pages":[
-    
     "pages/list/list",
     "pages/index/index",
     "pages/searchcargolist/list",
@@ -53,6 +52,7 @@
     "pages/drivinglicence/drivinglicence",
     "pages/vehicleinformation/vehicleinformation",
     "pages/drivingcertification/drivingcertification",
+    "pages/tuya/tuya",
     "pages/vehicletracking/vehicletracking"
   ],
   "window": {
@@ -70,6 +70,7 @@
     "borderStyle": "black",
     "position": "bottom",
     "list": [
+      
       {
         "pagePath": "pages/list/list",
         "text": "货源列表",
