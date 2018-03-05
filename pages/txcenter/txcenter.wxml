@@ -5,13 +5,13 @@
     <navigator class="truck-yellow-selected" url="../addcar/addcar">
         <text>我要发车</text>
     </navigator>
-    <navigator class="confirmed" url="../confirmedtrucks/trucks">
+    <navigator class="tick1" url="../confirmedtrucks/trucks">
         <text>已确认交易的车源</text>
     </navigator>
-    <navigator class="todo" url="../todotrucks/trucks">
+    <navigator class="todo1" url="../todotrucks/trucks">
         <text>待确认交易的车源</text>
     </navigator>
-   <navigator class="confirmed" url="../confirmedcargolist/cargolist">
+   <navigator class="tick2" url="../confirmedcargolist/cargolist">
         <text>已确认交易的货源</text>
     </navigator>
     <navigator class="todo" url="../todocargolist/cargolist">

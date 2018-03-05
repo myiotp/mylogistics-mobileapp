@@ -94,6 +94,15 @@ navigator:before{
 .confirmed:before{
     background-image: url("https://tongdagufen.cn/images/yes.png")
 }
+.tick1:before{
+    background-image: url("https://tongdagufen.cn/images/tick1.png")
+}
+.tick2:before{
+    background-image: url("https://tongdagufen.cn/images/tick2.png")
+}
 .todo:before{
     background-image: url("https://tongdagufen.cn/images/todo.png")
+}
+.todo1:before{
+    background-image: url("https://tongdagufen.cn/images/todo1.png")
 }
