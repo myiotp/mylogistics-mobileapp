@@ -14,32 +14,48 @@
         <text>切换角色(当前为:{{myrole}})</text>
     </navigator>
     -->
-    <navigator class="dataperfect" url="../dataperfect/dataperfect">
+   <view>
+      <view class="graySpace"></view>
+      <navigator class="dataperfect" url="../dataperfect/dataperfect">
         <text>资料完善</text>
-    </navigator>
-    <navigator class="publish" url="../trucks/trucks">
-        <text>我发布的车源</text>
-    </navigator>
-    <navigator class="publish" url="../cargolist/cargolist">
-        <text>我发布的货源</text>
-    </navigator>
-    <navigator class="favorite" url="../favorites/favorites">
-        <text>我收藏的车源</text>
-    </navigator>
-    <navigator class="favorite" url="../favorites2/favorites2">
-        <text>我收藏的货源</text>
-    </navigator>
-
+     </navigator>
+    </view>
     
-    <navigator class="nameauthentication" url="../userauth/userauth">
+    <view>
+      <view class="graySpace"></view>
+       <navigator class="publish" url="../trucks/trucks">
+        <text>我发布的车源</text>
+      </navigator>
+      <navigator class="publish" url="../cargolist/cargolist">
+          <text>我发布的货源</text>
+      </navigator>
+    </view>  
+   <view>
+      <view class="graySpace"></view>
+      <navigator class="favorite" url="../favorites/favorites">
+        <text>我收藏的车源</text>
+      </navigator>
+      <navigator class="favorite" url="../favorites2/favorites2">
+          <text>我收藏的货源</text>
+      </navigator>
+    </view>   
+    
+
+    <view>
+      <view class="graySpace"></view>
+      <navigator class="nameauthentication" url="../userauth/userauth">
         <text>实名认证</text>
-    </navigator>
-    <navigator class="drivinglicence" url="../licenseauth/licenseauth">
-        <text>驾驶证认证</text>
-    </navigator>
- <navigator class="vehicleinformation" url="../usercarlist/usercarlist">
-        <text>车辆认证</text>
-    </navigator>
+      </navigator>
+      <navigator class="drivinglicence" url="../licenseauth/licenseauth">
+          <text>驾驶证认证</text>
+      </navigator>
+      <navigator class="vehicleinformation" url="../usercarlist/usercarlist">
+          <text>车辆认证</text>
+      </navigator>
+     </view>   
+    <view>
+      <view class="graySpace"></view>
+    </view>  
 
 
 </page>

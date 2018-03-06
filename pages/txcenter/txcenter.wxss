@@ -33,7 +33,7 @@
 
 navigator{
     position: relative;
-    margin-top: 30rpx;
+    margin-top: 5rpx;
     padding:27rpx 60rpx 27rpx 90rpx;
     height:34rpx;
     line-height: 34rpx;

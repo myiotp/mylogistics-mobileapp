@@ -14,3 +14,8 @@ page {
   font:32rpx/1.5 "Microsoft YaHei";
 }
 caption,list-item{display:block}
+.graySpace{
+  padding-left: 40rpx;
+  font-size: 12px;
+  min-height: 30rpx;
+}
