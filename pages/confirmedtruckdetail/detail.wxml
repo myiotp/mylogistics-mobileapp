@@ -72,6 +72,7 @@
 
     <view class="footer">
         <button class="tel" type="primary" class="tel" data-index="{{index}}" bindtap="makePhoneCall">车源电话：{{phone}}</button>
+        <button class="unfavorite" type="primary" data-index="{{index}}" bindtap="starttracking">{{socktBtnTitle}}</button>
     </view>
 
 </page>
