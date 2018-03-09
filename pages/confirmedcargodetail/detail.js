@@ -1,6 +1,10 @@
 var app = getApp();
+var socketMsgQueue = [];
+
 Page({
     data:{
+        socktBtnTitle: '启动跟踪',
+        wstxid: '',
         id:'',
         start:{
             city:'',
@@ -36,10 +40,22 @@ Page({
         owner:''
     },
     onLoad:function(options){
-        var that = this;
+      var that = this;
         that.setData({
-          id: options['id']
+          id: options['id'],
+          txid:options['txid'],
+          wstxid:wx.getStorageSync('wstxid')
         })
+        console.log("txid:" + options['txid'] + ",wstxid:"+wx.getStorageSync('wstxid'))
+        if(wx.getStorageSync('wstxid')) {
+          if(options['txid'] == wx.getStorageSync('wstxid')) {
+            that.setData({socktBtnTitle: '跟踪已启动，点击断开连接'})
+          } else {
+            that.setData({socktBtnTitle: '其他交易正在跟踪中，点击监控该交易，同时会断开其他交易跟踪'})
+          }
+        } else {
+          that.setData({socktBtnTitle: '启动跟踪'})
+        }
 
         wx.request({
             url: app.serviceurl+'/api/cargoes/' + options['id'],
@@ -160,6 +176,66 @@ Page({
             phoneNumber:that.data['phone']
         })
     },
+    starttracking:function(){
+      var that = this;
+      console.log("that.data.wstxid:" + that.data.wstxid)
+      var remindTitle = that.data.socketOpen ? '正在关闭' : '正在连接'
+      wx.showToast({
+        title: remindTitle,
+        icon: 'loading',
+        duration: 2000
+      })
+
+      if (!that.data.socketOpen) {
+        wx.hideToast()
+        that.setData({
+          socktBtnTitle: '跟踪已启动，点击断开连接',
+          socketOpen: true
+        })
+        wx.setStorageSync('wstxid', that.data['txid']);
+        // wx.onSocketError(function (res) { 
+        //   console.log('WebSocket连接打开失败，请检查！') 
+        //   that.setData({ 
+        //     socktBtnTitle: '启动跟踪',
+        //     socketOpen: false
+        //   }) 
+        //   wx.setStorageSync('socketOpen', false)
+        //   wx.hideToast() 
+        // })
+        // wx.onSocketOpen(function (res) {
+        //   console.log('WebSocket连接已打开！')
+          
+        //   wx.setStorageSync('socketOpen', true)
+        //   for (var i = 0; i < socketMsgQueue.length; i++) {
+        //     that.sendSocketMessage(socketMsgQueue[i])
+        //   }
+        //   socketMsgQueue = []
+        // })
+        // wx.onSocketClose(function (res) {
+        //   console.log('WebSocket 已关闭！')
+        //   wx.hideToast()
+        //   that.setData({
+        //     socktBtnTitle: '启动跟踪',
+        //     socketOpen: false
+        //   })
+        //   wx.setStorageSync('socketOpen', false)
+        // })
+      } else {
+        //关闭WebSocket连接。
+        that.setData({
+          socktBtnTitle: '启动跟踪',
+          socketOpen: false
+        })
+        wx.setStorageSync('wstxid', '');
+      }    
+   },
+   viewtracing:function(){
+    let that = this;
+    console.log(that.data)
+    wx.navigateTo({
+      url: '../tracing/tracing?txid='+that.data['txid']+'&cid='+that.data['id']+'&o='+that.data['owner']
+    })
+  },
     removeFavorite:function(){
       let that = this;
       console.log(that.data)

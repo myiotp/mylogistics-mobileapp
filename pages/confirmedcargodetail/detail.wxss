@@ -165,4 +165,7 @@
     background-image: url("https://tongdagufen.cn/images/collect.png");
 
 }
+.tracing{
+    margin-top: 30rpx;
+}
 .disablebutton{background:#888;color:#fff;margin-top: 30rpx;}

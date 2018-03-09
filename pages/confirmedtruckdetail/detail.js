@@ -1,10 +1,11 @@
 var app = getApp();
-var socketOpen = false
-var socketMsgQueue = []
+var socketMsgQueue = [];
 Page({
     data:{
         socktBtnTitle: '启动跟踪',
+        wstxid: '',
         id:'',
+        txid:'',
         start:{
             city:'',
             province:''
@@ -36,8 +37,20 @@ Page({
     onLoad:function(options){
         var that = this;
         that.setData({
-          id: options['id']
+          id: options['id'],
+          txid:options['txid'],
+          wstxid:wx.getStorageSync('wstxid')
         })
+        console.log("txid:" + options['txid'] + ",wstxid:"+wx.getStorageSync('wstxid'))
+        if(wx.getStorageSync('wstxid')) {
+          if(options['txid'] == wx.getStorageSync('wstxid')) {
+            that.setData({socktBtnTitle: '跟踪已启动，点击断开连接'})
+          } else {
+            that.setData({socktBtnTitle: '其他交易正在跟踪中，点击监控该交易，同时会断开其他交易跟踪'})
+          }
+        } else {
+          that.setData({socktBtnTitle: '启动跟踪'})
+        }
 
         wx.request({
             url: app.serviceurl+'/api/truck/' + options['id'],
@@ -152,127 +165,76 @@ Page({
     },
     starttracking:function(){
       var that = this;
-      var remindTitle = socketOpen ? '正在关闭' : '正在连接'
+      console.log("that.data.wstxid:" + that.data.wstxid)
+      var remindTitle = that.data.socketOpen ? '正在关闭' : '正在连接'
       wx.showToast({
         title: remindTitle,
         icon: 'loading',
-        duration: 10000
+        duration: 2000
       })
 
-      if (!socketOpen) {
-        wx.connectSocket({
-          url: 'ws://localhost:8080'
+      if (!that.data.socketOpen) {
+        wx.hideToast()
+        that.setData({
+          socktBtnTitle: '跟踪已启动，点击断开连接',
+          socketOpen: true
         })
-        wx.onSocketError(function (res) { 
-          socketOpen = false 
-          console.log('WebSocket连接打开失败，请检查！') 
-          that.setData({ 
-            socktBtnTitle: '启动跟踪' 
-          }) 
-          wx.hideToast() 
-        })
-        wx.onSocketOpen(function (res) {
-          console.log('WebSocket连接已打开！')
-          wx.hideToast()
-          that.setData({
-            socktBtnTitle: '跟踪已启动，点击断开连接'
-          })
-          socketOpen = true
-          for (var i = 0; i < socketMsgQueue.length; i++) {
-            that.sendSocketMessage(socketMsgQueue[i])
-          }
-          socketMsgQueue = []
-        })
-        wx.onSocketClose(function (res) {
-          socketOpen = false
-          console.log('WebSocket 已关闭！')
-          wx.hideToast()
-          that.setData({
-            socktBtnTitle: '启动跟踪'
-          })
-        })
+        wx.setStorageSync('wstxid', that.data['txid']);
+        // wx.onSocketError(function (res) { 
+        //   console.log('WebSocket连接打开失败，请检查！') 
+        //   that.setData({ 
+        //     socktBtnTitle: '启动跟踪',
+        //     socketOpen: false
+        //   }) 
+        //   wx.setStorageSync('socketOpen', false)
+        //   wx.hideToast() 
+        // })
+        // wx.onSocketOpen(function (res) {
+        //   console.log('WebSocket连接已打开！')
+          
+        //   wx.setStorageSync('socketOpen', true)
+        //   for (var i = 0; i < socketMsgQueue.length; i++) {
+        //     that.sendSocketMessage(socketMsgQueue[i])
+        //   }
+        //   socketMsgQueue = []
+        // })
+        // wx.onSocketClose(function (res) {
+        //   console.log('WebSocket 已关闭！')
+        //   wx.hideToast()
+        //   that.setData({
+        //     socktBtnTitle: '启动跟踪',
+        //     socketOpen: false
+        //   })
+        //   wx.setStorageSync('socketOpen', false)
+        // })
       } else {
         //关闭WebSocket连接。
-        wx.closeSocket()
+        that.setData({
+          socktBtnTitle: '启动跟踪',
+          socketOpen: false
+        })
+        wx.setStorageSync('wstxid', '');
       }    
-
-      setInterval(function () {  
-        //循环执行代码  
-        //console.log("111");
-        if(socketOpen) {
-          wx.getLocation({
-            type: 'gcj02',
-            success: function(res) {
-              var latitude = res.latitude
-              var longitude = res.longitude
-              var speed = res.speed
-              var accuracy = res.accuracy
-              var msg = "{'t':"+latitude+",'g':"+longitude+",'s':"+speed+",'a':"+accuracy+"}";
-              //console.log(msg)
-              that.sendSocketMessage(msg)
-              
-            },
-            fail: function(err) {
-              console.log(err)
-              wx.getSetting({
-                success: (res) => {
-                  console.log(res);
-                  console.log(res.authSetting['scope.userLocation']);
-                  if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权
-                    wx.showModal({
-                      title: '是否授权当前位置',
-                      content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
-                      success: function (res) {
-                        if (res.cancel) {
-                          console.info("1授权失败返回数据");
-          
-                        } else if (res.confirm) {
-                          //village_LBS(that);
-                          wx.openSetting({
-                            success: function (data) {
-                              console.log(data);
-                              if (data.authSetting["scope.userLocation"] == true) {
-                                wx.showToast({
-                                  title: '授权成功',
-                                  icon: 'success',
-                                  duration: 5000
-                                })
-                                //再次授权，调用getLocationt的API
-                                //village_LBS(that);
-                              }else{
-                                wx.showToast({
-                                  title: '授权失败',
-                                  icon: 'success',
-                                  duration: 5000
-                                })
-                              }
-                            }
-                          })
-                        }
-                      }
-                    })
-                  } else if (res.authSetting['scope.userLocation'] == undefined) {//初始化进入
-                    //village_LBS(that);
-                  }
-                }
-              })
-            }
-          })
-        }
-        
-      }, 10000) //循环时间 这里是10秒   
    },
-   sendSocketMessage: function (msg) { 
-    if (socketOpen) { 
-      //通过 WebSocket 连接发送数据，需要先 wx.connectSocket，并在 wx.onSocketOpen 回调之后才能发送。 
-      wx.sendSocketMessage({ 
-        data: msg 
-       }) 
-     } else { 
-       socketMsgQueue.push(msg) 
-     } 
+  //  sendSocketMessage: function (msg) { 
+  //   var _socketOpen = wx.getStorageSync('socketOpen');
+  //   console.log("_socketOpen:" + _socketOpen);
+  //   if (_socketOpen) { 
+  //     //通过 WebSocket 连接发送数据，需要先 wx.connectSocket，并在 wx.onSocketOpen 回调之后才能发送。 
+  //     wx.sendSocketMessage({ 
+  //       data: msg 
+  //      }) 
+  //    } else { 
+  //      //socketMsgQueue.push(msg) 
+  //    } 
+  //   },
+    viewtracing:function(){
+      let that = this;
+      console.log(that.data)
+      wx.navigateTo({
+        url: '../tracing/tracing?txid='+that.data['txid']+'&cid='+that.data['id']+'&o='+that.data['owner']
+      })
     },
-
     removeFavorite:function(){
       let that = this;
       console.log(that.data)

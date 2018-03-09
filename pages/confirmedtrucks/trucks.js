@@ -6,7 +6,7 @@ var GetList = function (that) {
     hidden: false  
 	});  
 	var url=app.serviceurl + '/api/truck/username/'+app.uid+'/status/confirmed';
-
+	console.log(url);
 	wx.request({
 		url: url,
 		data:{

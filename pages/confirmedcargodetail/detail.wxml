@@ -71,7 +71,8 @@
 
     <view class="footer">
         <button class="tel" type="primary" class="tel" data-index="{{index}}" bindtap="makePhoneCall">货源电话：{{phone}}</button>
-        
+         <button class="tracing" type="primary" data-index="{{index}}" bindtap="viewtracing">查看轨迹</button>
+       
     </view>
 
 </page>

@@ -156,7 +156,15 @@
 .favorite{
     margin-top: 30rpx;
 }
-.unfavorite{
+.untracing{
+    margin-top: 30rpx;
+}
+.tracing:before{
+    width:28rpx;
+    height:28rpx;
+    background-image: url("https://tongdagufen.cn/images/collect.png");
+}
+.tracing{
     margin-top: 30rpx;
 }
 .favorite:before{

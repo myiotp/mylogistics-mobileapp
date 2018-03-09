@@ -71,8 +71,15 @@
     </view>
 
     <view class="footer">
-        <button class="tel" type="primary" class="tel" data-index="{{index}}" bindtap="makePhoneCall">车源电话：{{phone}}</button>
-        <button class="unfavorite" type="primary" data-index="{{index}}" bindtap="starttracking">{{socktBtnTitle}}</button>
+        <button class="tel" type="primary" data-index="{{index}}" bindtap="makePhoneCall">车源电话：{{phone}}</button>
+        <button class="tracing" type="primary" data-index="{{index}}" bindtap="viewtracing">查看轨迹</button>
+        <view wx:if="{{wstxid}}">
+            <button class="tracing" type="warn" data-index="{{index}}" bindtap="starttracking">{{socktBtnTitle}}</button>
+        </view>
+        <view wx:else>
+	        <button class="untracing" type="primary" data-index="{{index}}" bindtap="starttracking">{{socktBtnTitle}}</button>
+		</view> 
+        
     </view>
 
 </page>
