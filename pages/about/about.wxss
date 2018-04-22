@@ -41,7 +41,6 @@
     height: 750rpx;
     border-radius: 10rpx;
     margin-top: -175rpx;
-    filter: blur(15px);
 }
 .content{
     flex: 1;
@@ -96,7 +95,7 @@
     color: #545454;
     line-height: 175%;
     background: #fff;
-    margin-top: 15rpx;
+    margin-top: 1rpx;
     border-top: 1px #e5e5e5 solid;
     border-bottom: 1px #e5e5e5 solid;
 }

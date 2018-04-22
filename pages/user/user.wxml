@@ -75,13 +75,15 @@
     </view>   
     <view>
       <view class="graySpace"></view>
-      <navigator class="feedback" url="../licenseauth/licenseauth">
+      <!--<navigator class="feedback" url="../licenseauth/licenseauth">
           <text>反馈</text>
       </navigator>
-      <navigator class="about" url="../usercarlist/usercarlist">
+      -->
+      <navigator class="about" url="../about/about">
           <text>关于</text>
       </navigator>
     </view>  
-
-
+    <view>
+      <view class="graySpace"></view>
+    </view>
 </page>

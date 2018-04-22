@@ -19,6 +19,7 @@
     "pages/todocargodetail/detail",
     "pages/txcenter/txcenter",
     "pages/user/user",
+    "pages/about/about",
     "pages/tracing/tracing",
     "pages/userauth/userauth",
     "pages/licenseauth/licenseauth",
