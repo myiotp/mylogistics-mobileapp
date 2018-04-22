@@ -1,4 +1,6 @@
 var app = getApp();
+var page =1;
+var pageSize = app.pageSize;
 Page({
   data: {
     list: '',
@@ -19,39 +21,39 @@ Page({
 			carType:options['s4'],
 			carLength:options['s5']
 		});
-    wx.request({
-      url: app.serviceurl + '/api/truck/q',
-			data:{
-        username:app.uid,
-				shipTimestamp:options['s1'],
-				fromid:options['s2'],
-				toid:options['s3'],
-				carType:options['s4'],
-				carLength:options['s5']
-			},
-      success: function (res) {
-        let dd=res.data.data;
-				if(dd.length ==0) {
-					wx.showToast({
-            title: '没有查询到记录',
-            icon: 'success',
-            duration: 1e3
-          });
+    // wx.request({
+    //   url: app.serviceurl + '/api/truck/q',
+		// 	data:{
+    //     username:app.uid,
+		// 		shipTimestamp:options['s1'],
+		// 		fromid:options['s2'],
+		// 		toid:options['s3'],
+		// 		carType:options['s4'],
+		// 		carLength:options['s5']
+		// 	},
+    //   success: function (res) {
+    //     let dd=res.data.data;
+		// 		if(dd.length ==0) {
+		// 			wx.showToast({
+    //         title: '没有查询到记录',
+    //         icon: 'success',
+    //         duration: 1e3
+    //       });
 
-          setTimeout(function () {
-            app.submited = true;
-            wx.hideToast();
-            wx.switchTab({
-              url: '../carlist/carlist'
-            })
-          }, 1e3);
-				}else {
-					that.setData({
-						list:res.data.data
-					})
-				}
-      }
-    })
+    //       setTimeout(function () {
+    //         app.submited = true;
+    //         wx.hideToast();
+    //         wx.switchTab({
+    //           url: '../carlist/carlist'
+    //         })
+    //       }, 1e3);
+		// 		}else {
+		// 			that.setData({
+		// 				list:res.data.data
+		// 			})
+		// 		}
+    //   }
+    // })
   },
 
 	onShow:function(options){
@@ -64,9 +66,12 @@ Page({
 				fromid:that.data['fromid'],
 				toid:that.data['toid'],
 				carType:that.data['carType'],
-				carLength:that.data['carLength']
+        carLength:that.data['carLength'],
+        pageSize:pageSize,
+			  page: page
 			},
 			success:function(res){
+        console.log(res.data);
         let dd=res.data.data;
 				if(dd.length ==0) {
 					wx.showToast({

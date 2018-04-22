@@ -34,7 +34,26 @@
 .condition .price{color:#FFB578;border-color:#FFB578;}
 .condition .favorite{color:#E64340;border-color:#FFB578;}
 .place .end  image{width:30rpx;height:30rpx;margin-bottom:12rpx;overflow:hidden;top:0;right:0;}
+.place .start  image{width:30rpx;height:30rpx;margin-bottom:12rpx;overflow:hidden;top:0;left:0;}
 
 
 .add{position: fixed;bottom: 30px;right:30px;}
 .add image{width: 80rpx;height: 80rpx;}
+.statustext{
+	position: absolute;
+	left: -50rpx;
+	top: 0;
+	background: #07b5e0;
+	color: #fff;
+	font-size: 20rpx;
+	padding: 6rpx 10rpx;
+}
+.statustext2{
+	position: absolute;
+	left: -50rpx;
+	top: 0;
+	background: #f7982a;
+	color: #fff;
+	font-size: 20rpx;
+	padding: 6rpx 10rpx;
+}

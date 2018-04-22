@@ -46,7 +46,7 @@
     </view>
 
 
-		<block wx:for="{{infoList}}">
+		<block wx:for="{{infoList}}" wx:key="{{index}}">
 			<view class="popup">
 				<view class="information">{{item.information}}</view>
 				<view class="select" id="{{index}}" bindtap="{{item.bindBtn}}">{{item.select}}</view>
@@ -63,7 +63,7 @@
 <view class="shade" hidden="{{hiddenBoolean}}">
 	<view class="layer" bindtap="hiddenBtn"></view>
 	<view class="selected">
-		<block wx:for="{{options}}">
+		<block wx:for="{{options}}" wx:key="{{item.id}}">
 			<view bindtap="{{screenBtn}}" id="{{item.id}}" class="{{className[index]}}" >
 				<text>{{item.name}}</text>
 			</view>
