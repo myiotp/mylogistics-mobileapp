@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.7.2",
-	"appid": "wxc55ee3a8af900bb7",
-	"projectname": "MyLogistics0227",
+	"appid": "wx62d1f359dbf918a9",
+	"projectname": "MyLogistics0312",
 	"condition": {
 		"search": {
 			"current": -1,
