@@ -4,6 +4,8 @@
 	<view class="goods">
 		<navigator class="monad" wx:for="{{list}}" url="../mycargodetail/detail?id={{item.id}}" wx:key="{{item.id}}">
 			<view class="place">
+				<text class="statustext" data-status="{{item.status}}" wx:if="{{item.status == 11}}">已交易</text>
+				<text class="statustext2" data-status="{{item.status}}" wx:if="{{item.status != 11}}">交易中</text>
 				<view class="start">
 					<text class="city">{{item.fromCityName}}</text>
 					<text class="province">{{item.fromProvinceName}}</text>
