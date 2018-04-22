@@ -19,6 +19,7 @@
         </navigator>
       </view>
       <button type="primary" size="default" class="submit" form-type="submit">提交申请认证</button>
+      <view class="hint">审核结果:{{comment}}</view>
     </view>
   </form>
 </page>

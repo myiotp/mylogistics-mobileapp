@@ -2,7 +2,7 @@
 	<view class="input-list">
     <view class="import">
 				<view class="information">唯一号</view>
-				<input name="username" placeholder-style="color:#B2B2B2" disabled='{{username != null}}' placeholder="提交后不能再修改" value='{{username}}'/>
+				<input class="readonly" name="username" placeholder-style="color:#B2B2B2" disabled='{{username != null}}' placeholder="提交后不能再修改" value='{{username}}'/>
 		</view>
 		<view class="import">
 			<view class="information">真实姓名</view>
@@ -10,11 +10,11 @@
 		</view>
     <view class="import">
 			<view class="information">身份证号</view>
-			<input name="idnumber" type="digit"  placeholder-style="color:#B2B2B2" maxlength="18" placeholder="请填写您真实的身份证号"  value='{{idnumber}}'/>
+			<input name="idnumber" type="idcard"  placeholder-style="color:#B2B2B2" maxlength="18" placeholder="请填写您真实的身份证号"  value='{{idnumber}}'/>
 		</view>
     <view class="import">
-			<view class="information">联系方式</view>
-			<input name="ownerCellphone" type="digit"  placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写您的手机号码" value='{{ownerCellphone}}'/>
+			<view class="information">手机号码</view>
+			<input name="ownerCellphone" type="number"  placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写您的手机号码" value='{{ownerCellphone}}'/>
 		</view>
     <view class="import">
 			<view class="information">公司名称</view>

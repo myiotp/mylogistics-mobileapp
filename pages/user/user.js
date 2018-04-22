@@ -3,6 +3,7 @@ Page({
     data:{
         userInfo:{},
         myrole:'',
+        b_authresult:'未认证',
         total:{
             view:56,
             vehiclefavorite:'0',
@@ -26,68 +27,38 @@ Page({
             },
             fail:function(err){}
         });
-        var openId=wx.getStorageSync('openId');
-        
-        wx.request({
-          url: app.serviceurl + '/api/wx/username/'+openId+'',
-    			data:{
-
-    			},
-    			success:function(res){
-            console.log(res.data)
-            if(res.data.data == null || res.data.data == '') {
-              wx.showModal({  
-                title: '提示',  
-                content: '请完善资料',
-                success: function (res) {
-                  wx.navigateTo({
-                    url: '../dataperfect/dataperfect'
-                  })
-                }
-              })  
-            } else {
-              app.uid = res.data.data;
-              wx.setStorageSync('appuid', res.data.data);
-            }
-    				
-    			}
-        })
-        
-        
-        if(app.uid == '') {
-          
-        }
-    		wx.request({
-          url: app.serviceurl + '/api/userfavorite/username/'+app.uid+'/mycount',
-    			data:{
-
-    			},
-    			success:function(res){
-            console.log(res.data.data)
-    				that.setData({
-              total:{
-                  vehiclefavorite: res.data.data['1'],
-                  cargofavorite:res.data.data['2'],
-                  myvehicle:res.data.data['3'],
-                  mycargo:res.data.data['4']
-              }
-    				})
-    			}
-    		})
+       
     },
     onShow:function() {
-      app.uid=wx.getStorageSync('appuid');
-        if(app.uid == '') {
-          wx.showModal({  
-            title: '提示',  
-            content: '请完善资料',
-            success: function (res) {
-              wx.navigateTo({
-                url: '../dataperfect/dataperfect'
-              })
-            }
-          })  
+      var openId=wx.getStorageSync('openId');
+        
+      wx.request({
+        url: app.serviceurl + '/api/wx/username/'+openId+'',
+        data:{
+
+        },
+        success:function(res){
+          console.log(res.data)
+          if(res.data.data == null || res.data.data == '') {
+            wx.showModal({  
+              title: '提示',  
+              showCancel: false,
+              content: '请完善资料',
+              success: function (res) {
+                wx.navigateTo({
+                  url: '../dataperfect/dataperfect'
+                })
+              }
+            })  
+          } else {
+            app.uid = res.data.data;
+            wx.setStorageSync('appuid', res.data.data);
+          }
+          
         }
+      })
+
+      app.uid=wx.getStorageSync('appuid');
         
       var that = this;
       wx.getStorage({
@@ -123,5 +94,42 @@ Page({
           })
         }
       })
+
+      wx.request({
+        url: app.serviceurl + '/api/identityauth/' + app.uid + '/type/100',
+        data: {
+            uid:app.uid
+        },
+        success:function(res){
+            console.log(res.data);
+            if(res.data) {
+              let _authresult = res.data.data['authresult'];
+              // let _ok = false;
+              if(_authresult == '1') {
+                that.setData({
+                  b_authresult: '已认证'
+                })
+                
+              }else {
+                that.setData({
+                  b_authresult: '未认证'
+                })
+            
+                wx.showModal({  
+                  title: '提示', 
+                  showCancel: false,
+                  content:'您还未通过实名认证,请完善资料后提交证件进行认证!',
+                  success: function(res) { 
+                    if (res.confirm) { 
+                      wx.navigateTo({
+                        url: '../userauth/userauth'
+                      })
+                    }
+                  }
+                })  
+            }
+          }
+        }
+    })
     }
 })

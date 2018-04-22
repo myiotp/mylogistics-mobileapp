@@ -1,6 +1,9 @@
 var app = getApp();
 Page({
   data: {
+    //toast默认不显示  
+    isShowToast: false,
+    count:3000,
     list: ''
   },
   add: function () {
@@ -26,5 +29,9 @@ Page({
 
       }
     })
+  },
+  
+  onShow:function() {
+    
   }
 })

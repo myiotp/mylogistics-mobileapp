@@ -16,7 +16,7 @@ var list = [
 Page({
 
   data: {
-    textHint: "请添加您的货物相关信息，以便于我们帮您更精准的配车和让车主更加了解您。",
+    textHint: "请添加您的车辆相关信息，以便于我们帮您更精准的配货和让货主更加了解您。",
     hiddenBoolean: true,
     inputHidden: true,
     className: ['header'],

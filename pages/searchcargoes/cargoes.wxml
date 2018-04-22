@@ -55,7 +55,6 @@
 		</block>
 
 	</view>
-	<view class="hint">{{textHint}}</view>
 	<button name="id" type="hidden" value='{{id}}'/>
 	<button type="primary" size="default" class="submit" form-type="submit">搜索</button>
 	<button formType="reset" class="resume">重新输入</button>

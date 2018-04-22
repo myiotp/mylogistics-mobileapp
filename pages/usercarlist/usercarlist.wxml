@@ -33,6 +33,7 @@
 	</view>
 
 	<view class="add" bindtap="add">
-		<image src="../../images/adddy.png"></image>
+		<image src="../../images/adddy.png"></image>添加车辆
 	</view>
+	
 </page>

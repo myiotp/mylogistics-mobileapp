@@ -316,25 +316,83 @@ Page({
     console.log('form发生了submit事件，携带数据为：', formData);
     var openId = (wx.getStorageSync('openId'));
     console.log(this.data);
-    let submitData = {
-      "id": formData['id'],
-      "openid":openId,
-      "username": formData['username'],
-      "password": "1234",
-      "email": "12@12.com",
-      "realname": formData['ownname'],
-      "company": formData['corporatename'],
-      "mobilephone": formData['ownerCellphone'],
-      "idcard": formData['idnumber'],
-      "province": this.data['start'],
-      "city": this.data['startOptions'],
-      "address": formData['detailedaddress'],
-      "emergency": formData['emergencycontact'],
-      "emergencyphone": formData['emergencyphone'],
-      "usertype":this.data['usertype']
-    };
-    console.log(submitData);
-    this._submit(submitData, '提交成功')
+    var flag = true;//判断信息输入是否完整  
+    var warn = "";//弹框时提示的内容  
+    var that=this;
+
+    if(formData['ownname']==""){
+      warn="请填写真实有效的名字";
+    } else if(formData['ownerCellphone']=="" || formData['ownerCellphone'].length<11) {
+      warn="请填写您的手机号码";
+    } else if(formData['idnumber']=="" || formData['idnumber'].length<18) {
+      warn="请填写您真实的身份证号";
+    } else if(formData['corporatename']=="") {
+      warn="请填写您的手机号码";
+    } else if(this.data['start']=="" || this.data['start']=="请选择城市") {
+      warn="请选择所在地区";
+    } else if(this.data['startOptions']=="" || this.data['startOptions']==",,") {
+      warn="请选择所在地区";
+    } else if(formData['usertype']=="") {
+      warn="请选择类型";
+    } else {
+      flag=false;
+      let submitData = {
+        "id": formData['id'],
+        "openid":openId,
+        "username": formData['username'],
+        "password": "1234",
+        "email": "12@12.com",
+        "realname": formData['ownname'],
+        "company": formData['corporatename'],
+        "mobilephone": formData['ownerCellphone'],
+        "idcard": formData['idnumber'],
+        "province": this.data['start'],
+        "city": this.data['startOptions'],
+        "address": formData['detailedaddress'],
+        "emergency": formData['emergencycontact'],
+        "emergencyphone": formData['emergencyphone'],
+        "usertype":this.data['usertype']
+      };
+      console.log(submitData);
+
+      wx.request({
+        url: app.serviceurl + '/api/identityauth/' + formData['username'] + '/type/100',
+        data: {
+            uid:formData['username']
+        },
+        success:function(res){
+            console.log(res.data);
+            if(res.data) {
+              let _authresult = res.data.data['authresult'];
+              // let _ok = false;
+              if(_authresult == '1') {
+                wx.showModal({  
+                  title: '提示', 
+                  showCancel: true,
+                  content:'您已通过实名认证,重新提交将需要再次认证!是否确认重新提交?',
+                  success: function(res) { 
+                    if (res.confirm) { 
+                      that._submit(submitData, '提交成功')
+                    }
+                  }
+                })  
+              } else {
+                that._submit(submitData, '提交成功')
+              }
+            }
+        }
+      })
+
+      
+    }
+    
+    if(flag==true){  
+      wx.showModal({  
+        title: '提示', 
+        showCancel: false,
+        content:warn  
+      })  
+    }    
   },
 
   /**
