@@ -1,3 +1,5 @@
+var feedbackApi=require('../mytoast/showToast');
+
 var app = getApp();
 Page({
     data:{
@@ -39,8 +41,10 @@ Page({
         that.setData({
           id: options['id']
         })
-
-        wx.request({
+        if(options['c']==0) {
+          feedbackApi.showToast({title: '该车源还没有货主抢定，无需确认!',duration: 3000 })
+        } else {
+          wx.request({
             url: app.serviceurl+'/api/truck/' + options['id'],
             data:{
                 id:options['id'],
@@ -147,7 +151,10 @@ Page({
                 owner: rawdata.username
               });
             }
-        })
+          })
+        }
+
+        
     },
     confirm:function(){
       let that = this;

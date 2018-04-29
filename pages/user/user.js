@@ -1,3 +1,4 @@
+var feedbackApi=require('../mytoast/showToast');
 var app = getApp();
 Page({
     data:{
@@ -96,40 +97,49 @@ Page({
       })
 
       wx.request({
-        url: app.serviceurl + '/api/identityauth/' + app.uid + '/type/100',
+        url: app.serviceurl + '/api/identityauth/' + app.uid + '/types',
         data: {
             uid:app.uid
         },
         success:function(res){
             console.log(res.data);
-            if(res.data) {
-              let _authresult = res.data.data['authresult'];
+            if(res.data && res.data.data) {
+              let _authresult = res.data.data['100'];
               // let _ok = false;
               if(_authresult == '1') {
                 that.setData({
                   b_authresult: '已认证'
                 })
-                
-              }else {
+              } else if(_authresult == '-1') {  
                 that.setData({
-                  b_authresult: '未认证'
+                  b_authresult: '未通过认证'
                 })
-            
                 wx.showModal({  
                   title: '提示', 
-                  showCancel: false,
+                  showCancel: true,
                   content:'您还未通过实名认证,请完善资料后提交证件进行认证!',
+                  cancelText:'完善资料',
+                  confirmText:'提交证件',
                   success: function(res) { 
                     if (res.confirm) { 
                       wx.navigateTo({
                         url: '../userauth/userauth'
                       })
+                    } else {
+                      wx.navigateTo({
+                        url: '../dataperfect/dataperfect'
+                      })
                     }
                   }
                 })  
+              }else {
+                that.setData({
+                  b_authresult: '待审核'
+                })
+                feedbackApi.showToast({title: '您的实名认证已提交,请等待认证结果!',duration: 3000 })
             }
           }
         }
-    })
+      })
     }
 })

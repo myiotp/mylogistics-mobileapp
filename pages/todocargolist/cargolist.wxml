@@ -3,8 +3,9 @@
 <page>
 	<view class="goods">
 	<view wx:if="{{size > 0}}">
-		<navigator class="monad" wx:for="{{list}}" url="../todocargodetail/detail?id={{item.id}}" wx:key="{{item.id}}">
+		<navigator class="monad" wx:for="{{list}}" url="../todocargodetail/detail?id={{item.id}}&c={{item.txId}}" wx:key="{{item.id}}">
 			<view class="place">
+				<text class="statustext" data-status="{{item.txId}}">{{item.txId}}个待确认车源</text>
 				<view class="start">
 					<text class="city">{{item.fromCityName}}</text>
 					<text class="province">{{item.fromProvinceName}}</text>

@@ -22,6 +22,12 @@ var list = [
 Page({
 
   data: {
+    cargoOwner: '',
+    ownerCellphone: '',
+    ownercompany: '',
+    operator: '',
+    emergencyContact: '',
+    emergencyCellphone: '',
     textHint: "请添加您的货物相关信息，以便于我们帮您更精准的配车和让车主更加了解您。",
     hiddenBoolean: true,
     inputHidden: true,
@@ -179,6 +185,7 @@ Page({
     this.getProvince();
     this.initcartype();
     this.initcarlength();
+    this.initdata();
 
     var date = new Date();
     var seperator1 = "-";
@@ -198,6 +205,31 @@ Page({
     })
     console.log(this.loaded)
     console.log(this.data);
+  },
+  initdata : function() {
+    var that = this;
+    var p = {
+
+    }
+    wx.request({
+      url: app.serviceurl + "/api/cargoes/username/"+app.uid+"/latest",
+      data: p,
+
+      success: function (res) {
+        if(res.data.data) {
+          var _data  = res.data.data;
+          that.setData({
+            cargoOwner: _data['cargoOwner'],
+            ownerCellphone: _data['ownerCellphone'],
+            ownercompany: _data['ownercompany'],
+            operator: _data['operator'],
+            emergencyContact: _data['emergencyContact'],
+            emergencyCellphone: _data['emergencyCellphone']
+          })
+        }
+       
+      }
+    })
   },
   initcartype : function () {
     this.type = wx.getStorageSync('chooseCartype');

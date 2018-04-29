@@ -1,3 +1,5 @@
+@import '../mytoast/showToast.wxss';  
+
 .header{
     height:224rpx;
     background:url("https://tongdagufen.cn/images/truck-1.jpg") no-repeat 0 0;

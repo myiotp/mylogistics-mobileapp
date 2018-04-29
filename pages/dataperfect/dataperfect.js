@@ -319,8 +319,15 @@ Page({
     var flag = true;//判断信息输入是否完整  
     var warn = "";//弹框时提示的内容  
     var that=this;
+ 
+    var pattern = /^[A-Za-z0-9]+$/gi;
 
-    if(formData['ownname']==""){
+
+    if(formData['username']=="") {
+      warn="请填写唯一号(只能包含字母或数字)";
+    } else if (!pattern.test(formData['username'])) {
+      warn="唯一号只能包含字母或数字";
+    }else if(formData['ownname']==""){
       warn="请填写真实有效的名字";
     } else if(formData['ownerCellphone']=="" || formData['ownerCellphone'].length<11) {
       warn="请填写您的手机号码";
@@ -362,7 +369,7 @@ Page({
         },
         success:function(res){
             console.log(res.data);
-            if(res.data) {
+            if(res.data && (res.data.data)) {
               let _authresult = res.data.data['authresult'];
               // let _ok = false;
               if(_authresult == '1') {
@@ -372,13 +379,15 @@ Page({
                   content:'您已通过实名认证,重新提交将需要再次认证!是否确认重新提交?',
                   success: function(res) { 
                     if (res.confirm) { 
-                      that._submit(submitData, '提交成功')
+                      that._submit(submitData, '提交成功');
                     }
                   }
                 })  
               } else {
-                that._submit(submitData, '提交成功')
+                that._submit(submitData, '提交成功');
               }
+            } else {
+              that._submit(submitData, '提交成功');
             }
         }
       })

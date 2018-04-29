@@ -1,3 +1,4 @@
+@import '../mytoast/showToast.wxss';  
 .user-info2{
     position: relative;
     margin-top:20rpx;

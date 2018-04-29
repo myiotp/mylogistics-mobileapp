@@ -2,19 +2,19 @@
 	<view class="input-list">
     <view class="import">
 			<view class="information">货主姓名</view>
-			<input name="cargoOwner" placeholder-style="color:#B2B2B2" placeholder="请填写真实有效的名字"/>
+			<input name="cargoOwner" placeholder-style="color:#B2B2B2" placeholder="请填写真实有效的名字" value="{{cargoOwner}}"/>
 		</view>
     <view class="import">
 			<view class="information">联系方式</view>
-			<input name="ownerCellphone" type="digit"  placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写您的手机号码"/>
+			<input name="ownerCellphone" type="digit"  placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写您的手机号码" value="{{ownerCellphone}}"/>
 		</view>
 	<view class="import">
 		<view class="information">所在公司</view>
-		<input name="ownercompany" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写所在的公司"/>
+		<input name="ownercompany" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写所在的公司" value="{{ownercompany}}"/>
 	</view>
 	<view class="import">
 		<view class="information">经办人</view>
-		<input name="operator" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写经办人"/>
+		<input name="operator" placeholder-style="color:#B2B2B2" maxlength="11" placeholder="请填写经办人" value="{{operator}}"/>
 	</view>
     <view class="import">
 			<view class="information">货物名称</view>
@@ -110,11 +110,11 @@
 		</view>
 		<view class="import">
 				<view class="information">紧急联系人</view>
-				<input name="emergencyContact" placeholder-style="color:#B2B2B2" placeholder="紧急联系人"/>
+				<input name="emergencyContact" placeholder-style="color:#B2B2B2" placeholder="紧急联系人" value="{{emergencyContact}}"/>
 		</view>
 		<view class="import">
 				<view class="information">紧急联系人电话</view>
-				<input name="emergencyCellphone" type="digit" placeholder-style="color:#B2B2B2" placeholder="紧急联系人电话"/>
+				<input name="emergencyCellphone" type="digit" placeholder-style="color:#B2B2B2" placeholder="紧急联系人电话" value="{{emergencyCellphone}}"/>
 		</view>
 		<view class="import">
 				<view class="information">备注</view>

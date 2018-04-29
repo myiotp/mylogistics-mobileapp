@@ -16,6 +16,12 @@ var list = [
 Page({
 
   data: {
+    owner: '',
+    ownerCellphone: '',
+    ownercompany: '',
+    operator: '',
+    emergencyContact: '',
+    emergencyCellphone: '',
     textHint: "请添加您的车辆相关信息，以便于我们帮您更精准的配货和让货主更加了解您。",
     hiddenBoolean: true,
     inputHidden: true,
@@ -172,7 +178,7 @@ Page({
     this.init();
     this.getProvince();
     this.initcartype();
-    //this.initcarlength();
+    this.initdata();
 
     var date = new Date();
     var seperator1 = "-";
@@ -192,6 +198,31 @@ Page({
     })
     console.log(this.loaded)
     console.log(this.data);
+  },
+  initdata : function() {
+    var that = this;
+    var p = {
+
+    }
+    wx.request({
+      url: app.serviceurl + "/api/truck/username/"+app.uid+"/latest",
+      data: p,
+
+      success: function (res) {
+        if(res.data.data) {
+          var _data  = res.data.data;
+          that.setData({
+            owner: _data['owner'],
+            ownerCellphone: _data['ownerCellphone'],
+            ownercompany: _data['ownercompany'],
+            operator: _data['operator'],
+            emergencyContact: _data['emergencyContact'],
+            emergencyCellphone: _data['emergencyCellphone']
+          })
+        }
+       
+      }
+    })
   },
   initcartype : function () {
     var that = this;
@@ -324,6 +355,38 @@ Page({
      } else {
        this.loaded = true;
      }
+     wx.request({
+      url: app.serviceurl + '/api/identityauth/' + app.uid + '/types',
+      data: {
+          uid:app.uid
+      },
+      success:function(res){
+          console.log(res.data);
+          if(res.data && res.data.data) {
+            let _authresult = res.data.data['200'];
+            // let _ok = false;
+            if(_authresult != '1') {
+              wx.showModal({  
+                title: '提示', 
+                showCancel: false,
+                content:'您还未通过驾驶证认证,不能发布车源信息!',
+                cancelText:'完善资料',
+                confirmText:'确定',
+                success: function(res) { 
+                  if (res.confirm) { 
+                    wx.navigateBack()
+                  } else {
+                    
+                  }
+                }
+              })  
+           
+          } else {
+              
+          }
+        }
+      }
+    })
    },
 
    getProvince: function () {//进行省份请求
