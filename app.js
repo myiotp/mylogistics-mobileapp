@@ -1,3 +1,29 @@
+function compareVersion(v1, v2) {
+  v1 = v1.split('.')
+  v2 = v2.split('.')
+  var len = Math.max(v1.length, v2.length)
+
+  while (v1.length < len) {
+    v1.push('0')
+  }
+  while (v2.length < len) {
+    v2.push('0')
+  }
+
+  for (var i = 0; i < len; i++) {
+    var num1 = parseInt(v1[i])
+    var num2 = parseInt(v2[i])
+
+    if (num1 > num2) {
+      return 1
+    } else if (num1 < num2) {
+      return -1
+    }
+  }
+
+  return 0
+}
+
 //app.js
 App({
   onLaunch: function () {
@@ -116,7 +142,7 @@ App({
         } else {
           wx.showModal({
             title: '警告',
-            content: '您点击了拒绝授权，将无法正常使用。请再次点击授权，或者删除小程序重新进入。',
+            content: '点击授权之后您可以正常使用小程序的全部功能。',
             success: function (res) {
               if (res.confirm) {
                 console.log('用户点击确定');
@@ -160,35 +186,69 @@ App({
   },
   onShow: function () {
     console.log("App生命周期函数——onShow函数");
-    /**
-     * 微信强制更新版本机制
-     */
-    const updateManager = wx.getUpdateManager();
-    // 请求完新版本信息的回调
-    updateManager.onCheckForUpdate(function (res) {
-      let version = res.hasUpdate?'有新版本待更新':'最新版本';
-      console.log(version);
-    })
-    //新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-    updateManager.onUpdateReady(function () {
-      wx.showModal({
-        title: '更新提示',
-        content: '新版本已经准备好，是否重启应用？',
-        success: function (res) {
-          if (res.confirm) {
-            updateManager.applyUpdate()
+    var ver = -1;
+    try {
+      var res = wx.getSystemInfoSync()
+      console.log(res.model)
+      console.log(res.pixelRatio)
+      console.log(res.windowWidth)
+      console.log(res.windowHeight)
+      console.log(res.language)
+      console.log(res.version)
+      console.log(res.platform)
+      console.log(res.SDKVersion)
+
+      ver = compareVersion(res.SDKVersion, '1.9.90');
+    } catch (e) {
+      // Do something when catch error
+    }
+
+    
+    console.log("ver:" + ver);
+    if(ver < 0) {
+      console.log('当前微信版本过低，无法正常使用该功能，请升级到最新微信版本后重试。');
+      wx.showModal({  
+        title: '提示', 
+        showCancel: false,
+        content:'当前微信版本过低，无法正常使用该功能，请升级到最新微信版本后重试。',
+        success: function(res) { 
+          if (res.confirm) { 
+            
           }
         }
-      });
-    })
-    // 新的版本下载失败
-    updateManager.onUpdateFailed(function () {
-      wx.showModal({
-        title: '新的版本下载失败,请重新安装白日梦小程序',
-        icon: 'success',
-        duration: 2000
-      });
-    })
+      })  
+    } else {
+      /**
+       * 微信强制更新版本机制
+       */
+      const updateManager = wx.getUpdateManager();
+      // 请求完新版本信息的回调
+      updateManager.onCheckForUpdate(function (res) {
+        let version = res.hasUpdate?'有新版本待更新':'最新版本';
+        console.log(version);
+      })
+      //新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+      updateManager.onUpdateReady(function () {
+        wx.showModal({
+          title: '更新提示',
+          content: '新版本已经准备好，是否重启应用？',
+          success: function (res) {
+            if (res.confirm) {
+              updateManager.applyUpdate()
+            }
+          }
+        });
+      })
+      // 新的版本下载失败
+      updateManager.onUpdateFailed(function () {
+        wx.showModal({
+          title: '新的版本下载失败,请重新安装小程序',
+          icon: 'success',
+          duration: 2000
+        });
+      })
+    }
+    
   },
   onHide: function () {
     console.log("App生命周期函数——onHide函数");
