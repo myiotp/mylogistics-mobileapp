@@ -1,3 +1,4 @@
+var feedbackApi=require('../mytoast/showToast');
 let app = getApp();
 
 var optionList = [];
@@ -245,6 +246,7 @@ Page({
     //console.log(this.type);
   },
   _submit: function (o, title) {
+    
     let that = this;
     wx.request({
       url: app.serviceurl + '/api/cargoes',
@@ -276,6 +278,7 @@ Page({
         }
       }
     })
+    feedbackApi.showToast({title: '提交处理中,请稍候!',duration: 2000 })
   },
   formSubmit: function (e) {
     let formData = e.detail.value;

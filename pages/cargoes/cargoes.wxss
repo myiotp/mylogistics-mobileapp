@@ -1,3 +1,4 @@
+@import '../mytoast/showToast.wxss'; 
 .info{padding-top:20rpx;display:block;}
 .input-list{background:#fff;padding-left:30rpx;}
 .popup,.import{border-bottom:1px solid #eee;padding-left:234rpx;position:relative;height:88rpx;}

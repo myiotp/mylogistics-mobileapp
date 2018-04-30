@@ -38,7 +38,7 @@
 
 .add{position: fixed;bottom: 30px;right:30px;}
 .add image{width: 80rpx;height: 80rpx;}
-.statustext{
+.idtext{
 	position: absolute;
 	left: -50rpx;
 	top: 0;
@@ -47,9 +47,19 @@
 	font-size: 20rpx;
 	padding: 6rpx 10rpx;
 }
+
+.statustext{
+	position: absolute;
+	right: -50rpx;
+	top: 0;
+	background: #07b5e0;
+	color: #fff;
+	font-size: 20rpx;
+	padding: 6rpx 10rpx;
+}
 .statustext2{
 	position: absolute;
-	left: -50rpx;
+	right: -50rpx;
 	top: 0;
 	background: #f7982a;
 	color: #fff;

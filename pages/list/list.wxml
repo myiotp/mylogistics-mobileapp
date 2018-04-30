@@ -2,6 +2,7 @@
 	<view class="goods">
 		<navigator class="monad" wx:for="{{list}}" url="../detail/detail?id={{item.id}}" wx:key="{{item.id}}">
 			<view class="place">
+				<text class="idtext" data-status="{{item.id}}">{{item.id}}</text>
 				<text class="statustext" data-status="{{item.status}}" wx:if="{{item.status == 11}}">已交易</text>
 				<text class="statustext2" data-status="{{item.status}}" wx:if="{{item.status != 11}}">交易中</text>
 				<view class="start">

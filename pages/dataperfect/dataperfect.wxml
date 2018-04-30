@@ -1,3 +1,6 @@
+<import src="../mytoast/showToast.wxml" />  
+<template is="showToast" data="{{showToast: showToast}}" />  
+
 <form class="info" bindsubmit="formSubmit" bindreset="formReset">
 	<view class="input-list">
     <view class="import">

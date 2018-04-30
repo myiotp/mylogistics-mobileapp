@@ -1,5 +1,5 @@
 let app = getApp();
-
+var feedbackApi=require('../mytoast/showToast');
 var optionList = [];
 
 Page({
@@ -276,6 +276,7 @@ Page({
   },
   _submit: function (o, title) {
     let that = this;
+    
     wx.request({
       url: app.serviceurl + '/api/user',
       method: 'POST',
@@ -310,6 +311,7 @@ Page({
         
       }
     })
+    feedbackApi.showToast({title: '提交处理中,请稍候!',duration: 2000 })
   },
   formSubmit: function (e) {
     let formData = e.detail.value;
@@ -347,8 +349,8 @@ Page({
         "id": formData['id'],
         "openid":openId,
         "username": formData['username'],
-        "password": "1234",
-        "email": "12@12.com",
+        "password": "",
+        "email": "",
         "realname": formData['ownname'],
         "company": formData['corporatename'],
         "mobilephone": formData['ownerCellphone'],

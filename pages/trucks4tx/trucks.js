@@ -8,8 +8,11 @@ Page({
 	},
 	onLoad:function(options){
 		var that = this;
-		that.data.cid = options['cid'];
-		that.data['cargoowner'] = options['o'];
+		
+		that.setData({
+			cid:options['cid'],
+			cargoowner:options['o']
+		})
 		console.log(that.data)
 		// wx.request({
       	// 	url: app.serviceurl + '/api/truck/username/'+app.uid + '/status/todo',

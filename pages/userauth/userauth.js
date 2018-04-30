@@ -19,16 +19,16 @@ Page({
             },
             success:function(res){
                 console.log(res.data);
-                if(res.data) {
+                if(res.data && res.data.data) {
                   // let _authresult = res.data['authresult'];
                   // let _ok = false;
                   // if(_authresult == '1') {
                   //   _ok = true;
                   // }
                   that.setData({
-                      authresult:res.data.data['authresult'],
-                      comment:res.data.data['comment'],
-                      usertype:res.data.data['usertype']
+                      authresult:res.data.data['authresult'] || false,
+                      comment:res.data.data['comment'] || '',
+                      usertype:res.data.data['usertype'] || '1'
                   });
                 }
 

@@ -30,7 +30,7 @@
 .condition .truck{color:#8BBFFF;border-color:#8BBFFF;}
 .condition .article{color:#58DF7E;border-color:#58DF7E;}
 .condition .price{color:#FFB578;border-color:#FFB578;}
-.statustext{
+.idtext{
 	position: absolute;
 	left: -50rpx;
 	top: 0;
@@ -39,9 +39,19 @@
 	font-size: 20rpx;
 	padding: 6rpx 10rpx;
 }
+
+.statustext{
+	position: absolute;
+	right: -50rpx;
+	top: 0;
+	background: #07b5e0;
+	color: #fff;
+	font-size: 20rpx;
+	padding: 6rpx 10rpx;
+}
 .statustext2{
 	position: absolute;
-	left: -50rpx;
+	right: -50rpx;
 	top: 0;
 	background: #f7982a;
 	color: #fff;
