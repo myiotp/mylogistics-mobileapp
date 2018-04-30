@@ -342,11 +342,24 @@ App({
   initWebSocket: function() {
     var that = this;
     wx.connectSocket({
-      url: that.wsserver
+      url: that.wsserver,
+      success: function (res) {
+        console.log(res)
+        console.log("success")
+      },
+      complete: function (res) {
+        console.log(res)
+        console.log("complete")
+      },
+      fail: function (res) {
+        console.log(res)
+        console.log("fail")
+      }
     })
     wx.onSocketError(function (res) { 
-      console.log('WebSocket连接打开失败，请检查！') 
-      wx.setStorageSync('socketOpen', false)
+      console.log('WebSocket连接打开失败，请检查！');
+      console.log(res); 
+      wx.setStorageSync('socketOpen', false);
     })
     wx.onSocketOpen(function (res) {
       console.log('WebSocket连接已打开！')
