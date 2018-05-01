@@ -5,6 +5,7 @@ Page({
         userInfo:{},
         myrole:'',
         b_authresult:'未认证',
+        b2_authresult:'未认证',
         total:{
             view:56,
             vehiclefavorite:'0',
@@ -105,6 +106,8 @@ Page({
             console.log(res.data);
             if(res.data && res.data.data) {
               let _authresult = res.data.data['100'];
+              let _authresult2 = res.data.data['200'];
+              
               // let _ok = false;
               if(_authresult == '1') {
                 that.setData({
@@ -137,6 +140,21 @@ Page({
                   b_authresult: '待审核'
                 })
                 feedbackApi.showToast({title: '您的实名认证已提交,请等待认证结果!',duration: 3000 })
+            }
+
+            if(_authresult2 == '1') {
+              that.setData({
+                b2_authresult: '已认证'
+              })
+            } else if(_authresult2 == '-1') {  
+              that.setData({
+                b2_authresult: '未通过认证'
+              })
+            }else {
+              that.setData({
+                b2_authresult: '待审核'
+              })
+              //feedbackApi.showToast({title: '您的实名认证已提交,请等待认证结果!',duration: 3000 })
             }
           }
         }

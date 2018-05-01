@@ -21,8 +21,10 @@ Page({
     ownerCellphone: '',
     ownercompany: '',
     operator: '',
+    wechat:'',
     emergencyContact: '',
     emergencyCellphone: '',
+    memo: '',
     textHint: "请添加您的车辆相关信息，以便于我们帮您更精准的配货和让货主更加了解您。",
     hiddenBoolean: true,
     inputHidden: true,
@@ -213,12 +215,14 @@ Page({
         if(res.data.data) {
           var _data  = res.data.data;
           that.setData({
-            owner: _data['owner'],
-            ownerCellphone: _data['ownerCellphone'],
-            ownercompany: _data['ownercompany'],
-            operator: _data['operator'],
-            emergencyContact: _data['emergencyContact'],
-            emergencyCellphone: _data['emergencyCellphone']
+            owner: _data['owner']||'',
+            ownerCellphone: _data['ownerCellphone']||'',
+            ownercompany: _data['ownercompany']||'',
+            operator: _data['operator']||'',
+            wechat:_data['wechat']||'',
+            emergencyContact: _data['emergencyContact']||'',
+            emergencyCellphone: _data['emergencyCellphone']||'',
+            memo: _data['memo'] || ''
           })
         }
        

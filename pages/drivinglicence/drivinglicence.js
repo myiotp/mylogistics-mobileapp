@@ -3,13 +3,11 @@ var util = require('../../utils/util.js');
 Page({
   data: {
     tempFilePaths: '',
+    isremoteurl: false,
     uploaded: false
   },
   onLoad: function (options) {
     var that = this;
-    that.setData({
-      id: options['id']
-    })
 
     wx.request({
         url: app.serviceurl+'/api/uploadimage/' + app.uid + '/type/201',
@@ -18,11 +16,16 @@ Page({
             username: app.uid
         },
         success:function(res){
-          console.debug(res.data.data);
-          var rawdata = res.data.data;
-          that.setData({
-            tempFilePaths: app.imagesurl + '/' + rawdata.image
-          });
+          //console.debug(res.data);
+          if(res.data && res.data.data){
+            var rawdata = res.data.data;
+            that.setData({
+              tempFilePaths: app.imagesurl + '/' + rawdata.image,
+              isremoteurl:true,
+              uploaded: true
+            });
+          }
+          
         }
     })
   },
@@ -102,6 +105,9 @@ Page({
     var tempFilePaths2 = this.data.tempFilePaths2;
     console.log(tempFilePaths);
     //console.log(tempFilePaths2);
+
+    var _length = app.imagesurl.length;
+
     if (tempFilePaths == '') {
       wx.showToast({
         title: '请选择驾驶证照片',
@@ -114,6 +120,14 @@ Page({
         icon: 'failure',
         duration: 1e3
       });
+    } else if (tempFilePaths.length > _length) {
+      var _temp = tempFilePaths.substring(0,_length);
+      if(_temp == app.imagesurl) {
+        console.log("remote image:" + _temp);
+        wx.navigateBack();
+      } else {
+        this.upload_file(app.serviceurl + '/api/upload/auth/username/'+app.uid, tempFilePaths, 'file', '201');
+      }
     } else {
       this.upload_file(app.serviceurl + '/api/upload/auth/username/'+app.uid, tempFilePaths, 'file', '201');
 

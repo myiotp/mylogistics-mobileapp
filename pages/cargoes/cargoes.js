@@ -17,6 +17,12 @@ var list = [
     bindBtn: 'carExtent',
     name: 'car_size',
     val: ''
+  }, {
+    information: '付款方式',
+    select: '请选择付款方式',
+    bindBtn: 'paymentType',
+    name: 'payment_type',
+    val: ''
   }
 ];
 
@@ -27,8 +33,10 @@ Page({
     ownerCellphone: '',
     ownercompany: '',
     operator: '',
+    wechat:'',
     emergencyContact: '',
     emergencyCellphone: '',
+    memo: '',
     textHint: "请添加您的货物相关信息，以便于我们帮您更精准的配车和让车主更加了解您。",
     hiddenBoolean: true,
     inputHidden: true,
@@ -43,6 +51,7 @@ Page({
     validenddate:'',
     mycartyelist:[],
     mycarlengthlist:[],
+    paymenttypelist:[],
     provinceList: []
   },
   init: function () {
@@ -120,6 +129,16 @@ Page({
       });
     }
   },
+  paymentType: function (e) {
+    if (e.currentTarget.id == 2) {
+      this.setData({
+        infoId: e.currentTarget.id,
+        options: this.data.paymenttypelist,
+        hiddenBoolean: !this.data.hiddenBoolean,
+        screenBtn: 'carBtn'
+      });
+    }
+  },
   hiddenBtn: function (e) {
     this.setData({
       hiddenBoolean: !this.data.hiddenBoolean
@@ -157,6 +176,8 @@ Page({
       me = this.data.mycartyelist;
     } else if (this.data.infoId == 1) {
       me = this.data.mycarlengthlist;
+    } else if (this.data.infoId == 2) {
+      me = this.data.paymenttypelist;
     }
     for (var i = 0; i < me.length; i++) {
       if (me[i].id == dataId) {
@@ -186,6 +207,7 @@ Page({
     this.getProvince();
     this.initcartype();
     this.initcarlength();
+    this.initPaymenttype();
     this.initdata();
 
     var date = new Date();
@@ -220,12 +242,14 @@ Page({
         if(res.data.data) {
           var _data  = res.data.data;
           that.setData({
-            cargoOwner: _data['cargoOwner'],
-            ownerCellphone: _data['ownerCellphone'],
-            ownercompany: _data['ownercompany'],
-            operator: _data['operator'],
-            emergencyContact: _data['emergencyContact'],
-            emergencyCellphone: _data['emergencyCellphone']
+            cargoOwner: _data['cargoOwner']||'',
+            ownerCellphone: _data['ownerCellphone']||'',
+            ownercompany: _data['ownercompany']||'',
+            operator: _data['operator']||'',
+            wechat:_data['wechat']||'',
+            emergencyContact: _data['emergencyContact']||'',
+            emergencyCellphone: _data['emergencyCellphone']||'',
+            memo: _data['memo'] || ''
           })
         }
        
@@ -242,6 +266,12 @@ Page({
   initcarlength: function () {
     this.setData({
         mycarlengthlist:wx.getStorageSync('chooseCarLength')
+    })
+    //console.log(this.type);
+  },
+  initPaymenttype: function () {
+    this.setData({
+        paymenttypelist:wx.getStorageSync('choosePaymenttype')
     })
     //console.log(this.type);
   },
@@ -287,12 +317,16 @@ Page({
     var length = this.data.infoList.length;
     var car_type = '';
     var car_size = '';
+    var payment_type = '';
     for(var i=0;i<length;i++){
       if(this.data.infoList[i].name=='car_type'){
         car_type=this.data.infoList[i].select;
       }
       if(this.data.infoList[i].name=='car_size'){
         car_size=this.data.infoList[i].select;
+      }
+      if(this.data.infoList[i].name=='payment_type'){
+        payment_type=this.data.infoList[i].select;
       }
     }
     var flag = true;//判断信息输入是否完整  
@@ -301,6 +335,14 @@ Page({
       warn="请填写真实有效的名字";
     } else if(formData['ownerCellphone']=="") {
       warn="请填写您的手机号码";
+    } else if(formData['cargoName']=="") {
+      warn="请填写货物名称";  
+    } else if(formData['cargotype']=="") {
+      warn="请填写货物种类";  
+    } else if(formData['cargoWeight']=="") {
+      warn="请填写载重(吨)";
+    } else if(formData['vehicledimension']=="") {
+      warn="请填写货物体积";
     } else if(this.data['startOptions']=="" || this.data['startOptions']==",,") {
       warn="请选择装货地址";
     } else if(this.data['endOptions']=="" || this.data['endOptions']==",,") {
@@ -309,10 +351,8 @@ Page({
       warn="请选择车辆类型";
     } else if(car_size=="" || car_size == '请选择货箱长度') {
       warn="请选择货箱长度";  
-    } else if(formData['cargoWeight']=="") {
-      warn="请填写载重(吨)";
-    } else if(formData['vehicledimension']=="") {
-      warn="请填写货物体积";
+    } else if(payment_type=="" || payment_type == '请选择付款方式') {
+      warn="请选择付款方式";
     } else {
       flag=false;
       //need to handle formData['shiptime']
@@ -344,7 +384,7 @@ Page({
         "vehicledimension":formData['vehicledimension'],
         "shipTimestamp": '2018-01-02',
         "price": formData['price'],
-        "payment": formData['payment'],
+        "payment": payment_type,
         "validDays": formData['validtime'],
         "memo": formData['memo'],
         "wechat": formData['wechat'],

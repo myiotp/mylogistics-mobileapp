@@ -69,7 +69,7 @@
     <view>
       <view class="graySpace"></view>
       <navigator class="drivinglicence" url="../licenseauth/licenseauth">
-          <text>驾驶证认证</text>
+          <text>驾驶证认证({{b2_authresult}})</text>
       </navigator>
       <navigator class="vehicleinformation" url="../usercarlist/usercarlist">
           <text>车辆认证</text>

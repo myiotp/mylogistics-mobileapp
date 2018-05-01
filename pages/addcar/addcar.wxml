@@ -71,7 +71,7 @@
 		</view>
     <view class="import">
 			<view class="information">运输时效(天)</view>
-			<input name="validtime" type="digit" placeholder-style="color:#B2B2B2" placeholder="请输入运输时效"/>
+			<input name="validtime" type="number" placeholder-style="color:#B2B2B2" placeholder="请输入运输时效"/>
 		</view>
 		<view class="import">
 				<view class="information">货物种类</view>
@@ -79,7 +79,7 @@
 		</view>
 	    <view class="import">
 				<view class="information">微信</view>
-				<input name="wechat" placeholder-style="color:#B2B2B2" placeholder="微信号"/>
+				<input name="wechat" placeholder-style="color:#B2B2B2" placeholder="微信号" value="{{wechat}}"/>
 		</view>
 		<view class="import">
 				<view class="information">紧急联系人</view>
@@ -91,7 +91,7 @@
 		</view>
 		<view class="import">
 				<view class="information">备注</view>
-				<input name="memo" placeholder-style="color:#B2B2B2" placeholder="特殊情况请填写备注，如是否拼车配货，货物长宽高等"/>
+				<input name="memo" placeholder-style="color:#B2B2B2" placeholder="特殊情况请填写备注，如是否拼车配货，货物长宽高等" value="{{memo}}"/>
 		</view>
 
 	</view>

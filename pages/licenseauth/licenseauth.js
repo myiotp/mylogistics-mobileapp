@@ -26,7 +26,7 @@ Page({
                   // }
                   that.setData({
                       authresult:res.data.data['authresult'],
-                      comment:res.data.data['comment']
+                      comment:res.data.data['comment'] || ''
                   });
                 }
 

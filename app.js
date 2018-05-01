@@ -40,6 +40,7 @@ App({
     this.setCity();
     this.setCartype();
     this.setCarLength();
+    this.setPaymenttype();
     this.initWebSocket();
 
     // 展示本地存储能力
@@ -422,6 +423,27 @@ App({
         a = a.concat(res.data);
         wx.setStorage({
           key: 'chooseCarLength',
+          data: a
+        })
+      }
+    })
+  },
+  setPaymenttype: function () {
+    var p = {
+
+    }
+    wx.request({
+      url: this.serviceurl + "/api/payment",
+      data: p,
+
+      success: function (res) {
+        var a = [{
+          name: '选择类型',
+          id: ''
+        }];
+        a = a.concat(res.data);
+        wx.setStorage({
+          key: 'choosePaymenttype',
           data: a
         })
       }
