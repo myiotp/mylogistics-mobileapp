@@ -9,8 +9,8 @@
       </view>
     </view>
     <view class="describe">
-        <text class="desc-title">下载使用手册</text>
-        <text class="desc-content" selectable="true">https://www.tongdagufen.cn/images/help/userguide.pdf</text>
+        <button size="mini" type="primary" plain bindtap="getUserGuideDownloadUrl">点击获取使用手册下载地址</button>
+        
     </view>
     <view>
       <view class="graySpace"></view>

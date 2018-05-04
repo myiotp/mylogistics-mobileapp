@@ -28,6 +28,7 @@ Page({
         ],
         other:'',
         phone:'',
+        status:0,
         favoited:false
     },
     onLoad:function(options){
@@ -80,11 +81,16 @@ Page({
                     content: rawdata.owner  || ''
                   },
                   {
-                    caption: '微信',
-                    content: rawdata.wechat  || ''
+                    caption: '联系电话',
+                    content: rawdata.ownerCellphone || ''
                   }
+                  
                 ],
                 source1: [
+                  {
+                    caption: '微信',
+                    content: rawdata.wechat  || ''
+                  },
                   {
                     caption: '所在公司',
                     content: rawdata.ownercompany || ''
@@ -136,6 +142,7 @@ Page({
                 ],
                 other: rawdata.memo,
                 phone: rawdata.ownerCellphone,
+                status: rawdata.status,
                 favoited:rawdata.favoited
               });
             }
@@ -224,6 +231,46 @@ Page({
         } 
 
     },
+    revoke:function(){
+      let that = this;
+      console.log(that.data)
+      wx.showModal({  
+        title: '提示', 
+        showCancel: true,
+        content:'一旦作废该信息源将会失效，您确定要作废吗？',
+        cancelText:'取消',
+        confirmText:'确定',
+        success: function(res) { 
+          if (res.confirm) { 
+            wx.request({
+              url: app.serviceurl + '/api/truck/'+ that.data['id']+'/status/99',
+              method: 'PUT',
+              data: {
+                
+              },
+              success: function (res) {
+                console.log(res)
+                res = res.data;
+                if (res.status == 1 || res.status == 2) {
+                  wx.showToast({
+                    title: '确认成功',
+                    icon: 'success',
+                    duration: 1e3
+                  });
+                  setTimeout(function () {
+                    app.submited = true;
+                    wx.hideToast();
+                    wx.navigateTo({
+                      url: '../trucks/trucks'
+                    })
+                  }, 1e3);
+                }
+              }
+            })
+          } 
+        }
+      })  
+    },
     onShow:function(options){
         var that = this;
         console.info(app.serviceurl+'/api/truck/' + that.data['id']);
@@ -263,11 +310,15 @@ Page({
                     content: rawdata.owner  || ''
                   },
                   {
-                    caption: '微信',
-                    content: rawdata.wechat  || ''
+                    caption: '联系电话',
+                    content: rawdata.ownerCellphone || ''
                   }
                 ],
                 source1: [
+                  {
+                    caption: '微信',
+                    content: rawdata.wechat  || ''
+                  },
                   {
                     caption: '所在公司',
                     content: rawdata.ownercompany || ''
@@ -319,6 +370,7 @@ Page({
                 ],
                 other: rawdata.memo,
                 phone: rawdata.ownerCellphone,
+                status: rawdata.status,
                 favoited:rawdata.favoited
               });
             }

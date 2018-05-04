@@ -73,12 +73,8 @@
     </view>
 
     <view class="footer">
-        <button class="tel" type="primary" class="tel" data-index="{{index}}" bindtap="makePhoneCall">车源电话：{{phone}}</button>
-        <view wx:if="{{favoited == true}}">
-          <button class="unfavorite" type="warn" data-index="{{index}}" bindtap="removeFavorite">取消收藏</button>
-        </view>
-        <view wx:else>
-          <button class="favorite" type="default" data-index="{{index}}" bindtap="addFavorite">收藏这条车源</button>
+        <view wx:if="{{status != 11 && status !=99}}">
+        <button class="default" type="warn" data-index="{{index}}" bindtap="revoke">作废</button>
         </view>
     </view>
 

@@ -55,6 +55,15 @@
 	font-size: 20rpx;
 	padding: 6rpx 10rpx;
 }
+.statustext0{
+	position: absolute;
+	right: -50rpx;
+	top: 0;
+	background: #E64340;
+	color: #fff;
+	font-size: 20rpx;
+	padding: 6rpx 10rpx;
+}
 .statustext2{
 	position: absolute;
 	right: -50rpx;

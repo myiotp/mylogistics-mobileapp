@@ -289,6 +289,22 @@ Page({
             title: '提示',  
             content: '填写的唯一号已经存在'  
           })  
+        } else if(res.status == 11) {
+          wx.showModal({  
+            title: '提示',  
+            content: '唯一号不能修改'  
+          })  
+        } else if(res.status == 20) {
+          wx.showModal({  
+            title: '提示', 
+            showCancel: true,
+            content:'您已通过实名认证,重新提交将需要再次认证!是否确认重新提交?',
+            success: function(res) { 
+              if (res.confirm) { 
+                that._submit2(o, '提交成功');
+              }
+            }
+          })  
         } else {
           if (res.info == 'OK') {
             wx.setStorageSync('appuid', o.username)
@@ -312,6 +328,50 @@ Page({
       }
     })
     feedbackApi.showToast({title: '提交处理中,请稍候!',duration: 2000 })
+  },
+  _submit2: function (o, title) {
+    let that = this;
+    
+    wx.request({
+      url: app.serviceurl + '/api/user/reverify',
+      method: 'POST',
+      data: o,
+      success: function (res) {
+        console.log(res)
+        res = res.data;
+        if(res.status == 10) {
+          wx.showModal({  
+            title: '提示',  
+            content: '填写的唯一号已经存在'  
+          })  
+        } else if(res.status == 11) {
+          wx.showModal({  
+            title: '提示',  
+            content: '唯一号不能修改'  
+          })  
+        } else {
+          if (res.info == 'OK') {
+            wx.setStorageSync('appuid', o.username)
+            wx.showToast({
+              title: title,
+              icon: 'success',
+              duration: 1e3
+            });
+  
+            setTimeout(function () {
+              app.submited = true;
+              wx.hideToast();
+              wx.switchTab({
+                url: '../user/user'
+              })
+            }, 1e3);
+  
+          }
+        }
+        
+      }
+    })
+    
   },
   formSubmit: function (e) {
     let formData = e.detail.value;
@@ -362,37 +422,38 @@ Page({
         "emergencyphone": formData['emergencyphone'],
         "usertype":this.data['usertype']
       };
-      console.log(submitData);
-
-      wx.request({
-        url: app.serviceurl + '/api/identityauth/' + formData['username'] + '/type/100',
-        data: {
-            uid:formData['username']
-        },
-        success:function(res){
-            console.log(res.data);
-            if(res.data && (res.data.data)) {
-              let _authresult = res.data.data['authresult'];
-              // let _ok = false;
-              if(_authresult == '1') {
-                wx.showModal({  
-                  title: '提示', 
-                  showCancel: true,
-                  content:'您已通过实名认证,重新提交将需要再次认证!是否确认重新提交?',
-                  success: function(res) { 
-                    if (res.confirm) { 
-                      that._submit(submitData, '提交成功');
-                    }
-                  }
-                })  
-              } else {
-                that._submit(submitData, '提交成功');
-              }
-            } else {
-              that._submit(submitData, '提交成功');
-            }
-        }
-      })
+      //console.log(submitData);
+      feedbackApi.showToast({title: '提交处理中,请稍候!',duration: 2000 })
+      that._submit(submitData, '提交成功');
+      // wx.request({
+      //   url: app.serviceurl + '/api/identityauth/' + formData['username'] + '/type/100',
+      //   data: {
+      //       uid:formData['username']
+      //   },
+      //   success:function(res){
+      //       console.log(res.data);
+      //       if(res.data && (res.data.data)) {
+      //         let _authresult = res.data.data['authresult'];
+      //         // let _ok = false;
+      //         if(_authresult == '1') {
+      //           wx.showModal({  
+      //             title: '提示', 
+      //             showCancel: true,
+      //             content:'您已通过实名认证,重新提交将需要再次认证!是否确认重新提交?',
+      //             success: function(res) { 
+      //               if (res.confirm) { 
+      //                 that._submit(submitData, '提交成功');
+      //               }
+      //             }
+      //           })  
+      //         } else {
+      //           that._submit(submitData, '提交成功');
+      //         }
+      //       } else {
+      //         that._submit(submitData, '提交成功');
+      //       }
+      //   }
+      // })
 
       
     }

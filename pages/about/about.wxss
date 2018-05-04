@@ -123,6 +123,8 @@
 }
 .desc-content{
     padding-bottom: 15rpx;
+    padding-left:10rpx;
+    padding-right:10rpx;
 }
 .footer{
     display: flex;

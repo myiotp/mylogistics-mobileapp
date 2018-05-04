@@ -41,6 +41,7 @@ App({
     this.setCartype();
     this.setCarLength();
     this.setPaymenttype();
+    this.setAboutInfo();
     this.initWebSocket();
 
     // 展示本地存储能力
@@ -445,6 +446,27 @@ App({
         wx.setStorage({
           key: 'choosePaymenttype',
           data: a
+        })
+      }
+    })
+  },
+  setAboutInfo: function () {
+    var p = {
+
+    }
+    wx.request({
+      url: this.serviceurl + '/api/wx/about',
+      data: p,
+
+      success: function (res) {
+        var contactInfo = '';
+        if(res.data&&res.data.data) {
+          contactInfo=res.data.data
+        }
+        
+        wx.setStorage({
+          key: 'contactInfo',
+          data: contactInfo
         })
       }
     })
