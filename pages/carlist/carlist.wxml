@@ -34,6 +34,10 @@
 			</view>
 		</navigator>
 	</view>
+	<view class="refresh-block" wx:if="{{loading}}">
+		<image animation="{{refreshAnimation}}" src="../../images/loading.png"></image>
+	</view>
+	
 	<view class="add" bindtap="search">
 		<image src="../../images/search1.png"></image>
 	</view>

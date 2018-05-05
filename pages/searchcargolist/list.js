@@ -43,7 +43,7 @@ var GetList = function (that) {
 					});
 				} else {
 					for (var i = 0; i < len; i++) {  
-						mylist.unshift(res.data.data[i]);
+						mylist.push(res.data.data[i]);
 					}
 					that.setData({
 						list:mylist,
@@ -65,9 +65,32 @@ var GetList = function (that) {
 		}
 	})
 }
+
+/**
+ * 旋转刷新图标
+ */
+function updateRefreshIcon() {
+	var deg = 0;
+	console.log('旋转开始了.....')
+	var animation = wx.createAnimation({
+	  duration: 1000
+	});
+  
+	var timer = setInterval( ()=> {
+	  if (!this.data.loading)
+		clearInterval(timer);
+	  animation.rotateZ(deg).step();//在Z轴旋转一个deg角度
+	  deg += 360;
+	  this.setData({
+		refreshAnimation: animation.export()
+	  })
+	}, 2000);
+  }
 Page({
 	data: {
-	  	list:[],
+		loading:false,
+		refreshAnimation:{},
+			list:[],
 			shipTimestamp:'',
 			fromid:'',
 			toid:'',
@@ -93,18 +116,37 @@ Page({
 	},
 	onShow:function(options){
 		wx.showNavigationBarLoading();
-    page = 1;  
-    this.setData({  
-			list: [],  
-			size:0
-    });  
-    var that = this;
-    GetList(that);
+		page = 1;  
+		this.setData({  
+				list: [],  
+				size:0
+		});  
+		var that = this;
+		GetList(that);
 	},
-  onPullDownRefresh: function () {  
+	onPullDownRefresh: function () {  
 		console.log("下拉");
 		wx.showNavigationBarLoading();
-    var that = this;
-    GetList(that);
+		page = 1;  
+		this.setData({  
+				list: [],  
+				size:0
+		});  
+		var that = this;
+		GetList(that);
+	},
+	onReachBottom: function () {  
+    //上拉  
+		console.log("上拉")  
+		if (this.data.loading) return;  
+		this.setData({ loading: true });  
+		updateRefreshIcon.call(this);
+		var that = this;  
+			GetList(that); 
+			setTimeout( () =>{
+				this.setData({
+					loading: false
+				})
+			}, 2000)
 	}
 })

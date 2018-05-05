@@ -4,8 +4,10 @@
 	<view class="goods">
 		<navigator class="monad" wx:for="{{list}}" url="../cardetail/detail?id={{item.id}}" wx:key="{{item.id}}">
 			<view class="place">
+				<text class="idtext" data-status="{{item.id}}">{{item.id}}</text>
 				<text class="statustext" data-status="{{item.status}}" wx:if="{{item.status == 11}}">已交易</text>
-				<text class="statustext2" data-status="{{item.status}}" wx:if="{{item.status != 11}}">交易中</text>
+				<text class="statustext0" data-status="{{item.status}}" wx:if="{{item.status == 99}}">已作废</text>
+				<text class="statustext2" data-status="{{item.status}}" wx:if="{{item.status != 11 && item.status != 99}}">交易中</text>
 				<view class="start">
 					<text class="city">{{item.fromCityName}}</text>
 					<text class="province">{{item.fromProvinceName}}</text>
@@ -31,5 +33,8 @@
         <text class="truck">{{item.carLength}}米{{item.carType}}</text>
 			</view>
 		</navigator>
+	</view>
+	<view class="refresh-block" wx:if="{{loading}}">
+		<image animation="{{refreshAnimation}}" src="../../images/loading.png"></image>
 	</view>
 </page>

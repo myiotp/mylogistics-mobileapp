@@ -73,3 +73,11 @@
 	font-size: 20rpx;
 	padding: 6rpx 10rpx;
 }
+.refresh-block {  
+  padding: 15px;  
+  text-align: center  
+}  
+.refresh-block image {  
+  width: 30px;  
+  height: 30px;  
+}  

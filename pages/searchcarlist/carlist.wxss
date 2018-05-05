@@ -33,7 +33,7 @@
 .condition .favorite{color:#E64340;border-color:#FFB578;}
 .place .end  image{width:30rpx;height:30rpx;margin-bottom:12rpx;overflow:hidden;top:0;right:0;}
 .place .start  image{width:30rpx;height:30rpx;margin-bottom:12rpx;overflow:hidden;top:0;left:0;}
-.statustext{
+.idtext{
 	position: absolute;
 	left: -50rpx;
 	top: 0;
@@ -42,12 +42,39 @@
 	font-size: 20rpx;
 	padding: 6rpx 10rpx;
 }
+
+.statustext{
+	position: absolute;
+	right: -50rpx;
+	top: 0;
+	background: #07b5e0;
+	color: #fff;
+	font-size: 20rpx;
+	padding: 6rpx 10rpx;
+}
+.statustext0{
+	position: absolute;
+	right: -50rpx;
+	top: 0;
+	background: #E64340;
+	color: #fff;
+	font-size: 20rpx;
+	padding: 6rpx 10rpx;
+}
 .statustext2{
 	position: absolute;
-	left: -50rpx;
+	right: -50rpx;
 	top: 0;
 	background: #f7982a;
 	color: #fff;
 	font-size: 20rpx;
 	padding: 6rpx 10rpx;
 }
+.refresh-block {  
+  padding: 15px;  
+  text-align: center  
+}  
+.refresh-block image {  
+  width: 30px;  
+  height: 30px;  
+}  
