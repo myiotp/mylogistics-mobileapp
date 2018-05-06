@@ -121,5 +121,21 @@ Page({
 				loading: false
 			})
  		}, 2000)
+  },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '莒县通达物流',
+      path: '/page/list/list',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   }
 })
