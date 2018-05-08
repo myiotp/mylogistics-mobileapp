@@ -4,11 +4,11 @@ var optionList = [];
 var type = [];
 var size = [];
 var list = [
-  {
-    information: '选择车辆',
-    select: '请选择车辆',
-    bindBtn: 'carType',
-    name: 'car_type',
+ {
+    information: '交易状态',
+    select: '请选择交易状态',
+    bindBtn: 'cargoStatus',
+    name: 'cargo_status',
     val: ''
   }
 ];
@@ -30,6 +30,7 @@ Page({
     validenddate:'',
     mycartyelist:[],
     mycarlengthlist:[],
+    mystatuslist:[{name: '全部',id: '-1'},{name: '交易中',id: '0'},{name: '已交易',id: '11'},{name: '已作废',id: '99'}],
     provinceList: []
   },
   init: function () {
@@ -107,6 +108,16 @@ Page({
       });
     }
   },
+  cargoStatus: function (e) {
+    if (e.currentTarget.id == 0) {
+      this.setData({
+        infoId: e.currentTarget.id,
+        options: this.data.mystatuslist,
+        hiddenBoolean: !this.data.hiddenBoolean,
+        screenBtn: 'carBtn'
+      });
+    }
+  },
   hiddenBtn: function (e) {
     this.setData({
       hiddenBoolean: !this.data.hiddenBoolean
@@ -141,10 +152,8 @@ Page({
     var dataId = e.currentTarget.id,
       arr = this.data.infoList[this.data.infoId];
     if (this.data.infoId == 0) {
-      me = this.data.mycartyelist;
-    } else if (this.data.infoId == 1) {
-      me = this.data.mycarlengthlist;
-    }
+      me = this.data.mystatuslist;
+    } 
     for (var i = 0; i < me.length; i++) {
       if (me[i].id == dataId) {
         zone = me[i].name;
@@ -198,22 +207,7 @@ Page({
     var p = {
 
     }
-    wx.request({
-      url: app.serviceurl + "/api/uservehicle/username/"+app.uid+"/licenseplate",
-      data: p,
-
-      success: function (res) {
-        var a = [{
-          name: '选择车辆',
-          id: ''
-        }];
-        a = a.concat(res.data.data);
-        that.setData({
-            mycartyelist: a
-        })
-        console.log(that.data.mycartyelist);
-      }
-    })
+   
 
     console.log(this.data.mycartyelist);
   },
@@ -258,13 +252,12 @@ Page({
     var length = this.data.infoList.length;
     var car_type = '';
     var car_size = '';
+    var cargo_status = '';
     for(var i=0;i<length;i++){
-      if(this.data.infoList[i].name=='car_type'){
-        car_type=this.data.infoList[i].select;
+      
+      if(this.data.infoList[i].name=='cargo_status'){
+        cargo_status=this.data.infoList[i].val;
       }
-      // if(this.data.infoList[i].name=='car_size'){
-      //   car_size=this.data.infoList[i].select;
-      // }
     }
     //need to handle formData['shiptime']
     let submitData = {
@@ -299,7 +292,7 @@ Page({
     console.log(submitData);
     //this._submit(submitData, '提交成功')
     wx.redirectTo({
-      url: '../searchcarlist/carlist?s1='+this.data['shipTimestamp']+'&s2='+this.data['startOptions']+'&s3='+this.data['endOptions']+'&s4='+car_type+'&s5='+car_size
+      url: '../searchcarlist/carlist?s1='+this.data['shipTimestamp']+'&s2='+this.data['startOptions']+'&s3='+this.data['endOptions']+'&s4='+car_type+'&s5='+car_size+'&s6='+cargo_status
     })
   },
   bindShipDateChange: function(e) {

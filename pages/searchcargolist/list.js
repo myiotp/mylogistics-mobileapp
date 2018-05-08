@@ -17,6 +17,7 @@ var GetList = function (that) {
 			toid:that.data['toid'],
 			carType:that.data['carType'],
 			carLength:that.data['carLength'],
+			status:that.data['status'],
 			pageSize:pageSize,
 			page: page
 		},
@@ -95,7 +96,8 @@ Page({
 			fromid:'',
 			toid:'',
 			carType:'',
-			carLength:''
+			carLength:'',
+			status:-1
 	},
 	search: function () {
     wx.navigateTo({
@@ -111,7 +113,8 @@ Page({
 			fromid:options['s2'],
 			toid:options['s3'],
 			carType:options['s4'],
-			carLength:options['s5']
+			carLength:options['s5'],
+			status:options['s6']
 		});
 	},
 	onShow:function(options){

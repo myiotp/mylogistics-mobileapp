@@ -15,7 +15,8 @@ var GetList = function (that) {
       fromid:that.data['fromid'],
       toid:that.data['toid'],
       carType:that.data['carType'],
-      carLength:that.data['carLength'],
+			carLength:that.data['carLength'],
+			status:that.data['status'],
       pageSize:pageSize,
       page: page
     },
@@ -82,7 +83,8 @@ Page({
     fromid:'',
     toid:'',
     carType:'',
-    carLength:''
+		carLength:'',
+		status:-1
   },
   onLoad: function (options) {
     var that = this;
@@ -93,7 +95,8 @@ Page({
 			fromid:options['s2'],
 			toid:options['s3'],
 			carType:options['s4'],
-			carLength:options['s5']
+			carLength:options['s5'],
+			status:options['s6']
 		});
     
   },

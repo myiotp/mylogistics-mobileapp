@@ -1,4 +1,5 @@
 <page>
+<view wx:if="{{size > 0}}">
 	<view class="goods">
 		<navigator class="monad" wx:for="{{list}}" url="../detail/detail?id={{item.id}}" wx:key="{{item.id}}">
 			<view class="place">
@@ -38,4 +39,9 @@
 	<view class="refresh-block" wx:if="{{loading}}">
 		<image animation="{{refreshAnimation}}" src="../../images/loading.png"></image>
 	</view>
+
+	</view>
+	   <view wx:else>
+			不存在记录
+		</view> 	
 </page>

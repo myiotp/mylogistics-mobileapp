@@ -26,7 +26,7 @@ caption,list-item{display:block}
 	border-bottom: 1rpx solid #ddd;
 	position: relative;
 	z-index: 2;
-	background: #fff;
+	background: #f4f5f6;
 }
 .filter-tab text{
 	flex: 1;

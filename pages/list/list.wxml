@@ -2,13 +2,15 @@
 	<view class="filter-flex">
 		<view class="filter-tab">
 			<text bindtap="setFilterPanel" data-findex="1" class="{{showfilterindex==1?'active':''}}">状态</text>
-			<text bindtap="search" data-findex="2" class="{{showfilterindex==2?'active':''}}">搜索</text>
+			<text bindtap="search" data-findex="2" class="{{showfilterindex==2?'active':''}}">高级搜索</text>
 		</view>
 		<view class="filter-content" wx:if="{{showfilter}}">
 			<view class="filter-panel filter-sort" wx:if="{{showfilterindex==1}}">
 				<view wx:for="{{filterdata.sort}}" wx:key="{{item.id}}" bindtap="setSort" data-sortindex="{{index}}" data-sortid="{{item.id}}" class="{{sortindex==index?'active':''}}">{{item.title}}</view>
 			</view>
-		
+			<view class="filter-panel filter-multiple" wx:if="{{showfilterindex==2}}">
+				
+			</view>
 		</view>
 		<view class="filter-shadow" wx:if="{{showfilter}}" bindtap="hideFilter"></view>
 
@@ -54,7 +56,7 @@
 		<view class="refresh-block" wx:if="{{loading}}">
 			<image animation="{{refreshAnimation}}" src="../../images/loading.png"></image>
 		</view>
-		<view class="gototop {{scrolltop>10?'active':''}}" bindtap="goToTop"></view>
+		<view class="gototop {{scrolltop>50?'active':''}}" bindtap="goToTop"></view>
 		<!--
 		<view class="add" bindtap="search">
 			<image src="../../images/search2.png"></image>
