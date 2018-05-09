@@ -167,7 +167,7 @@ Page({
       }
       return {
         title: '莒县通达物流',
-        path: '/page/user/user',
+        path: '/pages/user/user',
         success: function (res) {
           // 转发成功
         },

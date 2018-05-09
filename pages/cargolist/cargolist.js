@@ -119,7 +119,7 @@ Page({
     }
     return {
       title: '莒县通达物流',
-      path: '/page/carlist/carlist',
+      path: '/pages/carlist/carlist',
       success: function (res) {
         // 转发成功
       },

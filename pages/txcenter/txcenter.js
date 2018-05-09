@@ -76,7 +76,7 @@ Page({
       }
       return {
         title: '莒县通达物流',
-        path: '/page/txcenter/txcenter',
+        path: '/pages/txcenter/txcenter',
         success: function (res) {
           // 转发成功
         },
